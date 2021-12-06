@@ -2229,6 +2229,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
+/* harmony import */ var _Songs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Songs */ "./client/components/Songs.js");
+
+
+
 
 
 class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
@@ -2237,13 +2243,40 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    this.props.fetchSingleSong(this.props.match.params.songId);
+  }
+
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Single Song");
+    const {
+      id,
+      name,
+      key,
+      verse,
+      chorus,
+      preChorus,
+      bridge
+    } = this.props.song;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, verse), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, preChorus), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, chorus), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, bridge));
   }
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SingleSong);
+const mapState = state => ({
+  song: state.song
+});
+
+const mapDispatch = (dispatch, {
+  history
+}) => ({
+  fetchSingleSong: songId => {
+    dispatch((0,_store_singleSong__WEBPACK_IMPORTED_MODULE_2__.fetchSingleSong)(songId));
+  }
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingleSong));
 
 /***/ }),
 
@@ -2333,25 +2366,72 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var _songs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./songs */ "./client/store/songs.js");
+/* harmony import */ var _singleSong__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./singleSong */ "./client/store/singleSong.js");
 
 
 
 
 
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
-  songs: _songs__WEBPACK_IMPORTED_MODULE_3__.default
+
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
+  songs: _songs__WEBPACK_IMPORTED_MODULE_3__.default,
+  song: _singleSong__WEBPACK_IMPORTED_MODULE_4__.default
 });
-const middleWare = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_4__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
+const middleWare = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_5__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
 })));
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_4__.createStore)(reducer, middleWare);
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(reducer, middleWare);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+
+/***/ }),
+
+/***/ "./client/store/singleSong.js":
+/*!************************************!*\
+  !*** ./client/store/singleSong.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchSingleSong": () => (/* binding */ fetchSingleSong),
+/* harmony export */   "default": () => (/* binding */ singleSongReducer)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+const SET_SONG = "SET_SONG";
+
+const setSingleSong = song => {
+  return {
+    type: SET_SONG,
+    song
+  };
+};
+
+const fetchSingleSong = songId => {
+  return async dispatch => {
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/songs/${songId}`);
+    dispatch(setSingleSong(data));
+  };
+};
+function singleSongReducer(state = [], action) {
+  switch (action.type) {
+    case SET_SONG:
+      return action.song;
+
+    default:
+      return state;
+  }
+}
 
 /***/ }),
 
@@ -2364,7 +2444,6 @@ const store = (0,redux__WEBPACK_IMPORTED_MODULE_4__.createStore)(reducer, middle
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "setSongs": () => (/* binding */ setSongs),
 /* harmony export */   "fetchSongs": () => (/* binding */ fetchSongs),
 /* harmony export */   "default": () => (/* binding */ songsReducer)
 /* harmony export */ });
@@ -2372,12 +2451,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 const SET_SONGS = "SET_SONGS";
+
 const setSongs = songs => {
   return {
     type: SET_SONGS,
     songs
   };
 };
+
 const fetchSongs = () => {
   return async dispatch => {
     const {

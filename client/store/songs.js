@@ -2,7 +2,7 @@ import axios from "axios"
 
 const SET_SONGS = "SET_SONGS";
 
-export const setSongs = (songs) => {
+const setSongs = (songs) => {
     return { type: SET_SONGS, songs };
 }
 

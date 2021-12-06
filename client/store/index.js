@@ -4,9 +4,11 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import songsReducer from "./songs";
+import singleSongReducer from "./singleSong";
 
 const reducer = combineReducers({
-    songs: songsReducer
+    songs: songsReducer,
+    song: singleSongReducer
 });
 
 const middleWare = composeWithDevTools(
