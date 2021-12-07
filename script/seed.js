@@ -9,12 +9,17 @@ const seed = async () => {
     await db.sync({ force: true });
     // seed your database here!
     await Songs.create(
-    { name: "Song1", key: "Am", intro: null, verse: "Am, Dm, Em", preChorus: "Gmaj", chorus: "E#m, Em, Dm", bridge: "Gmaj, Am, Cmaj"},
+    { name: "Song1", key: "Am", intro: null, verse: "Am, Dm, Em", preChorus: "G", chorus: "E#m, Em, Dm", bridge: "G, Am, C"},
     );
     await Songs.create(
-      { name: "Song2", key: "Am", intro: null, verse: "Am, Dm, Em", preChorus: "Gmaj", chorus: "E#m, Em, Dm", bridge: "Gmaj, Am, Cmaj"}
+      { name: "Song2", key: "Gm", intro: null, verse: "Am, Dm, Em", preChorus: "G", chorus: "E#m, Em, Dm", bridge: "G, Am, C"}
   
-      );
+    );
+
+    await Songs.create(
+      { name: "Song3", key: "D", intro: null, verse: "Am, Dm, Em", preChorus: "G", chorus: "E#m, Em, Dm", bridge: "G, Am, C"}
+  
+    );
     //await Song.create({ name: "Song2", key: "Am", intro: null, verse: "Am, Dm, Em", preChorus: "Gmaj", chorus: "E#m, Em, Dm", bridge: "Gmaj, Am, Cmaj"});
 
 

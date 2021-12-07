@@ -2231,8 +2231,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
-/* harmony import */ var _Songs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Songs */ "./client/components/Songs.js");
-
 
 
 
@@ -2240,11 +2238,43 @@ __webpack_require__.r(__webpack_exports__);
 class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      //key: this.props.song.key
+      notes: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    console.log(event.target.value);
+    let newKey = event.target.value;
+
+    for (let i in this.state.notes) {
+      if (this.state.notes[i] === this.props.key) {
+        let index = i - newKey;
+        console.log(index);
+      }
+    }
   }
 
   componentDidMount() {
     this.props.fetchSingleSong(this.props.match.params.songId);
+    this.setState({
+      notes: {
+        1: "A",
+        2: "A#",
+        3: "B",
+        4: "C",
+        5: "C#",
+        6: "D",
+        7: "D#",
+        8: "E",
+        9: "F",
+        10: "F#",
+        11: "G",
+        12: "G#"
+      }
+    });
   }
 
   render() {
@@ -2256,10 +2286,21 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       chorus,
       preChorus,
       bridge
-    } = this.props.song;
+    } = this.props.song; //const minor = key.includes("m") ? true : false;
+
+    let ogKey = key;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, verse), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, preChorus), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, chorus), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, bridge));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+      name: "transpose",
+      onChange: this.handleChange
+    }, Object.keys(this.state.notes).map((key, index) => key.includes("m") ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: this.state.notes[key],
+      key: index
+    }, this.state.notes[key]) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: index,
+      key: index
+    }, this.state.notes[key], "m"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, verse), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, preChorus), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, chorus), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, bridge));
   }
 
 }
