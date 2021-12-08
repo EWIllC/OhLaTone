@@ -20,6 +20,7 @@ class SingleSong extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.chordMapper = this.chordMapper.bind(this);
+        this.transmute = this.transmute.bind(this);
     };
 
     handleChange(event) {
@@ -32,11 +33,19 @@ class SingleSong extends React.Component {
 
         //console.log(steps)
         const { notes, verse, chorus, preChorus, bridge, minorOr} = this.state;
+
         let stateKey = minorOr ? {[newKeyPos]: notes[newKeyPos] + "m"} : {[newKeyPos]: notes[newKeyPos] + "m"};
-        console.log(stateKey)
+        
+        let newVerse = this.transmute(verse, steps);
+        let newPreChorus = this.transmute(preChorus, steps);
+        let newChorus = this.transmute(chorus, steps);
+        let newBirdge = this.transmute(bridge, steps)
         this.setState({
-            key: stateKey
-            
+            key: stateKey,
+            verse: newVerse,
+            preChorus: newPreChorus,
+            chorus: newChorus,
+            bridge: newBirdge
             // verse: this.chordMapper(verse, steps)
         })
     }
@@ -67,11 +76,30 @@ class SingleSong extends React.Component {
             if(i - steps < 1) {
                 sec.push(chords[i - steps + 12]);
             } else {
-                sec.push(chords[i + steps]);
+                sec.push(chords[i - steps]);
             }
         }
 
         return sec;
+    };
+
+    transmute(chords, steps) {
+        let hashed = {};
+        for(let i in chords) {
+            //hashed[this.state.notes[parseInt(i) + steps]]
+            if(chords[i].includes("m")) {
+                hashed[i] = this.state.notes[parseInt(i) + steps] + "m";
+            } else {
+                hashed[i] = this.state.notes[parseInt(i) + steps]
+            }
+            // hashed[i] = this.state.notes[parseInt(i) + steps]
+            console.log(hashed)
+            //console.log(this.state.notes[parseInt(i) + steps])
+            
+
+        }
+        //console.log(hashed);
+        return hashed;
     }
 
 
