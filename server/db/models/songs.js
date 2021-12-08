@@ -6,22 +6,22 @@ const Songs = db.define("song", {
         type: Sequelize.STRING
     },
     key: {
-        type: Sequelize.TEXT
+        type: Sequelize.JSON
     },
     intro: {
-        type: Sequelize.TEXT
+        type: Sequelize.JSON
     },
     verse: {
-        type: Sequelize.TEXT
+        type: Sequelize.JSON
     },
     preChorus: {
-        type: Sequelize.TEXT
+        type: Sequelize.JSON
     },
     chorus: {
-        type: Sequelize.TEXT
+        type: Sequelize.JSON
     },
     bridge: {
-        type: Sequelize.TEXT
+        type: Sequelize.JSON
     }
 });
 

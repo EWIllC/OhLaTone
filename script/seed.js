@@ -9,15 +9,15 @@ const seed = async () => {
     await db.sync({ force: true });
     // seed your database here!
     await Songs.create(
-    { name: "Song1", key: "Am", intro: null, verse: "Am, Dm, Em", preChorus: "G", chorus: "E#m, Em, Dm", bridge: "G, Am, C"},
+    { name: "Song1", key: {1: "Am"}, intro: null, verse: {1:"Am", 6:"Dm", 8:"Em"}, preChorus: {11:"G"}, chorus: {9:"F", 8:"Em", 6:"Dm"}, bridge: {11:"G", 1:"Am", 4:"C"}},
     );
     await Songs.create(
-      { name: "Song2", key: "Gm", intro: null, verse: "Am, Dm, Em", preChorus: "G", chorus: "E#m, Em, Dm", bridge: "G, Am, C"}
+      { name: "Song2", key: {11: "Gm"}, intro: null, verse: {1:"Am", 6:"Dm", 8:"Em"}, preChorus: {11:"G"}, chorus: {9:"F", 8:"Em", 6:"Dm"}, bridge: {11:"G", 1:"Am", 4:"C"}}
   
     );
 
     await Songs.create(
-      { name: "Song3", key: "D", intro: null, verse: "Am, Dm, Em", preChorus: "G", chorus: "E#m, Em, Dm", bridge: "G, Am, C"}
+      { name: "Song3", key: {6: "D"}, intro: null, verse: {1:"Am", 6:"Dm", 8:"Em"}, preChorus: {11:"G"}, chorus: {9:"F", 8:"Em", 6:"Dm"}, bridge: {11:"G", 1:"Am", 4:"C"}}
   
     );
     //await Song.create({ name: "Song2", key: "Am", intro: null, verse: "Am, Dm, Em", preChorus: "Gmaj", chorus: "E#m, Em, Dm", bridge: "Gmaj, Am, Cmaj"});

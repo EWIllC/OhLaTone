@@ -2239,27 +2239,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      //key: this.props.song.key
-      notes: ""
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    console.log(event.target.value);
-    let newKey = event.target.value;
-
-    for (let i in this.state.notes) {
-      if (this.state.notes[i] === this.props.key) {
-        let index = i - newKey;
-        console.log(index);
-      }
-    }
-  }
-
-  componentDidMount() {
-    this.props.fetchSingleSong(this.props.match.params.songId);
-    this.setState({
+      //key: this.props.song.key,
       notes: {
         1: "A",
         2: "A#",
@@ -2273,8 +2253,81 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         10: "F#",
         11: "G",
         12: "G#"
-      }
+      },
+      key: {},
+      verse: {},
+      preChorus: {},
+      chorus: {},
+      bridge: {},
+      minorOr: false
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.chordMapper = this.chordMapper.bind(this);
+  }
+
+  handleChange(event) {
+    //console.log(parseInt(Object.keys(this.state.key)))
+    //let key = this.state.notes[this.state.key]
+    let ogKeyPos = parseInt(Object.keys(this.state.key));
+    let newKeyPos = event.target.value;
+    let steps = ogKeyPos > newKeyPos ? ogKeyPos - newKeyPos : newKeyPos - ogKeyPos; //console.log(steps)
+
+    const {
+      notes,
+      verse,
+      chorus,
+      preChorus,
+      bridge,
+      minorOr
+    } = this.state;
+    let stateKey = minorOr ? {
+      [newKeyPos]: notes[newKeyPos] + "m"
+    } : {
+      [newKeyPos]: notes[newKeyPos] + "m"
+    };
+    console.log(stateKey);
+    this.setState({
+      key: stateKey // verse: this.chordMapper(verse, steps)
+
     });
+  }
+
+  componentDidMount() {
+    this.props.fetchSingleSong(this.props.match.params.songId);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.song !== this.props.song) {
+      let {
+        key,
+        verse,
+        preChorus,
+        chorus,
+        bridge
+      } = this.props.song;
+      this.setState({
+        key: key,
+        verse: verse,
+        preChorus: preChorus,
+        chorus: chorus,
+        bridge: bridge,
+        minorOr: this.chordMapper(key).toString().includes("m") ? true : false
+      });
+    }
+  }
+
+  chordMapper(chords, steps = 0) {
+    let sec = []; //console.log(steps)
+
+    for (let i = 0; i < 12; i++) {
+      if (i - steps < 1) {
+        sec.push(chords[i - steps + 12]);
+      } else {
+        sec.push(chords[i + steps]);
+      }
+    }
+
+    return sec;
   }
 
   render() {
@@ -2285,22 +2338,23 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       verse,
       chorus,
       preChorus,
-      bridge
-    } = this.props.song; //const minor = key.includes("m") ? true : false;
+      bridge,
+      minorOr
+    } = this.state; //const minor = this.chordMapper(key).toString().includes("m") ? true : false;
+    //let ogKey = key;
 
-    let ogKey = key;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", this.chordMapper(key).toString().split(",").join(" ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       name: "transpose",
       onChange: this.handleChange
-    }, Object.keys(this.state.notes).map((key, index) => key.includes("m") ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: this.state.notes[key],
+    }, Object.keys(this.state.notes).map((note, index) => minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: index + 1,
       key: index
-    }, this.state.notes[key]) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: index,
+    }, this.state.notes[note], "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: index + 1,
       key: index
-    }, this.state.notes[key], "m"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, verse), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, preChorus), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, chorus), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, bridge));
+    }, this.state.notes[note]))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), this.chordMapper(verse).toString().split(",").join(" "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), this.chordMapper(preChorus).toString().split(",").join(" "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), this.chordMapper(chorus).toString().split(",").join(" "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), this.chordMapper(bridge).toString().split(",").join(" "));
   }
 
 }
@@ -2317,7 +2371,29 @@ const mapDispatch = (dispatch, {
   }
 });
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingleSong));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingleSong)); // let notes = {
+//     1:"A" ,2:"A#",3:"B",4:"C",5:"C#",6:"D",7:"D#",8:"E",9:"F",10:"F#",11:"G",12:"G#"
+//   }
+//   let verse = "G"
+//   const transpose = (chord, steps) => {
+//     let minor = false;
+//     if(chord.includes("m")) {
+//       minor = true;
+//       chord = chord.slice(0,chord.length-1);
+//       console.log(chord);
+//     }
+//     //console.log(minor);
+//     console.log(chord);
+//     for(let i in notes) {
+//       if(notes[i] === chord) {
+//         //console.log(i - steps)
+//         if(i - steps < 1) {
+//           return minor ? notes[i - steps + 12] + "m" : notes[i - steps + 12]
+//         }
+//         return return minor ? notes[i - steps] + "m" : notes[i - steps]
+//       }
+//     }
+//   }
 
 /***/ }),
 
