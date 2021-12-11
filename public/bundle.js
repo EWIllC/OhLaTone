@@ -2242,40 +2242,52 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       //key: this.props.song.key,
       notes: [{
         val: 1,
-        note: "A"
+        note: "A",
+        type: null
       }, {
         val: 2,
-        note: "A#"
+        note: "A#",
+        type: null
       }, {
         val: 3,
-        note: "B"
+        note: "B",
+        type: null
       }, {
         val: 4,
-        note: "C"
+        note: "C",
+        type: null
       }, {
         val: 5,
-        note: "C#"
+        note: "C#",
+        type: null
       }, {
         val: 6,
-        note: "D"
+        note: "D",
+        type: null
       }, {
         val: 7,
-        note: "D#"
+        note: "D#",
+        type: null
       }, {
         val: 8,
-        note: "E"
+        note: "E",
+        type: null
       }, {
         val: 9,
-        note: "F"
+        note: "F",
+        type: null
       }, {
         val: 10,
-        note: "F#"
+        note: "F#",
+        type: null
       }, {
         val: 11,
-        note: "G"
+        note: "G",
+        type: null
       }, {
         val: 12,
-        note: "G#"
+        note: "G#",
+        type: null
       }],
       key: {},
       verse: [],
@@ -2285,7 +2297,8 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       minorOr: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.chordValueMachine = this.chordValueMachine.bind(this); //this.transmute = this.transmute.bind(this);
+    this.chordValueMachine = this.chordValueMachine.bind(this);
+    this.typeAssign = this.typeAssign.bind(this); //this.transmute = this.transmute.bind(this);
   }
 
   handleChange(event) {
@@ -2305,31 +2318,30 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
     let stepDir = key.val < value; //let newKey = notes[this.chordValueMachine(steps, key.val)]
 
-    let newVerse = verse.map((chord, index) => notes[this.chordValueMachine(steps, chord.val, notes[value - 1].val, key.val)]);
-    console.log(newVerse); // let newPreChorus = preChorus.map((chord) => (notes[chord.val + steps - 1]));
-    // let newChorus = chorus.map((chord) => (notes[chord.val + steps - 1]));
-    // let newBridge = bridge.map((chord) => (notes[chord.val + steps - 1]));
-    //console.log(newKey, "key", newVerse, "verse", newPreChorus, "pre", newChorus, "chorus", newBridge, "bridge")
+    let newVerse = verse.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)); //console.log(newVerse)
+
+    let newPreChorus = preChorus.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord));
+    let newChorus = chorus.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord));
+    let newBridge = bridge.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)); //console.log(newKey, "key", newVerse, "verse", newPreChorus, "pre", newChorus, "chorus", newBridge, "bridge")
 
     this.setState({
       key: notes[value - 1],
-      verse: newVerse // preChorus: newPreChorus,
-      // chorus: newChorus,
-      // bridge: newBridge
-
+      verse: newVerse,
+      preChorus: newPreChorus,
+      chorus: newChorus,
+      bridge: newBridge
     });
   }
 
-  chordValueMachine(steps, chordValue, newKeyValue, oldKeyValue) {
-    //console.log(chordValue)
-    console.log(newKeyValue > oldKeyValue);
+  chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
+    let chordValue = chord.val;
 
     if (newKeyValue > oldKeyValue) {
       if (steps + chordValue > 12) {
-        console.log("greater than 12");
+        //console.log("greater than 12")
         return chordValue + steps - 13;
       } else {
-        console.log("less than 12");
+        //console.log("less than 12")
         return chordValue + steps - 1;
       }
     }
@@ -2337,21 +2349,21 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     if (newKeyValue < oldKeyValue) {
       //console.log(chordValue - steps)
       if (chordValue - steps < 1) {
-        console.log(this.state.notes[chordValue - steps + 11]);
+        //console.log(this.state.notes[chordValue - steps + 11])
         return chordValue - steps + 11;
       } else {
         return chordValue - steps - 1;
       }
-    } // let stepDir = keyValue < newKeyValue ? true : false;
-    // console.log(steps, "steps", chordValue, "chordValue", stepDir, "~~~ func invoked")
-    // if(stepDir) {
-    //     console.log("~~~ dir = ",stepDir)
-    //     return chordValue + steps - 1;
-    // }
-    // if(!stepDir) {
-    //     return chordValue - steps - 1;
-    // }
+    }
+  }
 
+  typeAssign(newChord, oldChord) {
+    if (oldChord.type) {
+      newChord.type = oldChord.type;
+      return newChord;
+    } else {
+      return newChord;
+    }
   }
 
   componentDidMount() {
@@ -2374,8 +2386,8 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         verse: verse,
         preChorus: preChorus,
         chorus: chorus,
-        bridge: bridge,
-        minorOr: key.note.includes("m") ? true : false
+        bridge: bridge //minorOr:  key.includes("m") ? true : false
+
       });
     }
   } // transmute(chords, steps) {
@@ -2417,7 +2429,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "hello world"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "hello world"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       name: "transpose",
       onChange: this.handleChange
     }, notes.map((chord, index) => minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
@@ -2426,7 +2438,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, chord.note, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
       value: chord.val,
       key: index
-    }, chord.note))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), verse.map(chord => chord.note + " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), preChorus.map(chord => chord.note + " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), chorus.map(chord => chord.note + " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), bridge.map(chord => chord.note + " "));
+    }, chord.note))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), verse.map(chord => chord.type ? chord.note + chord.type + " " : chord.note + " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), preChorus.map(chord => chord.type ? chord.note + chord.type + " " : chord.note + " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), chorus.map(chord => chord.type ? chord.note + chord.type + " " : chord.note + " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), bridge.map(chord => chord.type ? chord.note + chord.type + " " : chord.note + " "));
   }
 
 }
