@@ -2239,7 +2239,6 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      //key: this.props.song.key,
       notes: [{
         val: 1,
         note: "A",
@@ -2298,7 +2297,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.chordValueMachine = this.chordValueMachine.bind(this);
-    this.typeAssign = this.typeAssign.bind(this); //this.transmute = this.transmute.bind(this);
+    this.typeAssign = this.typeAssign.bind(this);
   }
 
   handleChange(event) {
@@ -2314,16 +2313,11 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       notes
     } = this.state;
     let value = parseInt(event.target.value);
-    let steps = value > key.val ? value - key.val : key.val - value; //since im stepping backwords decrement
-
-    let stepDir = key.val < value; //let newKey = notes[this.chordValueMachine(steps, key.val)]
-
-    let newVerse = verse.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)); //console.log(newVerse)
-
+    let steps = value > key.val ? value - key.val : key.val - value;
+    let newVerse = verse.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord));
     let newPreChorus = preChorus.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord));
     let newChorus = chorus.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord));
-    let newBridge = bridge.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)); //console.log(newKey, "key", newVerse, "verse", newPreChorus, "pre", newChorus, "chorus", newBridge, "bridge")
-
+    let newBridge = bridge.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord));
     this.setState({
       key: notes[value - 1],
       verse: newVerse,
@@ -2338,23 +2332,23 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
     if (newKeyValue > oldKeyValue) {
       if (steps + chordValue > 12) {
-        //console.log("greater than 12")
         return chordValue + steps - 13;
       } else {
-        //console.log("less than 12")
         return chordValue + steps - 1;
       }
     }
 
+    ;
+
     if (newKeyValue < oldKeyValue) {
-      //console.log(chordValue - steps)
       if (chordValue - steps < 1) {
-        //console.log(this.state.notes[chordValue - steps + 11])
         return chordValue - steps + 11;
       } else {
         return chordValue - steps - 1;
       }
     }
+
+    ;
   }
 
   typeAssign(newChord, oldChord) {
@@ -2386,30 +2380,11 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         verse: verse,
         preChorus: preChorus,
         chorus: chorus,
-        bridge: bridge //minorOr:  key.includes("m") ? true : false
-
+        bridge: bridge,
+        minorOr: key.type === "m"
       });
     }
-  } // transmute(chords, steps) {
-  //     let hashed = {};
-  //     // console.log(chords, 'chors');
-  //     // console.log(hashed, "hashed")
-  //     for(let i in chords) {
-  //         console.log(i)
-  //         //hashed[this.state.notes[parseInt(i) + steps]]
-  //         if(chords[i].includes("m")) {
-  //             hashed[parseInt(i) + steps] = this.state.notes[parseInt(i) + steps] + "m";
-  //         } else {
-  //             hashed[parseInt(i) + steps] = this.state.notes[parseInt(i) + steps]
-  //         }
-  //         // hashed[i] = this.state.notes[parseInt(i) + steps]
-  //         //console.log(hashed)
-  //         //console.log(this.state.notes[parseInt(i) + steps])
-  //     }
-  //     //console.log(hashed);
-  //     return hashed;
-  // }
-
+  }
 
   render() {
     const {
@@ -2422,14 +2397,10 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       bridge,
       minorOr,
       notes
-    } = this.state; //const minor = key.note.includes("m") ? true : false;
-    //console.log(this.state.verse)
-    //let ogKey = key;
-    //console.log(this.props)
-
+    } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "hello world"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       name: "transpose",
       onChange: this.handleChange
     }, notes.map((chord, index) => minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
@@ -2443,6 +2414,8 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 }
 
+;
+
 const mapState = state => ({
   song: state.song
 });
@@ -2455,29 +2428,7 @@ const mapDispatch = (dispatch, {
   }
 });
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingleSong)); // let notes = {
-//     1:"A" ,2:"A#",3:"B",4:"C",5:"C#",6:"D",7:"D#",8:"E",9:"F",10:"F#",11:"G",12:"G#"
-//   }
-//   let verse = "G"
-//   const transpose = (chord, steps) => {
-//     let minor = false;
-//     if(chord.includes("m")) {
-//       minor = true;
-//       chord = chord.slice(0,chord.length-1);
-//       console.log(chord);
-//     }
-//     //console.log(minor);
-//     console.log(chord);
-//     for(let i in notes) {
-//       if(notes[i] === chord) {
-//         //console.log(i - steps)
-//         if(i - steps < 1) {
-//           return minor ? notes[i - steps + 12] + "m" : notes[i - steps + 12]
-//         }
-//         return return minor ? notes[i - steps] + "m" : notes[i - steps]
-//       }
-//     }
-//   }
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingleSong));
 
 /***/ }),
 
