@@ -13,7 +13,7 @@ class Routes extends React.Component {
                 <Route path="/home" component={Home} />
                 <Route exact path="/songs" component={Songs} />
                 <Route path="/songs/:songId" component={SingleSong}></Route>
-                <Route path="/addSong" componenr={AddSong}></Route>
+                <Route path="/addSong" component={AddSong}></Route>
                 <Route path="/contact" component={Contact}/>
                 <Redirect to="/home" />
             </Switch>

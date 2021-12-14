@@ -2090,7 +2090,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       component: _components_SingleSong__WEBPACK_IMPORTED_MODULE_3__.default
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
       path: "/addSong",
-      componenr: _components_AddSong__WEBPACK_IMPORTED_MODULE_4__.default
+      component: _components_AddSong__WEBPACK_IMPORTED_MODULE_4__.default
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
       path: "/contact",
       component: _components_Contact__WEBPACK_IMPORTED_MODULE_5__.default
@@ -2117,20 +2117,207 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_songs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/songs */ "./client/store/songs.js");
+
+
+
 
 
 class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
-    this.state = {};
+    super();
+    this.state = {
+      notes: {
+        "A": {
+          val: 1,
+          note: "A",
+          type: null
+        },
+        "A#": {
+          val: 2,
+          note: "A#",
+          type: null
+        },
+        "B": {
+          val: 3,
+          note: "B",
+          type: null
+        },
+        "C": {
+          val: 4,
+          note: "C",
+          type: null
+        },
+        "C#": {
+          val: 5,
+          note: "C#",
+          type: null
+        },
+        "D": {
+          val: 6,
+          note: "D",
+          type: null
+        },
+        "D#": {
+          val: 7,
+          note: "D#",
+          type: null
+        },
+        "E": {
+          val: 8,
+          note: "E",
+          type: null
+        },
+        "F": {
+          val: 9,
+          note: "F",
+          type: null
+        },
+        "F#": {
+          val: 10,
+          note: "F#",
+          type: null
+        },
+        "G": {
+          val: 11,
+          note: "G",
+          type: null
+        },
+        "G#": {
+          val: 12,
+          note: "G#",
+          type: null
+        }
+      },
+      songName: "",
+      key: "",
+      intro: "",
+      verse: "",
+      preChorus: "",
+      chorus: "",
+      bridge: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.newSection = this.newSection.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+    console.log(event.target.value);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const {
+      notes,
+      songName,
+      key,
+      intro,
+      verse,
+      preChorus,
+      chorus,
+      bridge
+    } = this.state; //const newIntro = this.newSection(intro.toUpperCase())
+
+    const newSong = {
+      name: songName,
+      key: notes[key.toUpperCase()],
+      intro: this.newSection(intro.toUpperCase()),
+      verse: this.newSection(verse.toUpperCase()),
+      preChorus: this.newSection(preChorus.toUpperCase()),
+      chorus: this.newSection(chorus.toUpperCase()),
+      bridge: this.newSection(bridge.toUpperCase())
+    };
+    console.log(newSong);
+  }
+
+  newSection(section) {
+    console.log(section, "sec");
+    const {
+      notes
+    } = this.state;
+    const spaceless = section.replace(/\s/g, '');
+    const split = spaceless.split(",");
+    console.log(split, "split");
+    return split.map(chord => {
+      return notes[chord];
+    });
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Add a Song");
+    const {
+      name,
+      key,
+      intro,
+      verse,
+      preChorus,
+      chorus,
+      bridge
+    } = this.state;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Add a Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "songName",
+      value: name,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Key:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "key",
+      value: key,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "intro",
+      value: intro,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "verse",
+      value: verse,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Pre-Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "preChorus",
+      value: preChorus,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "chorus",
+      value: chorus,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "bridge",
+      value: bridge,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      type: "submit"
+    }, "Submit"))));
   }
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AddSong);
+;
+
+const mapState = state => ({});
+
+const mapDispatch = dispatch => ({
+  addSong: song => dispatch((0,_store_songs__WEBPACK_IMPORTED_MODULE_2__.addSong)(song))
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(null, mapDispatch)(AddSong));
 
 /***/ }),
 
@@ -2597,17 +2784,26 @@ function singleSongReducer(state = [], action) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchSongs": () => (/* binding */ fetchSongs),
+/* harmony export */   "addSong": () => (/* binding */ addSong),
 /* harmony export */   "default": () => (/* binding */ songsReducer)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 const SET_SONGS = "SET_SONGS";
+const ADD_SONG = "ADD_SONG";
 
 const setSongs = songs => {
   return {
     type: SET_SONGS,
     songs
+  };
+};
+
+const setNewSong = song => {
+  return {
+    type: ADD_SONG,
+    song
   };
 };
 
@@ -2619,10 +2815,21 @@ const fetchSongs = () => {
     dispatch(setSongs(data));
   };
 };
+const addSong = song => {
+  return async dispatch => {
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/songs", song);
+    dispatch(fetchSongs());
+  };
+};
 function songsReducer(state = [], action) {
   switch (action.type) {
     case SET_SONGS:
       return action.songs;
+
+    case ADD_SONG:
+      return [...state, action.songs];
 
     default:
       return state;
