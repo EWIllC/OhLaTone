@@ -2225,25 +2225,45 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
     const newSong = {
       name: songName,
-      key: notes[key.toUpperCase()],
+      key: this.newSection(key.toUpperCase())[0],
       intro: this.newSection(intro.toUpperCase()),
       verse: this.newSection(verse.toUpperCase()),
       preChorus: this.newSection(preChorus.toUpperCase()),
       chorus: this.newSection(chorus.toUpperCase()),
       bridge: this.newSection(bridge.toUpperCase())
     };
-    console.log(newSong);
+    this.props.addSong(newSong);
   }
 
   newSection(section) {
-    console.log(section, "sec");
     const {
       notes
     } = this.state;
     const spaceless = section.replace(/\s/g, '');
-    const split = spaceless.split(",");
-    console.log(split, "split");
+    const split = spaceless.split(","); //console.log(split, "split");
+
     return split.map(chord => {
+      if (!chord.includes("#") && chord.length) {
+        let type = chord.slice(1);
+        chord = chord.slice(0, 1);
+        chord = notes[chord];
+        type.length > 0 ? chord.type = type : chord.type = null;
+        return chord;
+      } else if (chord.length) {
+        let type = chord.slice(chord.indexOf("#") + 1);
+        chord = chord.slice(0, 2);
+        chord = notes[chord];
+        type.length > 0 ? chord.type = type : chord.type = null;
+        return chord;
+      } // if(chord.length >= 2 && chord[chord.length -1] != "#") {
+      //     let slice = chord.indexOf("#") ? chord.slice(chord.indexOf("#") + 1) : chord.slice(1);
+      //     chord = chord.indexOf("#") ? chord.slice(0, chord.indexOf("#") + 1) : chord.slice(0, 1);
+      //     notes[chord].type = slice;
+      //     console.log(notes[chord])
+      //     return notes[chord];
+      // }
+
+
       return notes[chord];
     });
   }
