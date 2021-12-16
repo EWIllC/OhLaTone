@@ -38,7 +38,6 @@ class AddSong extends React.Component {
     };
 
     handleChange(event) {
-
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -48,7 +47,7 @@ class AddSong extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const { notes, songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
+        const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
         //const newIntro = this.newSection(intro.toUpperCase())
         const newSong = {
             name: songName,
@@ -66,34 +65,41 @@ class AddSong extends React.Component {
         const{ notes } = this.state;
         const spaceless = section.replace(/\s/g, '');
         const split = spaceless.split(",");
+        //notes = notes;
         //console.log(split, "split");
         
         return split.map((chord) => {
 
+            console.log(notes, "first")
             if(!chord.includes("#") && chord.length) {
 
+                //console.log(notes,'entered the if')
                 let type = chord.slice(1);
                 chord = chord.slice(0,1);
-                chord = notes[chord];
-                type.length > 0 ? chord.type = type : chord.type = null;
-                return chord;
+                let newChord = {
+                    val: notes[chord].val,
+                    note: notes[chord].note,
+                    type: type
+                };
+                console.log(notes, "reassingment?")
+                // const newChord = notes[chord];
+                type.length > 0 ? newChord.type = type : newChord.type = null;
+                
+                return newChord;
 
             } else if (chord.length) {
 
                 let type = chord.slice(chord.indexOf("#") + 1);
-                chord = chord.slice(0, 2);
-                chord = notes[chord];
-                type.length > 0 ? chord.type = type : chord.type = null;
-                return chord;
+                let newChord = {
+                    val: notes[chord].val,
+                    note: notes[chord].note,
+                    type: type
+                };
+                type.length > 0 ? newChord.type = type : newChord.type = null;
+                //console.log(notes)
+
+                return newChord;
             }
-            // if(chord.length >= 2 && chord[chord.length -1] != "#") {
-            //     let slice = chord.indexOf("#") ? chord.slice(chord.indexOf("#") + 1) : chord.slice(1);
-            //     chord = chord.indexOf("#") ? chord.slice(0, chord.indexOf("#") + 1) : chord.slice(0, 1);
-            //     notes[chord].type = slice;
-            //     console.log(notes[chord])
-            //     return notes[chord];
-            // }
-            return notes[chord];
         });
     }
 

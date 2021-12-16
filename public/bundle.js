@@ -2213,7 +2213,6 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   handleSubmit(event) {
     event.preventDefault();
     const {
-      notes,
       songName,
       key,
       intro,
@@ -2240,31 +2239,36 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       notes
     } = this.state;
     const spaceless = section.replace(/\s/g, '');
-    const split = spaceless.split(","); //console.log(split, "split");
+    const split = spaceless.split(","); //notes = notes;
+    //console.log(split, "split");
 
     return split.map(chord => {
+      console.log(notes, "first");
+
       if (!chord.includes("#") && chord.length) {
+        //console.log(notes,'entered the if')
         let type = chord.slice(1);
         chord = chord.slice(0, 1);
-        chord = notes[chord];
-        type.length > 0 ? chord.type = type : chord.type = null;
-        return chord;
+        let newChord = {
+          val: notes[chord].val,
+          note: notes[chord].note,
+          type: type
+        };
+        console.log(notes, "reassingment?"); // const newChord = notes[chord];
+
+        type.length > 0 ? newChord.type = type : newChord.type = null;
+        return newChord;
       } else if (chord.length) {
         let type = chord.slice(chord.indexOf("#") + 1);
-        chord = chord.slice(0, 2);
-        chord = notes[chord];
-        type.length > 0 ? chord.type = type : chord.type = null;
-        return chord;
-      } // if(chord.length >= 2 && chord[chord.length -1] != "#") {
-      //     let slice = chord.indexOf("#") ? chord.slice(chord.indexOf("#") + 1) : chord.slice(1);
-      //     chord = chord.indexOf("#") ? chord.slice(0, chord.indexOf("#") + 1) : chord.slice(0, 1);
-      //     notes[chord].type = slice;
-      //     console.log(notes[chord])
-      //     return notes[chord];
-      // }
+        let newChord = {
+          val: notes[chord].val,
+          note: notes[chord].note,
+          type: type
+        };
+        type.length > 0 ? newChord.type = type : newChord.type = null; //console.log(notes)
 
-
-      return notes[chord];
+        return newChord;
+      }
     });
   }
 
@@ -2414,6 +2418,8 @@ class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: "/songs"
     }, "Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      to: "/addSong"
+    }, "Add a Song"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: "/contact"
     }, "Contact")));
   }
