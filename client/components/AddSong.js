@@ -22,7 +22,6 @@ class AddSong extends React.Component {
             "G":{val: 11, note:"G", type: ""},
             "G#":{val: 12, note:"G#", type: ""}},
                 
-
             songName: "",
             key: "",
             intro: "",
@@ -32,9 +31,11 @@ class AddSong extends React.Component {
             bridge: "",
 
         };
+        
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.newSection = this.newSection.bind(this)
+        this.newSection = this.newSection.bind(this);
+
     };
 
     handleChange(event) {

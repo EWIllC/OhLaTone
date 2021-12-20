@@ -12,7 +12,7 @@ class Songs extends React.Component {
     render() {
 
         const { songs } = this.props;
-        console.log(songs)
+
         return (
             <div>
                 <div>This is the Songs</div>

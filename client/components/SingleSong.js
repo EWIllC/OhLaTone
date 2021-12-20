@@ -34,6 +34,7 @@ class SingleSong extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleEditRedirect = this.handleEditRedirect.bind(this);
         this.chordValueMachine = this.chordValueMachine.bind(this);
         this.typeAssign = this.typeAssign.bind(this);
 
@@ -88,7 +89,6 @@ class SingleSong extends React.Component {
     
     chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
 
-        console.log(chord)
         let chordValue = chord.val;
     
         if(newKeyValue > oldKeyValue) {
@@ -132,6 +132,10 @@ class SingleSong extends React.Component {
         }
     }
 
+    handleEditRedirect() {
+        this.props.history.push(`${this.props.match.params.songId}/editSong`)
+    }
+
     componentDidMount() {
 
         this.props.fetchSingleSong(this.props.match.params.songId);
@@ -161,7 +165,7 @@ class SingleSong extends React.Component {
     render() {
 
         const { id, name, key, intro, verse, chorus, preChorus, bridge, minorOr, notes} = this.state;
-        console.log(minorOr)
+       
         return (
             <div key={id}>
                 <h2>{name}</h2>
@@ -193,6 +197,11 @@ class SingleSong extends React.Component {
                 {bridge[0] !== null ? 
                 bridge.map((chord) => (chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ")) : 
                 <p>n/a</p>}
+
+                <p>
+                <button onClick={this.handleEditRedirect}>Edit</button>
+                </p>
+        
             </div>
 
         )

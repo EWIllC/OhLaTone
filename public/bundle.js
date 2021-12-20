@@ -2062,12 +2062,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Home */ "./client/components/Home.js");
 /* harmony import */ var _components_Songs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Songs */ "./client/components/Songs.js");
 /* harmony import */ var _components_SingleSong__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/SingleSong */ "./client/components/SingleSong.js");
 /* harmony import */ var _components_AddSong__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/AddSong */ "./client/components/AddSong.js");
-/* harmony import */ var _components_Contact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Contact */ "./client/components/Contact.js");
+/* harmony import */ var _components_EditSong__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/EditSong */ "./client/components/EditSong.js");
+/* harmony import */ var _components_Contact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Contact */ "./client/components/Contact.js");
+
 
 
 
@@ -2078,23 +2080,28 @@ __webpack_require__.r(__webpack_exports__);
 
 class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/home",
       component: _components_Home__WEBPACK_IMPORTED_MODULE_1__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       exact: true,
       path: "/songs",
       component: _components_Songs__WEBPACK_IMPORTED_MODULE_2__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      exact: true,
       path: "/songs/:songId",
       component: _components_SingleSong__WEBPACK_IMPORTED_MODULE_3__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/addSong",
       component: _components_AddSong__WEBPACK_IMPORTED_MODULE_4__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      exact: true,
+      path: "/songs/:songId/editSong",
+      component: _components_EditSong__WEBPACK_IMPORTED_MODULE_5__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/contact",
-      component: _components_Contact__WEBPACK_IMPORTED_MODULE_5__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Redirect, {
+      component: _components_Contact__WEBPACK_IMPORTED_MODULE_6__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Redirect, {
       to: "/home"
     }));
   }
@@ -2362,6 +2369,281 @@ class Contact extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 /***/ }),
 
+/***/ "./client/components/EditSong.js":
+/*!***************************************!*\
+  !*** ./client/components/EditSong.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
+
+
+
+
+class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor() {
+    super();
+    this.state = {
+      notes: {
+        "A": {
+          val: 1,
+          note: "A",
+          type: ""
+        },
+        "A#": {
+          val: 2,
+          note: "A#",
+          type: ""
+        },
+        "B": {
+          val: 3,
+          note: "B",
+          type: ""
+        },
+        "C": {
+          val: 4,
+          note: "C",
+          type: ""
+        },
+        "C#": {
+          val: 5,
+          note: "C#",
+          type: ""
+        },
+        "D": {
+          val: 6,
+          note: "D",
+          type: ""
+        },
+        "D#": {
+          val: 7,
+          note: "D#",
+          type: ""
+        },
+        "E": {
+          val: 8,
+          note: "E",
+          type: ""
+        },
+        "F": {
+          val: 9,
+          note: "F",
+          type: ""
+        },
+        "F#": {
+          val: 10,
+          note: "F#",
+          type: ""
+        },
+        "G": {
+          val: 11,
+          note: "G",
+          type: ""
+        },
+        "G#": {
+          val: 12,
+          note: "G#",
+          type: ""
+        }
+      },
+      songName: "",
+      key: {
+        val: 0,
+        note: "",
+        type: ""
+      },
+      intro: [],
+      verse: [],
+      preChorus: [],
+      chorus: [],
+      bridge: []
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.newSection = this.newSection.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const {
+      songName,
+      key,
+      intro,
+      verse,
+      preChorus,
+      chorus,
+      bridge
+    } = this.state;
+    const newSong = {
+      name: songName,
+      key: this.newSection(key.toUpperCase())[0],
+      intro: this.newSection(intro.toUpperCase()),
+      verse: this.newSection(verse.toUpperCase()),
+      preChorus: this.newSection(preChorus.toUpperCase()),
+      chorus: this.newSection(chorus.toUpperCase()),
+      bridge: this.newSection(bridge.toUpperCase())
+    };
+    this.props.addSong(newSong);
+    this.props.history.push("/songs");
+  }
+
+  newSection(section) {
+    const {
+      notes
+    } = this.state;
+    const spaceless = section.replace(/\s/g, '');
+    const split = spaceless.split(",");
+    return split.map(chord => {
+      if (!chord.includes("#") && chord.length) {
+        let type = chord.slice(1);
+        chord = chord.slice(0, 1);
+        let newChord = {
+          val: notes[chord].val,
+          note: notes[chord].note,
+          type: type
+        };
+        type.length > 0 ? newChord.type = type : newChord.type = null;
+        return newChord;
+      } else if (chord.length) {
+        let type = chord.slice(chord.indexOf("#") + 1);
+        chord = chord.slice(0, 2);
+        let newChord = {
+          val: notes[chord].val,
+          note: notes[chord].note,
+          type: type
+        };
+        type.length > 0 ? newChord.type = type : newChord.type = null;
+        return newChord;
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.props.fetchSingleSong(this.props.match.params.songId);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.song !== this.props.song) {
+      let {
+        name,
+        key,
+        intro,
+        verse,
+        preChorus,
+        chorus,
+        bridge
+      } = this.props.song;
+      this.setState({
+        songName: name,
+        key: key,
+        intro: intro,
+        verse: verse,
+        preChorus: preChorus,
+        chorus: chorus,
+        bridge: bridge,
+        minorOr: key.type.includes("M")
+      });
+    }
+  }
+
+  render() {
+    const {
+      songName,
+      key,
+      intro,
+      verse,
+      preChorus,
+      chorus,
+      bridge
+    } = this.state;
+    return (
+      /*#__PURE__*/
+      //<p>hello world</p>
+      react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Edit Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "songForm",
+        type: "text",
+        name: "songName",
+        value: songName //placeholder={songName}
+        ,
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Key:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "songForm",
+        type: "text",
+        name: "key",
+        value: key.note + key.type.toLowerCase() //placeholder={key.note + key.type}
+        ,
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "songForm",
+        type: "text",
+        name: "intro",
+        value: intro[0] !== null ? intro.map(chord => chord.note) : "",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "songForm",
+        type: "text",
+        name: "verse",
+        value: verse[0] !== null ? verse.map(chord => chord.note) : "",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Pre-Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "songForm",
+        type: "text",
+        name: "verse",
+        value: preChorus[0] !== null ? preChorus.map(chord => chord.note) : "",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "songForm",
+        type: "text",
+        name: "verse",
+        value: chorus[0] !== null ? chorus.map(chord => chord.note) : "",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "songForm",
+        type: "text",
+        name: "verse",
+        value: bridge[0] !== null ? bridge.map(chord => chord.note) : "",
+        onChange: this.handleChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit"
+      }, "Submit"))))
+    );
+  }
+
+}
+
+;
+
+const mapState = state => ({
+  song: state.song
+});
+
+const mapDispatch = (dispatch, {
+  history
+}) => ({
+  fetchSingleSong: songId => {
+    dispatch((0,_store_singleSong__WEBPACK_IMPORTED_MODULE_2__.fetchSingleSong)(songId));
+  }
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(EditSong));
+
+/***/ }),
+
 /***/ "./client/components/Home.js":
 /*!***********************************!*\
   !*** ./client/components/Home.js ***!
@@ -2502,6 +2784,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       minorOr: false
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleEditRedirect = this.handleEditRedirect.bind(this);
     this.chordValueMachine = this.chordValueMachine.bind(this);
     this.typeAssign = this.typeAssign.bind(this);
   }
@@ -2538,7 +2821,6 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
-    console.log(chord);
     let chordValue = chord.val;
 
     if (newKeyValue > oldKeyValue) {
@@ -2569,6 +2851,10 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     } else {
       return newChord;
     }
+  }
+
+  handleEditRedirect() {
+    this.props.history.push(`${this.props.match.params.songId}/editSong`);
   }
 
   componentDidMount() {
@@ -2612,7 +2898,6 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       minorOr,
       notes
     } = this.state;
-    console.log(minorOr);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type.toLowerCase() : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
@@ -2624,7 +2909,9 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, chord.note, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
       value: chord.val,
       key: index
-    }, chord.note))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro"), intro[0] !== null ? intro.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), verse[0] !== null ? verse.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), preChorus[0] !== null ? preChorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), chorus[0] !== null ? chorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), bridge[0] !== null ? bridge.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"));
+    }, chord.note))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro"), intro[0] !== null ? intro.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), verse[0] !== null ? verse.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), preChorus[0] !== null ? preChorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), chorus[0] !== null ? chorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), bridge[0] !== null ? bridge.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      onClick: this.handleEditRedirect
+    }, "Edit")));
   }
 
 }
@@ -2676,7 +2963,6 @@ class Songs extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       songs
     } = this.props;
-    console.log(songs);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "This is the Songs"), songs.map(song => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: song.id
