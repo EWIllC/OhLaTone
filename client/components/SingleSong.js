@@ -53,12 +53,6 @@ class SingleSong extends React.Component {
         (
             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
         )) : [null]
-        
-        // let newVerse = verse !== null ? verse.map((chord, index) => 
-        // (
-        //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        // )) : null;
-
 
         let newVerse = verse[0] !== null ? verse.map((chord, index) => 
         (
@@ -124,7 +118,7 @@ class SingleSong extends React.Component {
     };
 
     typeAssign(newChord, oldChord) {
-        console.log(newChord, 'typeassign in type assign')
+        
         if(oldChord.type) {
 
             newChord.type = oldChord.type;
@@ -157,7 +151,7 @@ class SingleSong extends React.Component {
                 preChorus: preChorus,
                 chorus: chorus,
                 bridge: bridge,
-                minorOr:  key.type === "m"
+                minorOr:  key.type.includes("M")
 
             })
         }
@@ -167,12 +161,12 @@ class SingleSong extends React.Component {
     render() {
 
         const { id, name, key, intro, verse, chorus, preChorus, bridge, minorOr, notes} = this.state;
-        
+        console.log(minorOr)
         return (
             <div key={id}>
                 <h2>{name}</h2>
                 
-                <h3>Key of {key.type ? key.note + key.type : key.note}</h3>
+                <h3>Key of {key.type ? key.note + key.type.toLowerCase() : key.note}</h3>
                 <p>Transpose</p>
                 <select name="transpose" onChange={this.handleChange}>
                     {notes.map((chord, index) => (

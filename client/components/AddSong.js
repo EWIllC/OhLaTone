@@ -9,18 +9,18 @@ class AddSong extends React.Component {
         this.state = {
 
             notes: {
-            "A":{val: 1, note:"A", type: null},
-            "A#":{val: 2, note:"A#", type: null},
-            "B":{val: 3, note:"B", type: null},
-            "C":{val: 4, note:"C", type: null},
-            "C#":{val: 5, note:"C#", type: null},
-            "D":{val: 6, note:"D", type: null},
-            "D#":{val: 7, note:"D#", type: null},
-            "E":{val: 8, note:"E", type: null},
-            "F":{val: 9, note:"F", type: null},
-            "F#":{val: 10, note:"F#", type: null},
-            "G":{val: 11, note:"G", type: null},
-            "G#":{val: 12, note:"G#", type: null}},
+            "A":{val: 1, note:"A", type: ""},
+            "A#":{val: 2, note:"A#", type: ""},
+            "B":{val: 3, note:"B", type: ""},
+            "C":{val: 4, note:"C", type: ""},
+            "C#":{val: 5, note:"C#", type: ""},
+            "D":{val: 6, note:"D", type: ""},
+            "D#":{val: 7, note:"D#", type: ""},
+            "E":{val: 8, note:"E", type: ""},
+            "F":{val: 9, note:"F", type: ""},
+            "F#":{val: 10, note:"F#", type: ""},
+            "G":{val: 11, note:"G", type: ""},
+            "G#":{val: 12, note:"G#", type: ""}},
                 
 
             songName: "",
@@ -41,14 +41,11 @@ class AddSong extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         })
-        console.log(event.target.value);
-
     };
 
     handleSubmit(event) {
         event.preventDefault();
         const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
-        //const newIntro = this.newSection(intro.toUpperCase())
         const newSong = {
             name: songName,
             key: this.newSection(key.toUpperCase())[0],
@@ -59,21 +56,18 @@ class AddSong extends React.Component {
             bridge: this.newSection(bridge.toUpperCase()),
         }
         this.props.addSong(newSong)
+        this.props.history.push("/songs")
     };
 
     newSection(section) {
         const{ notes } = this.state;
         const spaceless = section.replace(/\s/g, '');
         const split = spaceless.split(",");
-        //notes = notes;
-        //console.log(split, "split");
         
         return split.map((chord) => {
 
-            console.log(notes, "first")
             if(!chord.includes("#") && chord.length) {
 
-                //console.log(notes,'entered the if')
                 let type = chord.slice(1);
                 chord = chord.slice(0,1);
                 let newChord = {
@@ -81,8 +75,7 @@ class AddSong extends React.Component {
                     note: notes[chord].note,
                     type: type
                 };
-                console.log(notes, "reassingment?")
-                // const newChord = notes[chord];
+                
                 type.length > 0 ? newChord.type = type : newChord.type = null;
                 
                 return newChord;
@@ -90,13 +83,13 @@ class AddSong extends React.Component {
             } else if (chord.length) {
 
                 let type = chord.slice(chord.indexOf("#") + 1);
+                chord = chord.slice(0,2);
                 let newChord = {
                     val: notes[chord].val,
                     note: notes[chord].note,
                     type: type
                 };
                 type.length > 0 ? newChord.type = type : newChord.type = null;
-                //console.log(notes)
 
                 return newChord;
             }
