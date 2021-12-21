@@ -2454,20 +2454,17 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         }
       },
       songName: "",
-      key: {
-        val: 0,
-        note: "",
-        type: ""
-      },
-      intro: [],
-      verse: [],
-      preChorus: [],
-      chorus: [],
-      bridge: []
+      key: "",
+      intro: "",
+      verse: "",
+      preChorus: "",
+      chorus: "",
+      bridge: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.newSection = this.newSection.bind(this);
+    this.mapper = this.mapper.bind(this);
   }
 
   handleChange(event) {
@@ -2496,8 +2493,8 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       chorus: this.newSection(chorus.toUpperCase()),
       bridge: this.newSection(bridge.toUpperCase())
     };
-    this.props.addSong(newSong);
-    this.props.history.push("/songs");
+    console.log(newSong); //this.props.addSong(newSong)
+    //this.props.history.push("/songs")
   }
 
   newSection(section) {
@@ -2531,6 +2528,11 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
   }
 
+  mapper(arr) {
+    console.log(arr);
+    return arr.map(chord => chord.type !== null ? chord.note + chord.type.toLowerCase() : chord.note).join(", ");
+  }
+
   componentDidMount() {
     this.props.fetchSingleSong(this.props.match.params.songId);
   }
@@ -2548,13 +2550,12 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       } = this.props.song;
       this.setState({
         songName: name,
-        key: key,
-        intro: intro,
-        verse: verse,
-        preChorus: preChorus,
-        chorus: chorus,
-        bridge: bridge,
-        minorOr: key.type.includes("M")
+        key: key.note + key.type.toLowerCase(),
+        intro: intro[0] !== null ? this.mapper(intro) : "",
+        verse: verse[0] !== null ? this.mapper(verse) : "",
+        preChorus: preChorus[0] !== null ? this.mapper(preChorus) : "",
+        chorus: chorus[0] !== null ? this.mapper(chorus) : "",
+        bridge: bridge[0] !== null ? this.mapper(bridge) : ""
       });
     }
   }
@@ -2585,38 +2586,38 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         className: "songForm",
         type: "text",
         name: "key",
-        value: key.note + key.type.toLowerCase() //placeholder={key.note + key.type}
+        value: key //placeholder={key.note + key.type.toLowerCase()}
         ,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "songForm",
         type: "text",
         name: "intro",
-        value: intro[0] !== null ? intro.map(chord => chord.note) : "",
+        value: intro,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "songForm",
         type: "text",
         name: "verse",
-        value: verse[0] !== null ? verse.map(chord => chord.note) : "",
+        value: verse,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Pre-Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "songForm",
         type: "text",
-        name: "verse",
-        value: preChorus[0] !== null ? preChorus.map(chord => chord.note) : "",
+        name: "preChorus",
+        value: preChorus,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "songForm",
         type: "text",
-        name: "verse",
-        value: chorus[0] !== null ? chorus.map(chord => chord.note) : "",
+        name: "chorus",
+        value: chorus,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "songForm",
         type: "text",
-        name: "verse",
-        value: bridge[0] !== null ? bridge.map(chord => chord.note) : "",
+        name: "bridge",
+        value: bridge,
         onChange: this.handleChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit"

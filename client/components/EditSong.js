@@ -24,18 +24,19 @@ class EditSong extends React.Component {
             "G#":{val: 12, note:"G#", type: ""}},
                 
             songName: "",
-            key: {val: 0, note: "", type: ""},
-            intro: [],
-            verse: [],
-            preChorus: [],
-            chorus: [],
-            bridge: [],
+            key: "",
+            intro: "",
+            verse: "",
+            preChorus: "",
+            chorus: "",
+            bridge: "",
 
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.newSection = this.newSection.bind(this);
+        this.mapper = this.mapper.bind(this);
 
     };
 
@@ -57,8 +58,9 @@ class EditSong extends React.Component {
             chorus: this.newSection(chorus.toUpperCase()),
             bridge: this.newSection(bridge.toUpperCase()),
         }
-        this.props.addSong(newSong)
-        this.props.history.push("/songs")
+        console.log(newSong)
+        //this.props.addSong(newSong)
+        //this.props.history.push("/songs")
     };
 
     newSection(section) {
@@ -98,6 +100,14 @@ class EditSong extends React.Component {
         });
     };
 
+    mapper(arr) {
+        console.log(arr)
+        return arr.map((chord) => (
+            chord.type !== null ? chord.note + chord.type.toLowerCase() :
+            chord.note 
+        )).join(", ")
+    };
+
 
     componentDidMount() {
 
@@ -112,14 +122,12 @@ class EditSong extends React.Component {
 
             this.setState({
                 songName: name,
-                key: key,
-                intro: intro,
-                verse: verse,
-                preChorus: preChorus,
-                chorus: chorus,
-                bridge: bridge,
-                minorOr:  key.type.includes("M")
-
+                key: key.note + key.type.toLowerCase(),
+                intro: intro[0] !== null ? this.mapper(intro) : "",
+                verse: verse[0] !== null ? this.mapper(verse) : "",
+                preChorus: preChorus[0] !== null ? this.mapper(preChorus) : "",
+                chorus: chorus[0] !== null ? this.mapper(chorus) : "",
+                bridge: bridge[0] !== null ? this.mapper(bridge) : "",
             })
         }
     };
@@ -149,8 +157,8 @@ class EditSong extends React.Component {
                     className = "songForm"
                     type="text"
                     name="key"
-                    value={key.note + key.type.toLowerCase()}
-                    //placeholder={key.note + key.type}
+                    value={key}
+                    //placeholder={key.note + key.type.toLowerCase()}
                     onChange={this.handleChange}
                     />
 
@@ -159,8 +167,7 @@ class EditSong extends React.Component {
                     className = "songForm"
                     type="text"
                     name="intro"
-                    value={intro[0] !== null ? intro.map((chord) => (chord.note)) :
-                    ""}
+                    value={intro}
                     onChange={this.handleChange}
                     />
 
@@ -169,8 +176,7 @@ class EditSong extends React.Component {
                     className = "songForm"
                     type="text"
                     name="verse"
-                    value={verse[0] !== null ? verse.map((chord) => (chord.note)) :
-                    ""}
+                    value={verse}
                     onChange={this.handleChange}
                     />
                     
@@ -178,9 +184,8 @@ class EditSong extends React.Component {
                     <input
                     className = "songForm"
                     type="text"
-                    name="verse"
-                    value={preChorus[0] !== null ? preChorus.map((chord) => (chord.note)) :
-                    ""}
+                    name="preChorus"
+                    value={preChorus}
                     onChange={this.handleChange}
                     />
 
@@ -188,9 +193,8 @@ class EditSong extends React.Component {
                     <input
                     className = "songForm"
                     type="text"
-                    name="verse"
-                    value={chorus[0] !== null ? chorus.map((chord) => (chord.note)) :
-                    ""}
+                    name="chorus"
+                    value={chorus}
                     onChange={this.handleChange}
                     />
 
@@ -198,9 +202,8 @@ class EditSong extends React.Component {
                     <input
                     className = "songForm"
                     type="text"
-                    name="verse"
-                    value={bridge[0] !== null ? bridge.map((chord) => (chord.note)) :
-                    ""}
+                    name="bridge"
+                    value={bridge}
                     onChange={this.handleChange}
                     />
 
