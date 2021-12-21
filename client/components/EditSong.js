@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleSong } from "../store/singleSong";
+import { editSong } from "../store/songs";
 
 class EditSong extends React.Component {
 
@@ -50,6 +51,7 @@ class EditSong extends React.Component {
         event.preventDefault();
         const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
         const newSong = {
+            id: this.props.song.id,
             name: songName,
             key: this.newSection(key.toUpperCase())[0],
             intro: this.newSection(intro.toUpperCase()),
@@ -58,9 +60,9 @@ class EditSong extends React.Component {
             chorus: this.newSection(chorus.toUpperCase()),
             bridge: this.newSection(bridge.toUpperCase()),
         }
-        console.log(newSong)
-        //this.props.addSong(newSong)
-        //this.props.history.push("/songs")
+        
+        this.props.editSong(newSong);
+        this.props.history.push("/songs");
     };
 
     newSection(section) {
@@ -122,7 +124,7 @@ class EditSong extends React.Component {
 
             this.setState({
                 songName: name,
-                key: key.note + key.type.toLowerCase(),
+                key: key.type ? key.note + key.type.toLowerCase() : key.note,
                 intro: intro[0] !== null ? this.mapper(intro) : "",
                 verse: verse[0] !== null ? this.mapper(verse) : "",
                 preChorus: preChorus[0] !== null ? this.mapper(preChorus) : "",
@@ -221,7 +223,9 @@ const mapState = (state) => ({ song: state.song });
 
 const mapDispatch = (dispatch, { history }) => ({
 
-    fetchSingleSong: (songId) => {dispatch(fetchSingleSong(songId))}
+    fetchSingleSong: (songId) => {dispatch(fetchSingleSong(songId))},
+
+    editSong: (song) => (dispatch(editSong(song)))
 
 });
 

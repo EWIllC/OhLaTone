@@ -155,7 +155,9 @@ class SingleSong extends React.Component {
                 preChorus: preChorus,
                 chorus: chorus,
                 bridge: bridge,
-                minorOr:  key.type.includes("M")
+
+                // checks if there is a type, and than if that type is minor
+                minorOr: key.type ? key.type.includes("M") ? true : false : false
 
             })
         }

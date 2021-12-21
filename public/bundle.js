@@ -2383,6 +2383,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
+/* harmony import */ var _store_songs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/songs */ "./client/store/songs.js");
+
 
 
 
@@ -2485,6 +2487,7 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       bridge
     } = this.state;
     const newSong = {
+      id: this.props.song.id,
       name: songName,
       key: this.newSection(key.toUpperCase())[0],
       intro: this.newSection(intro.toUpperCase()),
@@ -2493,8 +2496,8 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       chorus: this.newSection(chorus.toUpperCase()),
       bridge: this.newSection(bridge.toUpperCase())
     };
-    console.log(newSong); //this.props.addSong(newSong)
-    //this.props.history.push("/songs")
+    this.props.editSong(newSong);
+    this.props.history.push("/songs");
   }
 
   newSection(section) {
@@ -2550,7 +2553,7 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       } = this.props.song;
       this.setState({
         songName: name,
-        key: key.note + key.type.toLowerCase(),
+        key: key.type ? key.note + key.type.toLowerCase() : key.note,
         intro: intro[0] !== null ? this.mapper(intro) : "",
         verse: verse[0] !== null ? this.mapper(verse) : "",
         preChorus: preChorus[0] !== null ? this.mapper(preChorus) : "",
@@ -2638,7 +2641,8 @@ const mapDispatch = (dispatch, {
 }) => ({
   fetchSingleSong: songId => {
     dispatch((0,_store_singleSong__WEBPACK_IMPORTED_MODULE_2__.fetchSingleSong)(songId));
-  }
+  },
+  editSong: song => dispatch((0,_store_songs__WEBPACK_IMPORTED_MODULE_3__.editSong)(song))
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(EditSong));
@@ -2881,7 +2885,8 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         preChorus: preChorus,
         chorus: chorus,
         bridge: bridge,
-        minorOr: key.type.includes("M")
+        // checks if there is a type, and than if that type is minor
+        minorOr: key.type ? key.type.includes("M") ? true : false : false
       });
     }
   }
@@ -3100,6 +3105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchSongs": () => (/* binding */ fetchSongs),
 /* harmony export */   "addSong": () => (/* binding */ addSong),
+/* harmony export */   "editSong": () => (/* binding */ editSong),
 /* harmony export */   "default": () => (/* binding */ songsReducer)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -3107,6 +3113,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const SET_SONGS = "SET_SONGS";
 const ADD_SONG = "ADD_SONG";
+const EDIT_SONG = "EDIT_SONG";
 
 const setSongs = songs => {
   return {
@@ -3118,6 +3125,13 @@ const setSongs = songs => {
 const setNewSong = song => {
   return {
     type: ADD_SONG,
+    song
+  };
+};
+
+const setEditSong = song => {
+  return {
+    type: EDIT_SONG,
     song
   };
 };
@@ -3138,6 +3152,15 @@ const addSong = song => {
     dispatch(fetchSongs());
   };
 };
+const editSong = song => {
+  return async dispatch => {
+    console.log(song);
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/songs/${song.id}`, song);
+    dispatch(setEditSong(data));
+  };
+};
 function songsReducer(state = [], action) {
   switch (action.type) {
     case SET_SONGS:
@@ -3145,6 +3168,13 @@ function songsReducer(state = [], action) {
 
     case ADD_SONG:
       return [...state, action.songs];
+
+    case EDIT_SONG:
+      return state.filter(song => {
+        if (song !== action.song) {
+          return song;
+        }
+      }, action.song);
 
     default:
       return state;
