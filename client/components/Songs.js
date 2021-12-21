@@ -4,14 +4,29 @@ import { Link } from "react-router-dom";
 import { fetchSongs } from "../store/songs";
 
 class Songs extends React.Component {
+    constructor() {
+        super();
+        
+        this.state = {
+            songs: []
+        };
+    };
 
     componentDidMount() {
         this.props.fetchSongs();
     }
 
+    componentDidUpdate(prevProps) {
+        if(this.props.songs !== prevProps.songs) {
+            this.setState({
+                songs: this.props.songs
+            })
+        }
+    }
+
     render() {
 
-        const { songs } = this.props;
+        const { songs } = this.state;
 
         return (
             <div>

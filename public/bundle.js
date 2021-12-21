@@ -2961,14 +2961,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Songs extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor() {
+    super();
+    this.state = {
+      songs: []
+    };
+  }
+
   componentDidMount() {
     this.props.fetchSongs();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.songs !== prevProps.songs) {
+      this.setState({
+        songs: this.props.songs
+      });
+    }
   }
 
   render() {
     const {
       songs
-    } = this.props;
+    } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "This is the Songs"), songs.map(song => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: song.id
@@ -3154,11 +3169,8 @@ const addSong = song => {
 };
 const editSong = song => {
   return async dispatch => {
-    console.log(song);
-    const {
-      data
-    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/songs/${song.id}`, song);
-    dispatch(setEditSong(data));
+    await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/songs/${song.id}`, song);
+    dispatch(setEditSong(song));
   };
 };
 function songsReducer(state = [], action) {
@@ -3170,11 +3182,12 @@ function songsReducer(state = [], action) {
       return [...state, action.songs];
 
     case EDIT_SONG:
-      return state.filter(song => {
-        if (song !== action.song) {
+      return [...state.filter(song => {
+        if (song.id !== action.song.id) {
+          //console.log(song)
           return song;
         }
-      }, action.song);
+      }), action.song];
 
     default:
       return state;

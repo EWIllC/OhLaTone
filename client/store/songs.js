@@ -36,10 +36,10 @@ export const addSong = (song) => {
 
 export const editSong = (song) => {
     return async (dispatch) => {
-        console.log(song)
-        const { data } = await axios.put(`/api/songs/${song.id}`, song);
+        
+        await axios.put(`/api/songs/${song.id}`, song);
 
-        dispatch(setEditSong(data));
+        dispatch(setEditSong(song));
     }
 }
 
@@ -54,11 +54,13 @@ export default function songsReducer (state = [], action) {
             return [...state, action.songs];
         
         case EDIT_SONG:
-            return state.filter((song) => {
-                if(song !== action.song) {
-                    return song
+            return [...state.filter((song) => {
+                
+                if(song.id !== action.song.id) {
+                    //console.log(song)
+                    return song;
                 }
-            }, action.song);
+            }), action.song];
 
         default:
             return state;
