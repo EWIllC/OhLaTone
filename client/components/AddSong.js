@@ -31,7 +31,7 @@ class AddSong extends React.Component {
             bridge: "",
 
         };
-        
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.newSection = this.newSection.bind(this);
@@ -47,6 +47,11 @@ class AddSong extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
+
+        if(!this.state.notes[key[0]]) {
+            alert("song needs a valid key");
+        };
+
         const newSong = {
             name: songName,
             key: this.newSection(key.toUpperCase())[0],
@@ -56,21 +61,28 @@ class AddSong extends React.Component {
             chorus: this.newSection(chorus.toUpperCase()),
             bridge: this.newSection(bridge.toUpperCase()),
         }
-        this.props.addSong(newSong)
-        this.props.history.push("/songs")
+        this.props.addSong(newSong);
+        this.props.history.push("/songs");
     };
 
     newSection(section) {
         const{ notes } = this.state;
         const spaceless = section.replace(/\s/g, '');
         const split = spaceless.split(",");
+
         
         return split.map((chord) => {
+
 
             if(!chord.includes("#") && chord.length) {
 
                 let type = chord.slice(1);
                 chord = chord.slice(0,1);
+
+                if(!notes[chord]) {
+                    alert("not a valid chord");
+                };
+
                 let newChord = {
                     val: notes[chord].val,
                     note: notes[chord].note,
@@ -85,6 +97,11 @@ class AddSong extends React.Component {
 
                 let type = chord.slice(chord.indexOf("#") + 1);
                 chord = chord.slice(0,2);
+
+                if(!notes[chord]) {
+                    alert("not a valid chord");
+                };
+
                 let newChord = {
                     val: notes[chord].val,
                     note: notes[chord].note,
