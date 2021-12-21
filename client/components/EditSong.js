@@ -50,6 +50,11 @@ class EditSong extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
+
+        if(!this.state.notes[key[0]]) {
+            alert("song needs a valid key");
+        };
+        
         const newSong = {
             id: this.props.song.id,
             name: songName,
@@ -76,6 +81,11 @@ class EditSong extends React.Component {
 
                 let type = chord.slice(1);
                 chord = chord.slice(0,1);
+
+                if(!notes[chord]) {
+                    alert("not a valid chord");
+                };
+
                 let newChord = {
                     val: notes[chord].val,
                     note: notes[chord].note,
@@ -90,6 +100,11 @@ class EditSong extends React.Component {
 
                 let type = chord.slice(chord.indexOf("#") + 1);
                 chord = chord.slice(0,2);
+
+                if(!notes[chord]) {
+                    alert("not a valid chord");
+                };
+
                 let newChord = {
                     val: notes[chord].val,
                     note: notes[chord].note,
@@ -103,7 +118,7 @@ class EditSong extends React.Component {
     };
 
     mapper(arr) {
-        
+
         return arr.map((chord) => (
             chord.type !== null ? chord.note + chord.type.toLowerCase() :
             chord.note 

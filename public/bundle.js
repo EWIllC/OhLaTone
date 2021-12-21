@@ -2227,6 +2227,12 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       chorus,
       bridge
     } = this.state;
+
+    if (!this.state.notes[key[0]]) {
+      alert("song needs a valid key");
+    }
+
+    ;
     const newSong = {
       name: songName,
       key: this.newSection(key.toUpperCase())[0],
@@ -2250,6 +2256,12 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       if (!chord.includes("#") && chord.length) {
         let type = chord.slice(1);
         chord = chord.slice(0, 1);
+
+        if (!notes[chord]) {
+          alert("not a valid chord");
+        }
+
+        ;
         let newChord = {
           val: notes[chord].val,
           note: notes[chord].note,
@@ -2260,6 +2272,12 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       } else if (chord.length) {
         let type = chord.slice(chord.indexOf("#") + 1);
         chord = chord.slice(0, 2);
+
+        if (!notes[chord]) {
+          alert("not a valid chord");
+        }
+
+        ;
         let newChord = {
           val: notes[chord].val,
           note: notes[chord].note,
@@ -2486,6 +2504,12 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       chorus,
       bridge
     } = this.state;
+
+    if (!this.state.notes[key[0]]) {
+      alert("song needs a valid key");
+    }
+
+    ;
     const newSong = {
       id: this.props.song.id,
       name: songName,
@@ -2510,6 +2534,12 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       if (!chord.includes("#") && chord.length) {
         let type = chord.slice(1);
         chord = chord.slice(0, 1);
+
+        if (!notes[chord]) {
+          alert("not a valid chord");
+        }
+
+        ;
         let newChord = {
           val: notes[chord].val,
           note: notes[chord].note,
@@ -2520,6 +2550,12 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       } else if (chord.length) {
         let type = chord.slice(chord.indexOf("#") + 1);
         chord = chord.slice(0, 2);
+
+        if (!notes[chord]) {
+          alert("not a valid chord");
+        }
+
+        ;
         let newChord = {
           val: notes[chord].val,
           note: notes[chord].note,
