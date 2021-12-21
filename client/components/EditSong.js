@@ -103,7 +103,7 @@ class EditSong extends React.Component {
     };
 
     mapper(arr) {
-        console.log(arr)
+        
         return arr.map((chord) => (
             chord.type !== null ? chord.note + chord.type.toLowerCase() :
             chord.note 

@@ -2532,7 +2532,6 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   mapper(arr) {
-    console.log(arr);
     return arr.map(chord => chord.type !== null ? chord.note + chord.type.toLowerCase() : chord.note).join(", ");
   }
 
@@ -2723,6 +2722,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
+/* harmony import */ var _store_songs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/songs */ "./client/store/songs.js");
+
 
 
 
@@ -2790,6 +2791,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleEditRedirect = this.handleEditRedirect.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.chordValueMachine = this.chordValueMachine.bind(this);
     this.typeAssign = this.typeAssign.bind(this);
   }
@@ -2823,6 +2825,11 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       chorus: newChorus,
       bridge: newBridge
     });
+  }
+
+  handleDelete() {
+    this.props.deleteSong(this.props.song.id);
+    this.props.history.push("/songs");
   }
 
   chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
@@ -2917,7 +2924,9 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       key: index
     }, chord.note))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro"), intro[0] !== null ? intro.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), verse[0] !== null ? verse.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), preChorus[0] !== null ? preChorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), chorus[0] !== null ? chorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), bridge[0] !== null ? bridge.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: this.handleEditRedirect
-    }, "Edit")));
+    }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      onClick: this.handleDelete
+    }, "Delete")));
   }
 
 }
@@ -2933,7 +2942,8 @@ const mapDispatch = (dispatch, {
 }) => ({
   fetchSingleSong: songId => {
     dispatch((0,_store_singleSong__WEBPACK_IMPORTED_MODULE_2__.fetchSingleSong)(songId));
-  }
+  },
+  deleteSong: songId => dispatch((0,_store_songs__WEBPACK_IMPORTED_MODULE_3__.deleteSong)(songId))
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingleSong));
@@ -3121,6 +3131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchSongs": () => (/* binding */ fetchSongs),
 /* harmony export */   "addSong": () => (/* binding */ addSong),
 /* harmony export */   "editSong": () => (/* binding */ editSong),
+/* harmony export */   "deleteSong": () => (/* binding */ deleteSong),
 /* harmony export */   "default": () => (/* binding */ songsReducer)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -3129,6 +3140,7 @@ __webpack_require__.r(__webpack_exports__);
 const SET_SONGS = "SET_SONGS";
 const ADD_SONG = "ADD_SONG";
 const EDIT_SONG = "EDIT_SONG";
+const DELETE_SONG = "DELETE_SONG";
 
 const setSongs = songs => {
   return {
@@ -3149,7 +3161,10 @@ const setEditSong = song => {
     type: EDIT_SONG,
     song
   };
-};
+}; // const setDeleteSong = (songId) => {
+//     return { tyope: DELETE_SONG, songId };
+// };
+
 
 const fetchSongs = () => {
   return async dispatch => {
@@ -3173,6 +3188,12 @@ const editSong = song => {
     dispatch(setEditSong(song));
   };
 };
+const deleteSong = songId => {
+  return async dispatch => {
+    await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/songs/${songId}`);
+    dispatch(fetchSongs());
+  };
+};
 function songsReducer(state = [], action) {
   switch (action.type) {
     case SET_SONGS:
@@ -3189,10 +3210,20 @@ function songsReducer(state = [], action) {
         }
       }), action.song];
 
+    case DELETE_SONG:
+      return [...state.filter(song => {
+        if (song.id !== action.songId) {
+          return song;
+        }
+      })];
+
     default:
       return state;
   }
+
+  ;
 }
+;
 
 /***/ }),
 

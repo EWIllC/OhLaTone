@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleSong } from "../store/singleSong";
+import { deleteSong } from "../store/songs";
 
 class SingleSong extends React.Component {
     constructor() {
@@ -35,6 +36,8 @@ class SingleSong extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleEditRedirect = this.handleEditRedirect.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+
         this.chordValueMachine = this.chordValueMachine.bind(this);
         this.typeAssign = this.typeAssign.bind(this);
 
@@ -53,28 +56,28 @@ class SingleSong extends React.Component {
         intro.map((chord, index) => 
         (
             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        )) : [null]
+        )) : [null];
 
         let newVerse = verse[0] !== null ? verse.map((chord, index) => 
         (
             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        )) : [null]
+        )) : [null];
 
         
         let newPreChorus = preChorus[0] !== null ? preChorus.map((chord, index) => 
         (
             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        )) : [null]
+        )) : [null];
 
         let newChorus = chorus[0] !== null ? chorus.map((chord, index) => 
         (
             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        )) : [null]
+        )) : [null];
 
         let newBridge = bridge[0] !== null ? bridge.map((chord, index) => 
         (
             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        )) : [null]
+        )) : [null];
 
         this.setState({
             key: notes[value - 1],
@@ -83,8 +86,14 @@ class SingleSong extends React.Component {
             preChorus: newPreChorus,
             chorus: newChorus,
             bridge: newBridge
-        })
+        });
 
+    };
+
+    handleDelete() {
+
+        this.props.deleteSong(this.props.song.id);
+        this.props.history.push("/songs");
     };
     
     chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
@@ -202,6 +211,7 @@ class SingleSong extends React.Component {
 
                 <p>
                 <button onClick={this.handleEditRedirect}>Edit</button>
+                <button onClick={this.handleDelete}>Delete</button>
                 </p>
         
             </div>
@@ -214,7 +224,8 @@ const mapState = (state) => ({ song: state.song });
 
 const mapDispatch = (dispatch, { history }) => ({
 
-    fetchSingleSong: (songId) => {dispatch(fetchSingleSong(songId))}
+    fetchSingleSong: (songId) => {dispatch(fetchSingleSong(songId))},
+    deleteSong: (songId) => (dispatch(deleteSong(songId)))
 
 });
 
