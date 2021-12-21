@@ -21,7 +21,6 @@ router.get("/", async (req, res, next) => {
 
 router.put("/", async (req, res, next) => {
     try {
-        console.log(req.params, "~~~~")
         const songFound = await Songs.findByPk(req.params.songId);
         
         res.status(204);
@@ -33,3 +32,19 @@ router.put("/", async (req, res, next) => {
 
     };
 });
+
+router.delete("/", async (req, res, next) => {
+    try {
+        console.log("~~~~~hit")
+        const songFound = await Songs.findByPk(req.params.songId);
+
+        await songFound.destroy();
+
+        res.status(200);
+        res.json(songFound);
+    } catch (error) {
+
+        next(error);
+
+    }
+})
