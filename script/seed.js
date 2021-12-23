@@ -9,15 +9,62 @@ const seed = async () => {
     await db.sync({ force: true });
     // seed your database here!
     await Songs.create(
-    { name: "Song1", key: {val: 1, note: "A" , type: "M"}, intro: [null], verse: [{val: 1 ,note: "A" , type: "M"}, { val: 6, note :"D", type: "M"}, {val: 8, note:"E", type: "M"}], preChorus: [{val: 11, note:"G" , type: null}], chorus: [{val: 9, note: "F", type: null}, {val: 8, note:"E", type: "M"}, {val: 6, note:"D", type: "M"}], bridge: [{val: 11, note:"G", type: null}, {val: 1, note: "A", type: "M"}, {val: 4, note:"C", type: null}]},
+    { name: "Song1", 
+    key: {val: 1, note: "A" , type: "M"}, 
+    sections: { 
+  
+      Verse: {
+        name: "Verse", 
+        chords: [{val: 1 ,note: "A" , type: "M"}, { val: 6, note :"D", type: "M"}, {val: 8, note:"E", type: "M"}]}, 
+
+      PreChorus: {
+        name: "Pre-Chorus",
+        chords: [{val: 11, note:"G" , type: null}]
+      },
+
+      Chorus: {
+        name: "Chorus",
+        chords: [{val: 9, note: "F", type: null}, {val: 8, note:"E", type: "M"}, {val: 6, note:"D", type: "M"}]
+      }, 
+
+      Bridge: {
+        name: "Bridge",
+        chords: [{val: 11, note:"G", type: null}, {val: 1, note: "A", type: "M"}, {val: 4, note:"C", type: null}] }},
+      }
     );
-    await Songs.create(
-      { name: "Song2", key: {val: 1, note: "D" , type: "M"}, intro: [null], verse: [{val: 1 ,note: "A" , type: "M"}, { val: 6, note :"D", type: "M"}, {val: 8, note:"E", type: "M"}], preChorus: [{val: 11, note:"G" , type: null}], chorus: [{val: 9, note: "F", type: null}, {val: 8, note:"E", type: "M"}, {val: 6, note:"D", type: "M"}], bridge: [{val: 11, note:"G", type: null}, {val: 1, note: "A", type: "M"}, {val: 4, note:"C", type: null}]},
-      );
 
     await Songs.create(
-      { name: "Song3", key: {val: 1, note: "F" , type: "M"}, intro: [null], verse: [{val: 1 ,note: "A" , type: "M"}, { val: 6, note :"D", type: "M"}, {val: 8, note:"E", type: "M"}], preChorus: [{val: 11, note:"G" , type: null}], chorus: [{val: 9, note: "F", type: null}, {val: 8, note:"E", type: "M"}, {val: 6, note:"D", type: "M"}], bridge: [{val: 11, note:"G", type: null}, {val: 1, note: "A", type: "M"}, {val: 4, note:"C", type: null}]},
+      { name: "Song2", 
+      key: {val: 1, note: "A" , type: "M"}, 
+      sections: { 
+    
+        Intro: {
+          name: "Intro",
+          chords: [{val: 1 ,note: "A" , type: "M"}]
+
+        },
+        Verse: {
+          name: "Verse", 
+          chords: [{val: 1 ,note: "A" , type: "M"}, { val: 6, note :"D", type: "M"}, {val: 8, note:"E", type: "M"}]}, 
+  
+  
+        Chorus: {
+          name: "Chorus",
+          chords: [{val: 9, note: "F", type: null}, {val: 8, note:"E", type: "M"}, {val: 6, note:"D", type: "M"}]
+        }, 
+  
+        Bridge: {
+          name: "Bridge",
+          chords: [{val: 11, note:"G", type: null}, {val: 1, note: "A", type: "M"}, {val: 4, note:"C", type: null}] }},
+        }
       );
+    // await Songs.create(
+    //   { name: "Song2", key: {val: 1, note: "D" , type: "M"}, intro: [null], verse: [{val: 1 ,note: "A" , type: "M"}, { val: 6, note :"D", type: "M"}, {val: 8, note:"E", type: "M"}], preChorus: [{val: 11, note:"G" , type: null}], chorus: [{val: 9, note: "F", type: null}, {val: 8, note:"E", type: "M"}, {val: 6, note:"D", type: "M"}], bridge: [{val: 11, note:"G", type: null}, {val: 1, note: "A", type: "M"}, {val: 4, note:"C", type: null}]},
+    //   );
+
+    // await Songs.create(
+    //   { name: "Song3", key: {val: 1, note: "F" , type: "M"}, intro: [null], verse: [{val: 1 ,note: "A" , type: "M"}, { val: 6, note :"D", type: "M"}, {val: 8, note:"E", type: "M"}], preChorus: [{val: 11, note:"G" , type: null}], chorus: [{val: 9, note: "F", type: null}, {val: 8, note:"E", type: "M"}, {val: 6, note:"D", type: "M"}], bridge: [{val: 11, note:"G", type: null}, {val: 1, note: "A", type: "M"}, {val: 4, note:"C", type: null}]},
+    //   );
     //await Song.create({ name: "Song2", key: "AM", intro: null, verse: "AM, DM, EM", preChorus: "GMaj", chorus: "E#M, Em, Dm", bridge: "Gmaj, Am, Cmaj"});
 
 

@@ -8,21 +8,24 @@ const Songs = db.define("song", {
     key: {
         type: Sequelize.JSON
     },
-    intro: {
-        type: Sequelize.JSON
-    },
-    verse: {
-        type: Sequelize.JSON
-    },
-    preChorus: {
-        type: Sequelize.JSON
-    },
-    chorus: {
-        type: Sequelize.JSON
-    },
-    bridge: {
+    sections: {
         type: Sequelize.JSON
     }
+    // intro: {
+    //     type: Sequelize.JSON
+    // },
+    // verse: {
+    //     type: Sequelize.JSON
+    // },
+    // preChorus: {
+    //     type: Sequelize.JSON
+    // },
+    // chorus: {
+    //     type: Sequelize.JSON
+    // },
+    // bridge: {
+    //     type: Sequelize.JSON
+    // }
 });
 
 module.exports = Songs;

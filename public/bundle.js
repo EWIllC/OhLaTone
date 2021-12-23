@@ -2818,11 +2818,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         type: null
       }],
       key: {},
-      intro: [],
-      verse: [],
-      preChorus: [],
-      chorus: [],
-      bridge: [],
+      sections: {},
       minorOr: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -2843,24 +2839,43 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       preChorus,
       bridge,
       minorOr,
-      notes
+      notes,
+      sections
     } = this.state;
     let value = parseInt(event.target.value);
     let steps = value > key.val ? value - key.val : key.val - value; //console.log(verse)
+    // let newIntro = intro[0] !== null ?
+    // intro.map((chord, index) => 
+    // (
+    //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+    // )) : [null];
+    // let newVerse = verse[0] !== null ? verse.map((chord, index) => 
+    // (
+    //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+    // )) : [null];
+    // let newPreChorus = preChorus[0] !== null ? preChorus.map((chord, index) => 
+    // (
+    //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+    // )) : [null];
+    // let newChorus = chorus[0] !== null ? chorus.map((chord, index) => 
+    // (
+    //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+    // )) : [null];
+    // let newBridge = bridge[0] !== null ? bridge.map((chord, index) => 
+    // (
+    //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+    // )) : [null];
 
-    let newIntro = intro[0] !== null ? intro.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    let newVerse = verse[0] !== null ? verse.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    let newPreChorus = preChorus[0] !== null ? preChorus.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    let newChorus = chorus[0] !== null ? chorus.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    let newBridge = bridge[0] !== null ? bridge.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    this.setState({
+    Object.keys(sections).map(section => this.setState({
       key: notes[value - 1],
-      intro: newIntro,
-      verse: newVerse,
-      preChorus: newPreChorus,
-      chorus: newChorus,
-      bridge: newBridge
-    });
+      section: sections[section].chords = sections[section].chords.map(chord => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord))
+    })); //console.log(this.state)
+    // console.log(transposedSections)
+    // this.setState({
+    //     key: notes[value - 1],
+    //     //intro: newIntro,
+    //     sections: transposedSections
+    // });
   }
 
   handleDelete() {
@@ -2869,6 +2884,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
+    console.log(steps);
     let chordValue = chord.val;
 
     if (newKeyValue > oldKeyValue) {
@@ -2914,20 +2930,12 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       let {
         name,
         key,
-        intro,
-        verse,
-        preChorus,
-        chorus,
-        bridge
+        sections
       } = this.props.song;
       this.setState({
         name: name,
         key: key,
-        intro: intro,
-        verse: verse,
-        preChorus: preChorus,
-        chorus: chorus,
-        bridge: bridge,
+        sections: sections,
         // checks if there is a type, and than if that type is minor
         minorOr: key.type ? key.type.includes("M") ? true : false : false
       });
@@ -2939,14 +2947,11 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       id,
       name,
       key,
-      intro,
-      verse,
-      chorus,
-      preChorus,
-      bridge,
+      sections,
       minorOr,
       notes
-    } = this.state;
+    } = this.state; //console.log(sections)
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type.toLowerCase() : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
@@ -2958,7 +2963,12 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, chord.note, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
       value: chord.val,
       key: index
-    }, chord.note))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro"), intro[0] !== null ? intro.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), verse[0] !== null ? verse.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), preChorus[0] !== null ? preChorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), chorus[0] !== null ? chorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), bridge[0] !== null ? bridge.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    }, chord.note))), Object.keys(sections).map(section => {
+      //console.log(sections[section])
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        key: sections[section].name
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: this.handleEditRedirect
     }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: this.handleDelete
