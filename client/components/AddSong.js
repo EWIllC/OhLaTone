@@ -24,28 +24,40 @@ class AddSong extends React.Component {
                 
             songName: "",
             key: "",
-            intro: "",
-            verse: "",
-            preChorus: "",
-            chorus: "",
-            bridge: "",
+            addSection: { name: "", chords: "" },
+            sections: {}
 
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.newSection = this.newSection.bind(this);
+        this.handleAddSectionSubmit = this.handleAddSectionSubmit.bind(this);
 
     };
 
     handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+
+        const { sections } = this.state
+        if(event.target.name === "addSection") {
+            this.setState({
+                [event.target.name]: {name: event.target.value, chords: this.state[event.target.name].chords}
+            })
+        } else {
+            this.setState({
+                sections: {...sections,
+                    [event.target.name]: {
+                        name: event.target.name,
+                        chords: event.target.value
+                    }
+                }
+            })
+        }
     };
 
     handleSubmit(event) {
         event.preventDefault();
+
         const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
 
         if(!this.state.notes[key[0]]) {
@@ -62,9 +74,25 @@ class AddSong extends React.Component {
             bridge: this.newSection(bridge.toUpperCase()),
         }
         this.props.addSong(newSong);
-        this.props.history.push("/songs");
+        //this.props.history.push("/songs");
     };
 
+    handleAddSectionSubmit(event) {
+        event.preventDefault();
+        const { addSection, sections } = this.state;
+        this.setState({
+            sections: {...sections,
+            [addSection.name]: {
+                name: addSection.name,
+                chords: addSection.chords }
+            }
+        })
+        console.log(this.state)
+    }
+
+    // fromats the text into the standard data type for a song section
+    // removes spaces, formats to an array, 
+    //decernes weather or not a note is sharp so it may set the type accodingly
     newSection(section) {
         const{ notes } = this.state;
         const spaceless = section.replace(/\s/g, '');
@@ -112,13 +140,32 @@ class AddSong extends React.Component {
                 return newChord;
             }
         });
-    }
+    };
+
 
     render() {
-        const { name, key, intro, verse, preChorus, chorus, bridge } = this.state;
+        const { name, key, intro, verse, preChorus, chorus, bridge, sections, addSection } = this.state;
         return (
             <div>Add a Song
+
+                <form onSubmit={this.handleAddSectionSubmit}>
+                    <h3>Add a Section?</h3>
+                    {/* <button value="Verse" onClick={this.addSection}>Verse</button>
+                    <button value="Chorus" onClick={this.addSection}>Chorus</button> */}
+                    <p>
+                    <input
+                    className="songForm"
+                    type="text"
+                    name="addSection"
+                    value={addSection.name}
+                    onChange={this.handleChange}
+                    />
+                    <button type="submit">Submit</button>
+                    </p>
+                </form>
+
                 <form onSubmit={this.handleSubmit}>
+
                     <h4>Name:</h4>
 
                     <input
@@ -138,7 +185,26 @@ class AddSong extends React.Component {
                     onChange={this.handleChange}
                     />
 
-                    <h4>Intro:</h4>
+                    {Object.keys(sections).map((section) => {
+
+                        console.log(sections[section].name)
+
+                        return (
+
+                            <div key={sections[section].name}>
+                                <h4>{sections[section].name}</h4>
+                                <input
+                                className ="songForm"
+                                type="text"
+                                name={sections[section].name}
+                                value={sections[section].chords}
+                                onChange={this.handleChange}
+                                />
+                            </div>
+
+                        )
+                    })}
+                    {/* <h4>Intro:</h4>
                      <input
                     className = "songForm"
                     type="text"
@@ -186,7 +252,8 @@ class AddSong extends React.Component {
                     <p>
                     <button type="submit">Submit</button>
                     </p>
-                </form>
+                </form> */}
+            </form>
             </div>
         )
     };
