@@ -26,11 +26,7 @@ class EditSong extends React.Component {
                 
             songName: "",
             key: "",
-            intro: "",
-            verse: "",
-            preChorus: "",
-            chorus: "",
-            bridge: "",
+            sections: {}
 
         };
 
@@ -42,39 +38,105 @@ class EditSong extends React.Component {
     };
 
     handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+        console.log(event.target.value)
+        const { sections } = this.state;
+
+        if(event.target.name === "songName") {
+            
+            this.setState({
+                [event.target.name]: event.target.value
+            });
+        };
+
+        if(event.target.name === "key") {
+
+            this.setState({
+                [event.target.name]: event.target.value
+            });
+        };
+
+        if(event.target.name === "addSection") {
+
+            this.setState({
+                [event.target.name]: {name: event.target.value, chords: this.state[event.target.name].chords}
+            });
+        };
+
+        if(this.state.sections[event.target.name]) {
+            let chord = {};
+            chord.note = event.target.value
+            this.setState({
+                sections: {...sections,
+                    [event.target.name]: {
+                        name: event.target.name,
+                        chords: [chord]
+                    }
+                }
+            });
+        }
     };
 
     handleSubmit(event) {
         event.preventDefault();
-        const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
+        event.preventDefault();
+
+        const { songName, key, sections } = this.state;
 
         if(!this.state.notes[key[0]]) {
             alert("song needs a valid key");
         };
+
         
+        
+        const sectionsHash = {};
+        
+        Object.keys(sections).map((section) => {
+           
+                return sectionsHash[section] = { name: `${sections[section].name}`, chords: this.newSection(sections[section]) }}
+                
+        );
+
+        console.log(key)
         const newSong = {
-            id: this.props.song.id,
             name: songName,
             key: this.newSection(key.toUpperCase())[0],
-            intro: this.newSection(intro.toUpperCase()),
-            verse: this.newSection(verse.toUpperCase()),
-            preChorus: this.newSection(preChorus.toUpperCase()),
-            chorus: this.newSection(chorus.toUpperCase()),
-            bridge: this.newSection(bridge.toUpperCase()),
-        }
+            sections: sectionsHash
+        };
+
+        console.log(newSong)
+        // const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
+
+        // if(!this.state.notes[key[0]]) {
+        //     alert("song needs a valid key");
+        // };
         
-        this.props.editSong(newSong);
-        this.props.history.push("/songs");
+        // const newSong = {
+        //     id: this.props.song.id,
+        //     name: songName,
+        //     key: this.newSection(key.toUpperCase())[0],
+        //     intro: this.newSection(intro.toUpperCase()),
+        //     verse: this.newSection(verse.toUpperCase()),
+        //     preChorus: this.newSection(preChorus.toUpperCase()),
+        //     chorus: this.newSection(chorus.toUpperCase()),
+        //     bridge: this.newSection(bridge.toUpperCase()),
+        // }
+        
+        // this.props.editSong(newSong);
+        // this.props.history.push("/songs");
     };
 
     newSection(section) {
         const{ notes } = this.state;
-        const spaceless = section.replace(/\s/g, '');
-        const split = spaceless.split(",");
         
+        // the key is just a string while the sections are stored in an object "note", in an array to make
+        // the mappping of notes consistent with initial object.
+        section = typeof(section) === "string" ? section : section.chords[0].note;
+        console.log(section)
+
+        const spaceless = section.replace(/\s/g, '').toUpperCase();
+
+        const split = spaceless.split(",");
+
         return split.map((chord) => {
 
             if(!chord.includes("#") && chord.length) {
@@ -135,16 +197,12 @@ class EditSong extends React.Component {
     componentDidUpdate(prevProps) {
         if(prevProps.song !== this.props.song) {
 
-            let {name, key, intro, verse, preChorus, chorus, bridge} = this.props.song;
+            let {name, key, sections} = this.props.song;
 
             this.setState({
                 songName: name,
                 key: key.type ? key.note + key.type.toLowerCase() : key.note,
-                intro: intro[0] !== null ? this.mapper(intro) : "",
-                verse: verse[0] !== null ? this.mapper(verse) : "",
-                preChorus: preChorus[0] !== null ? this.mapper(preChorus) : "",
-                chorus: chorus[0] !== null ? this.mapper(chorus) : "",
-                bridge: bridge[0] !== null ? this.mapper(bridge) : "",
+                sections: sections
             })
         }
     };
@@ -152,10 +210,10 @@ class EditSong extends React.Component {
 
     render() {
 
-        const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
+        const { songName, key, sections } = this.state;
 
         return (
-            //<p>hello world</p>
+            
              <div>Edit Song
                  <form onSubmit={this.handleSubmit}>
                     <h4>Name:</h4>
@@ -179,51 +237,24 @@ class EditSong extends React.Component {
                     onChange={this.handleChange}
                     />
 
-                    <h4>Intro:</h4>
-                     <input
-                    className = "songForm"
-                    type="text"
-                    name="intro"
-                    value={intro}
-                    onChange={this.handleChange}
-                    />
+                    {Object.keys(sections).map((section) => {
 
-                    <h4>Verse:</h4>
-                    <input
-                    className = "songForm"
-                    type="text"
-                    name="verse"
-                    value={verse}
-                    onChange={this.handleChange}
-                    />
-                    
-                    <h4>Pre-Chorus:</h4>
-                    <input
-                    className = "songForm"
-                    type="text"
-                    name="preChorus"
-                    value={preChorus}
-                    onChange={this.handleChange}
-                    />
 
-                    <h4>Chorus:</h4>
-                    <input
-                    className = "songForm"
-                    type="text"
-                    name="chorus"
-                    value={chorus}
-                    onChange={this.handleChange}
-                    />
+                    return (
 
-                    <h4>Bridge:</h4>
-                    <input
-                    className = "songForm"
-                    type="text"
-                    name="bridge"
-                    value={bridge}
-                    onChange={this.handleChange}
-                    />
+                        <div key={sections[section].name}>
+                            <h4>{sections[section].name}</h4>
+                            <input
+                            className ="songForm"
+                            type="text"
+                            name={sections[section].name}
+                            value={sections[section].chords.map((chord) => (chord.type ? chord.note + chord.type.toLowerCase() : chord.note))}
+                            onChange={this.handleChange}
+                            />
+                        </div>
 
+                    )
+                    })}
                     <p>
                     <button type="submit">Submit</button>
                     </p>

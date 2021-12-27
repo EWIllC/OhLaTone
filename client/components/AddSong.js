@@ -83,23 +83,12 @@ class AddSong extends React.Component {
             alert("song needs a valid key");
         };
 
-        //console.log(this.state)
-        // const newSong = {
-        //     name: songName,
-        //     key: this.newSection(key.toUpperCase())[0],
-        //     intro: this.newSection(intro.toUpperCase()),
-        //     verse: this.newSection(verse.toUpperCase()),
-        //     preChorus: this.newSection(preChorus.toUpperCase()),
-        //     chorus: this.newSection(chorus.toUpperCase()),
-        //     bridge: this.newSection(bridge.toUpperCase()),
-        // }
-        // this.props.addSong(newSong);
-        //this.props.history.push("/songs");
+        
         
         const sectionsHash = {};
         
         Object.keys(sections).map((section) => {
-            //console.log(section.name)
+           
                 return sectionsHash[section] = { name: `${sections[section].name}`, chords: this.newSection(sections[section]) }}
                 
         );
@@ -110,7 +99,7 @@ class AddSong extends React.Component {
             sections: sectionsHash
         };
 
-        //console.log(newSong);
+        
         this.props.addSong(newSong);
 
     };
@@ -246,53 +235,7 @@ class AddSong extends React.Component {
 
                         )
                     })}
-                    {/* <h4>Intro:</h4>
-                     <input
-                    className = "songForm"
-                    type="text"
-                    name="intro"
-                    value={intro}
-                    onChange={this.handleChange}
-                    />
 
-                    <h4>Verse:</h4>
-                    <input
-                    className = "songForm"
-                    type="text"
-                    name="verse"
-                    value={verse}
-                    onChange={this.handleChange}
-                    />
-
-                    <h4>Pre-Chorus:</h4>
-                    <input
-                    className = "songForm"
-                    type="text"
-                    name="preChorus"
-                    value={preChorus}
-                    onChange={this.handleChange}
-                    />
-
-                    <h4>Chorus:</h4>
-                    <input
-                    className = "songForm"
-                    type="text"
-                    name="chorus"
-                    value={chorus}
-                    onChange={this.handleChange}
-                    />
-
-                    <h4>Bridge:</h4>
-                    <input
-                    className = "songForm"
-                    type="text"
-                    name="bridge"
-                    value={bridge}
-                    onChange={this.handleChange}
-                    />
-
-                    
-                </form> */}
                 <p>
                 <button type="submit">Submit</button>
                 </p>
