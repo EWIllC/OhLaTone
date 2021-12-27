@@ -39,11 +39,30 @@ class AddSong extends React.Component {
     handleChange(event) {
 
         const { sections } = this.state
+
+        if(event.target.name === "songName") {
+            
+            this.setState({
+                [event.target.name]: event.target.value
+            });
+        };
+
+        if(event.target.name === "key") {
+
+            this.setState({
+                [event.target.name]: event.target.value
+            });
+        };
+
         if(event.target.name === "addSection") {
+
             this.setState({
                 [event.target.name]: {name: event.target.value, chords: this.state[event.target.name].chords}
-            })
-        } else {
+            });
+        };
+
+        if(this.state.sections[event.target.name]) {
+            
             this.setState({
                 sections: {...sections,
                     [event.target.name]: {
@@ -51,51 +70,75 @@ class AddSong extends React.Component {
                         chords: event.target.value
                     }
                 }
-            })
-        }
+            });
+        };
     };
 
     handleSubmit(event) {
         event.preventDefault();
 
-        const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
+        const { songName, key, sections } = this.state;
 
         if(!this.state.notes[key[0]]) {
             alert("song needs a valid key");
         };
 
+        //console.log(this.state)
+        // const newSong = {
+        //     name: songName,
+        //     key: this.newSection(key.toUpperCase())[0],
+        //     intro: this.newSection(intro.toUpperCase()),
+        //     verse: this.newSection(verse.toUpperCase()),
+        //     preChorus: this.newSection(preChorus.toUpperCase()),
+        //     chorus: this.newSection(chorus.toUpperCase()),
+        //     bridge: this.newSection(bridge.toUpperCase()),
+        // }
+        // this.props.addSong(newSong);
+        //this.props.history.push("/songs");
+        
+        const sectionsHash = {};
+        
+        Object.keys(sections).map((section) => {
+            //console.log(section.name)
+                return sectionsHash[section] = { name: `${sections[section].name}`, chords: this.newSection(sections[section]) }}
+                
+        );
+
         const newSong = {
             name: songName,
             key: this.newSection(key.toUpperCase())[0],
-            intro: this.newSection(intro.toUpperCase()),
-            verse: this.newSection(verse.toUpperCase()),
-            preChorus: this.newSection(preChorus.toUpperCase()),
-            chorus: this.newSection(chorus.toUpperCase()),
-            bridge: this.newSection(bridge.toUpperCase()),
-        }
+            sections: sectionsHash
+        };
+
+        //console.log(newSong);
         this.props.addSong(newSong);
-        //this.props.history.push("/songs");
+
     };
 
     handleAddSectionSubmit(event) {
         event.preventDefault();
         const { addSection, sections } = this.state;
         this.setState({
+            addSection: { name: "", chords: "" },
             sections: {...sections,
             [addSection.name]: {
                 name: addSection.name,
                 chords: addSection.chords }
             }
         })
-        console.log(this.state)
     }
 
     // fromats the text into the standard data type for a song section
     // removes spaces, formats to an array, 
-    //decernes weather or not a note is sharp so it may set the type accodingly
+    // decernes weather or not a note is sharp so it may set the type accodingly
     newSection(section) {
+
+        console.log(section);
+
         const{ notes } = this.state;
-        const spaceless = section.replace(/\s/g, '');
+
+        const spaceless = section.chords ? section.chords.replace(/\s/g, '').toUpperCase() : section;
+
         const split = spaceless.split(",");
 
         
@@ -187,7 +230,6 @@ class AddSong extends React.Component {
 
                     {Object.keys(sections).map((section) => {
 
-                        console.log(sections[section].name)
 
                         return (
 
@@ -249,10 +291,11 @@ class AddSong extends React.Component {
                     onChange={this.handleChange}
                     />
 
-                    <p>
-                    <button type="submit">Submit</button>
-                    </p>
+                    
                 </form> */}
+                <p>
+                <button type="submit">Submit</button>
+                </p>
             </form>
             </div>
         )

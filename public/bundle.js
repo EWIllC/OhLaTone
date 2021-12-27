@@ -2216,6 +2216,22 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       sections
     } = this.state;
 
+    if (event.target.name === "songName") {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+
+    ;
+
+    if (event.target.name === "key") {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+
+    ;
+
     if (event.target.name === "addSection") {
       this.setState({
         [event.target.name]: {
@@ -2223,7 +2239,11 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
           chords: this.state[event.target.name].chords
         }
       });
-    } else {
+    }
+
+    ;
+
+    if (this.state.sections[event.target.name]) {
       this.setState({
         sections: { ...sections,
           [event.target.name]: {
@@ -2233,6 +2253,8 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         }
       });
     }
+
+    ;
   }
 
   handleSubmit(event) {
@@ -2240,28 +2262,41 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       songName,
       key,
-      intro,
-      verse,
-      preChorus,
-      chorus,
-      bridge
+      sections
     } = this.state;
 
     if (!this.state.notes[key[0]]) {
       alert("song needs a valid key");
     }
 
-    ;
+    ; //console.log(this.state)
+    // const newSong = {
+    //     name: songName,
+    //     key: this.newSection(key.toUpperCase())[0],
+    //     intro: this.newSection(intro.toUpperCase()),
+    //     verse: this.newSection(verse.toUpperCase()),
+    //     preChorus: this.newSection(preChorus.toUpperCase()),
+    //     chorus: this.newSection(chorus.toUpperCase()),
+    //     bridge: this.newSection(bridge.toUpperCase()),
+    // }
+    // this.props.addSong(newSong);
+    //this.props.history.push("/songs");
+
+    const sectionsHash = {};
+    Object.keys(sections).map(section => {
+      //console.log(section.name)
+      return sectionsHash[section] = {
+        name: `${sections[section].name}`,
+        chords: this.newSection(sections[section])
+      };
+    });
     const newSong = {
       name: songName,
       key: this.newSection(key.toUpperCase())[0],
-      intro: this.newSection(intro.toUpperCase()),
-      verse: this.newSection(verse.toUpperCase()),
-      preChorus: this.newSection(preChorus.toUpperCase()),
-      chorus: this.newSection(chorus.toUpperCase()),
-      bridge: this.newSection(bridge.toUpperCase())
-    };
-    this.props.addSong(newSong); //this.props.history.push("/songs");
+      sections: sectionsHash
+    }; //console.log(newSong);
+
+    this.props.addSong(newSong);
   }
 
   handleAddSectionSubmit(event) {
@@ -2271,6 +2306,10 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       sections
     } = this.state;
     this.setState({
+      addSection: {
+        name: "",
+        chords: ""
+      },
       sections: { ...sections,
         [addSection.name]: {
           name: addSection.name,
@@ -2278,17 +2317,17 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         }
       }
     });
-    console.log(this.state);
   } // fromats the text into the standard data type for a song section
   // removes spaces, formats to an array, 
-  //decernes weather or not a note is sharp so it may set the type accodingly
+  // decernes weather or not a note is sharp so it may set the type accodingly
 
 
   newSection(section) {
+    console.log(section);
     const {
       notes
     } = this.state;
-    const spaceless = section.replace(/\s/g, '');
+    const spaceless = section.chords ? section.chords.replace(/\s/g, '').toUpperCase() : section;
     const split = spaceless.split(",");
     return split.map(chord => {
       if (!chord.includes("#") && chord.length) {
@@ -2364,7 +2403,6 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       value: key,
       onChange: this.handleChange
     }), Object.keys(sections).map(section => {
-      console.log(sections[section].name);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: sections[section].name
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -2374,7 +2412,9 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         value: sections[section].chords,
         onChange: this.handleChange
       }));
-    })));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      type: "submit"
+    }, "Submit"))));
   }
 
 }
