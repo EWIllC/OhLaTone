@@ -98,6 +98,7 @@ class EditSong extends React.Component {
 
         console.log(key)
         const newSong = {
+            id: this.props.song.id,
             name: songName,
             key: this.newSection(key.toUpperCase())[0],
             sections: sectionsHash
@@ -121,8 +122,8 @@ class EditSong extends React.Component {
         //     bridge: this.newSection(bridge.toUpperCase()),
         // }
         
-        // this.props.editSong(newSong);
-        // this.props.history.push("/songs");
+        this.props.editSong(newSong);
+        this.props.history.push("/songs");
     };
 
     newSection(section) {

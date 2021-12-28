@@ -101,7 +101,7 @@ class AddSong extends React.Component {
 
         
         this.props.addSong(newSong);
-
+        this.props.history.push("/songs");
     };
 
     handleAddSectionSubmit(event) {

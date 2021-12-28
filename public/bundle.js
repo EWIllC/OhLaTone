@@ -2283,6 +2283,7 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       sections: sectionsHash
     };
     this.props.addSong(newSong);
+    this.props.history.push("/songs");
   }
 
   handleAddSectionSubmit(event) {
@@ -2608,6 +2609,7 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
     console.log(key);
     const newSong = {
+      id: this.props.song.id,
       name: songName,
       key: this.newSection(key.toUpperCase())[0],
       sections: sectionsHash
@@ -2626,8 +2628,9 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     //     chorus: this.newSection(chorus.toUpperCase()),
     //     bridge: this.newSection(bridge.toUpperCase()),
     // }
-    // this.props.editSong(newSong);
-    // this.props.history.push("/songs");
+
+    this.props.editSong(newSong);
+    this.props.history.push("/songs");
   }
 
   newSection(section) {
@@ -3303,6 +3306,7 @@ const addSong = song => {
   };
 };
 const editSong = song => {
+  console.log(song);
   return async dispatch => {
     await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/songs/${song.id}`, song);
     dispatch(setEditSong(song));

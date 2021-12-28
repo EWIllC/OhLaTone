@@ -40,6 +40,7 @@ export const addSong = (song) => {
 };
 
 export const editSong = (song) => {
+    console.log(song)
     return async (dispatch) => {
         
         await axios.put(`/api/songs/${song.id}`, song);
