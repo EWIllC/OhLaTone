@@ -39,62 +39,33 @@ class SingleSong extends React.Component {
 
     };
 
+
     handleChange(event) {
         
-        const { id, name, key, intro, verse, chorus, preChorus, bridge, minorOr, notes, sections} = this.state;
+        const { key, notes, sections} = this.state;
+
+        console.log(this.state.notes, "handleChange")
 
         let value = parseInt(event.target.value);
         
         let steps = value > key.val ? value - key.val : key.val - value;
 
-        
-        
-        //console.log(verse)
-        // let newIntro = intro[0] !== null ?
-        // intro.map((chord, index) => 
-        // (
-        //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        // )) : [null];
 
-        // let newVerse = verse[0] !== null ? verse.map((chord, index) => 
-        // (
-        //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        // )) : [null];
-
-        
-        // let newPreChorus = preChorus[0] !== null ? preChorus.map((chord, index) => 
-        // (
-        //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        // )) : [null];
-
-        // let newChorus = chorus[0] !== null ? chorus.map((chord, index) => 
-        // (
-        //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        // )) : [null];
-
-        // let newBridge = bridge[0] !== null ? bridge.map((chord, index) => 
-        // (
-        //     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        // )) : [null];
-        
 
         Object.keys(sections).map((section) => (
             this.setState({
                 key: notes[value - 1],
-                section: sections[section].chords = sections[section].chords.map((chord) => (
-                    this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-                ))
+                sections: {
+                    [section]: {
+                        name: [section].name,
+                        chords: sections[section].chords.map((chord) => (
+                            this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+                        ))
+                    }
+                }
             })
-            
         ))
-        
-        //console.log(this.state)
-        // console.log(transposedSections)
-        // this.setState({
-        //     key: notes[value - 1],
-        //     //intro: newIntro,
-        //     sections: transposedSections
-        // });
+        console.log(this.state)
 
     };
 
@@ -106,12 +77,13 @@ class SingleSong extends React.Component {
     
     chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
 
-        console.log(steps)
         let chordValue = chord.val;
+        
     
         if(newKeyValue > oldKeyValue) {
             
             if(steps + chordValue > 12) {
+                
                 
                 return chordValue + steps - 13;
                 
@@ -135,14 +107,23 @@ class SingleSong extends React.Component {
         
     };
 
-    typeAssign(newChord, oldChord) {
+    typeAssign(notesChord, oldChord) {
+
+        let newChord = {
+            note: notesChord.note,
+            type: null,
+            val: notesChord.val
+        }
+
+        
         if(oldChord.type) {
 
             newChord.type = oldChord.type;
 
             return newChord;
 
-        } else {
+        }
+        if(oldChord.type === null) {
 
             return newChord;
 
@@ -156,10 +137,12 @@ class SingleSong extends React.Component {
     componentDidMount() {
 
         this.props.fetchSingleSong(this.props.match.params.songId);
+        
 
     };
 
     componentDidUpdate(prevProps) {
+
         if(prevProps.song !== this.props.song) {
 
             let {name, key, sections} = this.props.song;
@@ -181,7 +164,6 @@ class SingleSong extends React.Component {
 
         const { id, name, key, sections, minorOr, notes} = this.state;
 
-        //console.log(sections)
        
         return (
             <div key={id}>
@@ -196,37 +178,21 @@ class SingleSong extends React.Component {
                     ))}
                 </select>
                 {Object.keys(sections).map((section) => {
-                    //console.log(sections[section])
+                    
+                    
                     return (
+                        
                         <div key={sections[section].name}>
                             <h4>{sections[section].name}</h4>
                             {sections[section].chords.map((chord) => (
                                 chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "
+                                
                             ))}
                         </div>
                         
                     )
                 })}
-                {/* <h4>Intro</h4>
-                {intro[0] !== null ? 
-                intro.map((chord) => (chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ")) :
-                <p>n/a</p>}
-                <h4>Verse</h4>
-                {verse[0] !== null ? 
-                verse.map((chord) => (chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ")) :
-                <p>n/a</p>}
-                <h4>PreChorus</h4>
-                {preChorus[0] !== null ? preChorus.map((chord) => (chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ")) :
-                <p>n/a</p>}
-                <h4>Chorus</h4>
-                {chorus[0] !== null ? 
-                chorus.map((chord) => (chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ")) :
-                <p>n/a</p>}
-                <h4>Bridge</h4>
-                {bridge[0] !== null ? 
-                bridge.map((chord) => (chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ")) : 
-                <p>n/a</p>} */}
-
+                
                 <p>
                 <button onClick={this.handleEditRedirect}>Edit</button>
                 <button onClick={this.handleDelete}>Delete</button>

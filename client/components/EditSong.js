@@ -103,24 +103,6 @@ class EditSong extends React.Component {
             key: this.newSection(key.toUpperCase())[0],
             sections: sectionsHash
         };
-
-        console.log(newSong)
-        // const { songName, key, intro, verse, preChorus, chorus, bridge } = this.state;
-
-        // if(!this.state.notes[key[0]]) {
-        //     alert("song needs a valid key");
-        // };
-        
-        // const newSong = {
-        //     id: this.props.song.id,
-        //     name: songName,
-        //     key: this.newSection(key.toUpperCase())[0],
-        //     intro: this.newSection(intro.toUpperCase()),
-        //     verse: this.newSection(verse.toUpperCase()),
-        //     preChorus: this.newSection(preChorus.toUpperCase()),
-        //     chorus: this.newSection(chorus.toUpperCase()),
-        //     bridge: this.newSection(bridge.toUpperCase()),
-        // }
         
         this.props.editSong(newSong);
         this.props.history.push("/songs");

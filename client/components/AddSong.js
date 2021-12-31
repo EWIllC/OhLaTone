@@ -176,7 +176,7 @@ class AddSong extends React.Component {
 
 
     render() {
-        const { name, key, intro, verse, preChorus, chorus, bridge, sections, addSection } = this.state;
+        const { name, key, sections, addSection } = this.state;
         return (
             <div>Add a Song
 
@@ -185,14 +185,19 @@ class AddSong extends React.Component {
                     {/* <button value="Verse" onClick={this.addSection}>Verse</button>
                     <button value="Chorus" onClick={this.addSection}>Chorus</button> */}
                     <p>
-                    <input
-                    className="songForm"
-                    type="text"
-                    name="addSection"
-                    value={addSection.name}
-                    onChange={this.handleChange}
-                    />
-                    <button type="submit">Submit</button>
+                        <input
+                        className="songForm"
+                        type="text"
+                        name="addSection"
+                        value={addSection.name}
+                        onChange={this.handleChange}
+                        />
+                        <button type="submit">Submit</button>
+                        </p>
+                    <p>
+                        <button onClick={this.handleAddSectionSubmit} value="Verse">Verse</button>
+                        <button onClick={this.handleAddSectionSubmit} value="Chorus">Chorus</button>
+                        <button onClick={this.handleAddSectionSubmit} value="Bridge">Bridge</button>
                     </p>
                 </form>
 
