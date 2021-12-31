@@ -44,7 +44,7 @@ class SingleSong extends React.Component {
         
         const { key, notes, sections} = this.state;
 
-        console.log(this.state.notes, "handleChange")
+        let keyType = key.type
 
         let value = parseInt(event.target.value);
         
@@ -52,21 +52,53 @@ class SingleSong extends React.Component {
 
 
 
-        Object.keys(sections).map((section) => (
-            this.setState({
-                key: notes[value - 1],
-                sections: {
-                    [section]: {
-                        name: [section].name,
-                        chords: sections[section].chords.map((chord) => (
-                            this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-                        ))
-                    }
-                }
-            })
-        ))
-        console.log(this.state)
+        // Object.keys(sections).map((section) => (
+        //     this.setState({
+        //         key: notes[value - 1],
+        //         sections: {
+        //             [section]: {
+        //                 name: sections[section].name,
+        //                 chords: sections[section].chords.map((chord) => (
+        //                     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+        //                 ))
+        //             }
+        //         }
+        //     })
+        // ))
 
+        let newSections = {};
+
+        let newKey = {
+            val: notes[value - 1].val,
+            note: notes[value - 1].note,
+            type: keyType
+        }
+        
+        Object.keys(sections).map((section) => (
+            
+            newSections[section] = {
+                name: sections[section].name,
+                chords: sections[section].chords.map((chord) => (
+                    this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+                ))
+            }
+            // {
+            //     [sections[section].name]: {
+            //         name: sections[section].name,
+            //         chords: sections[section].chords.map((chord) => (
+            //             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+            //         ))
+            //     }
+            // } 
+            
+        ))
+        
+        this.setState({
+            key: newKey,
+            sections: newSections
+        });
+       
+        
     };
 
     handleDelete() {
@@ -164,7 +196,7 @@ class SingleSong extends React.Component {
 
         const { id, name, key, sections, minorOr, notes} = this.state;
 
-       
+       console.log(minorOr)
         return (
             <div key={id}>
                 <h2>{name}</h2>
@@ -179,7 +211,7 @@ class SingleSong extends React.Component {
                 </select>
                 {Object.keys(sections).map((section) => {
                     
-                    
+                    //console.log(this.state)
                     return (
                         
                         <div key={sections[section].name}>
