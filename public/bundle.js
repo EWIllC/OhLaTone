@@ -2288,22 +2288,31 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   handleAddSectionSubmit(event) {
     event.preventDefault();
+    const secName = event.target.name !== "" ? event.target.name : this.state.addSection.name;
     const {
-      addSection,
-      sections
+      sections,
+      addSection
     } = this.state;
+    console.log(secName);
     this.setState({
       addSection: {
         name: "",
         chords: ""
       },
       sections: { ...sections,
-        [addSection.name]: {
-          name: addSection.name,
+        [secName]: {
+          name: secName,
           chords: addSection.chords
         }
       }
-    });
+    }); // this.setState({
+    //     addSection: { name: "", chords: "" },
+    //     sections: {...sections,
+    //     [addSection.name]: {
+    //         name: addSection.name,
+    //         chords: addSection.chords }
+    //     }
+    // })
   } // fromats the text into the standard data type for a song section
   // removes spaces, formats to an array, 
   // decernes weather or not a note is sharp so it may set the type accodingly
@@ -2371,14 +2380,14 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "submit"
     }, "Submit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-      onClick: this.handleAddSectionSubmit,
-      value: "Verse"
+      onClick: event => this.handleAddSectionSubmit(event),
+      name: "Verse"
     }, "Verse"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-      onClick: this.handleAddSectionSubmit,
-      value: "Chorus"
+      onClick: event => this.handleAddSectionSubmit(event),
+      name: "Chorus"
     }, "Chorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-      onClick: this.handleAddSectionSubmit,
-      value: "Bridge"
+      onClick: event => this.handleAddSectionSubmit(event),
+      name: "Bridge"
     }, "Bridge"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
       onSubmit: this.handleSubmit
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -2890,6 +2899,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleEditRedirect = this.handleEditRedirect.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleOrder = this.handleOrder.bind(this);
     this.chordValueMachine = this.chordValueMachine.bind(this);
     this.typeAssign = this.typeAssign.bind(this);
   }
@@ -2902,20 +2912,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     } = this.state;
     let keyType = key.type;
     let value = parseInt(event.target.value);
-    let steps = value > key.val ? value - key.val : key.val - value; // Object.keys(sections).map((section) => (
-    //     this.setState({
-    //         key: notes[value - 1],
-    //         sections: {
-    //             [section]: {
-    //                 name: sections[section].name,
-    //                 chords: sections[section].chords.map((chord) => (
-    //                     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-    //                 ))
-    //             }
-    //         }
-    //     })
-    // ))
-
+    let steps = value > key.val ? value - key.val : key.val - value;
     let newSections = {};
     let newKey = {
       val: notes[value - 1].val,
@@ -2925,15 +2922,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     Object.keys(sections).map(section => newSections[section] = {
       name: sections[section].name,
       chords: sections[section].chords.map(chord => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord))
-    } // {
-    //     [sections[section].name]: {
-    //         name: sections[section].name,
-    //         chords: sections[section].chords.map((chord) => (
-    //             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-    //         ))
-    //     }
-    // } 
-    );
+    });
     this.setState({
       key: newKey,
       sections: newSections
@@ -2990,6 +2979,8 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.history.push(`${this.props.match.params.songId}/editSong`);
   }
 
+  handleOrder() {}
+
   componentDidMount() {
     this.props.fetchSingleSong(this.props.match.params.songId);
   }
@@ -3020,6 +3011,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       minorOr,
       notes
     } = this.state;
+    const keyArray = Object.keys(sections);
     console.log(minorOr);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
@@ -3032,11 +3024,10 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, chord.note, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
       value: chord.val,
       key: index
-    }, chord.note))), Object.keys(sections).map(section => {
-      //console.log(this.state)
+    }, chord.note))), keyArray.map(section => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: sections[section].name
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "^"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "v")), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: this.handleEditRedirect
     }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {

@@ -106,15 +106,28 @@ class AddSong extends React.Component {
 
     handleAddSectionSubmit(event) {
         event.preventDefault();
-        const { addSection, sections } = this.state;
+
+        const secName = event.target.name !== "" ? event.target.name : this.state.addSection.name
+        const { sections, addSection} = this.state;
+        console.log(secName)
+
         this.setState({
             addSection: { name: "", chords: "" },
             sections: {...sections,
-            [addSection.name]: {
-                name: addSection.name,
+            [secName]: {
+                name: secName,
                 chords: addSection.chords }
             }
         })
+
+        // this.setState({
+        //     addSection: { name: "", chords: "" },
+        //     sections: {...sections,
+        //     [addSection.name]: {
+        //         name: addSection.name,
+        //         chords: addSection.chords }
+        //     }
+        // })
     }
 
     // fromats the text into the standard data type for a song section
@@ -195,9 +208,9 @@ class AddSong extends React.Component {
                         <button type="submit">Submit</button>
                         </p>
                     <p>
-                        <button onClick={this.handleAddSectionSubmit} value="Verse">Verse</button>
-                        <button onClick={this.handleAddSectionSubmit} value="Chorus">Chorus</button>
-                        <button onClick={this.handleAddSectionSubmit} value="Bridge">Bridge</button>
+                        <button onClick={(event) => this.handleAddSectionSubmit(event)} name="Verse">Verse</button>
+                        <button onClick={(event) => this.handleAddSectionSubmit(event)} name="Chorus">Chorus</button>
+                        <button onClick={(event) => this.handleAddSectionSubmit(event)} name="Bridge">Bridge</button>
                     </p>
                 </form>
 

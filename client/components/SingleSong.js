@@ -33,6 +33,7 @@ class SingleSong extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleEditRedirect = this.handleEditRedirect.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleOrder = this.handleOrder.bind(this)
 
         this.chordValueMachine = this.chordValueMachine.bind(this);
         this.typeAssign = this.typeAssign.bind(this);
@@ -50,22 +51,6 @@ class SingleSong extends React.Component {
         
         let steps = value > key.val ? value - key.val : key.val - value;
 
-
-
-        // Object.keys(sections).map((section) => (
-        //     this.setState({
-        //         key: notes[value - 1],
-        //         sections: {
-        //             [section]: {
-        //                 name: sections[section].name,
-        //                 chords: sections[section].chords.map((chord) => (
-        //                     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        //                 ))
-        //             }
-        //         }
-        //     })
-        // ))
-
         let newSections = {};
 
         let newKey = {
@@ -82,14 +67,6 @@ class SingleSong extends React.Component {
                     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
                 ))
             }
-            // {
-            //     [sections[section].name]: {
-            //         name: sections[section].name,
-            //         chords: sections[section].chords.map((chord) => (
-            //             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-            //         ))
-            //     }
-            // } 
             
         ))
         
@@ -166,6 +143,10 @@ class SingleSong extends React.Component {
         this.props.history.push(`${this.props.match.params.songId}/editSong`)
     }
 
+    handleOrder() {
+
+    }
+
     componentDidMount() {
 
         this.props.fetchSingleSong(this.props.match.params.songId);
@@ -196,7 +177,9 @@ class SingleSong extends React.Component {
 
         const { id, name, key, sections, minorOr, notes} = this.state;
 
-       console.log(minorOr)
+        const keyArray = Object.keys(sections)
+
+        console.log(minorOr)
         return (
             <div key={id}>
                 <h2>{name}</h2>
@@ -209,13 +192,16 @@ class SingleSong extends React.Component {
                         <option value={chord.val} key={index}>{chord.note}</option>
                     ))}
                 </select>
-                {Object.keys(sections).map((section) => {
+                {keyArray.map((section) => {
                     
-                    //console.log(this.state)
+                    
                     return (
                         
                         <div key={sections[section].name}>
-                            <h4>{sections[section].name}</h4>
+                            <h4>{sections[section].name}
+                            <button>^</button>
+                            <button>v</button>
+                            </h4>
                             {sections[section].chords.map((chord) => (
                                 chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "
                                 
