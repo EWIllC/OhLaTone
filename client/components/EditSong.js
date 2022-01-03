@@ -26,7 +26,8 @@ class EditSong extends React.Component {
                 
             songName: "",
             key: "",
-            sections: {}
+            sections: {},
+            keyArray: []
 
         };
 
@@ -34,6 +35,7 @@ class EditSong extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.newSection = this.newSection.bind(this);
         this.mapper = this.mapper.bind(this);
+        this.handleOrder = this.handleOrder.bind(this);
 
     };
 
@@ -170,6 +172,45 @@ class EditSong extends React.Component {
         )).join(", ")
     };
 
+    handleOrder(direction ,event) {
+        event.preventDefault();
+
+        const { keyArray } = this.state;
+        
+        const currentIndex = keyArray.indexOf(event.target.name)
+
+        const indexToBeSwapped = direction === "down" ?
+        currentIndex + 1 :
+        currentIndex - 1;
+
+        if(direction === "down") {
+            if(indexToBeSwapped >= keyArray.length) {
+                console.log("error")
+            } else {
+                const swapped = keyArray[currentIndex];
+                keyArray[currentIndex] = keyArray[indexToBeSwapped];
+                keyArray[indexToBeSwapped] = swapped;
+                
+                this.setState({
+                    keyArray: keyArray
+                });
+            };
+        };
+
+        if(direction === "up") {
+            if(indexToBeSwapped < 0) {
+                console.log("error")
+            } else {
+                const swapped = keyArray[currentIndex];
+                keyArray[currentIndex] = keyArray[indexToBeSwapped];
+                keyArray[indexToBeSwapped] = swapped;
+                
+                this.setState({
+                    keyArray: keyArray
+                })
+            }
+        }
+    };
 
     componentDidMount() {
 
@@ -177,7 +218,8 @@ class EditSong extends React.Component {
 
     };
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
+
         if(prevProps.song !== this.props.song) {
 
             let {name, key, sections} = this.props.song;
@@ -185,7 +227,8 @@ class EditSong extends React.Component {
             this.setState({
                 songName: name,
                 key: key.type ? key.note + key.type.toLowerCase() : key.note,
-                sections: sections
+                sections: sections,
+                keyArray: Object.keys(sections)
             })
         }
     };
@@ -193,7 +236,7 @@ class EditSong extends React.Component {
 
     render() {
 
-        const { songName, key, sections } = this.state;
+        const { songName, key, sections, keyArray } = this.state;
 
         return (
             
@@ -220,18 +263,25 @@ class EditSong extends React.Component {
                     onChange={this.handleChange}
                     />
 
-                    {Object.keys(sections).map((section) => {
+                    {keyArray.map((section) => {
 
 
                     return (
 
                         <div key={sections[section].name}>
-                            <h4>{sections[section].name}</h4>
+                            <h4>{sections[section].name}
+
+                            <button onClick={(event) => this.handleOrder("up", event)} name={`${sections[section].name}`}>^</button>
+                            <button onClick={(event) => this.handleOrder("down", event)} name={`${sections[section].name}`}>v</button>
+                            </h4>
+
                             <input
                             className ="songForm"
                             type="text"
                             name={sections[section].name}
-                            value={sections[section].chords.map((chord) => (chord.type ? chord.note + chord.type.toLowerCase() : chord.note))}
+                            value={sections[section].chords.map((chord) => (chord.type ?
+                                 chord.note + chord.type.toLowerCase() :
+                                  chord.note))}
                             onChange={this.handleChange}
                             />
                         </div>

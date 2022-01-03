@@ -27,17 +27,16 @@ class SingleSong extends React.Component {
         
             key: {},
             sections: {},
+            keyArray: [],
             minorOr: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleEditRedirect = this.handleEditRedirect.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleOrder = this.handleOrder.bind(this)
 
         this.chordValueMachine = this.chordValueMachine.bind(this);
         this.typeAssign = this.typeAssign.bind(this);
-
     };
 
 
@@ -45,7 +44,7 @@ class SingleSong extends React.Component {
         
         const { key, notes, sections} = this.state;
 
-        let keyType = key.type
+        let keyType = key.type;
 
         let value = parseInt(event.target.value);
         
@@ -57,7 +56,7 @@ class SingleSong extends React.Component {
             val: notes[value - 1].val,
             note: notes[value - 1].note,
             type: keyType
-        }
+        };
         
         Object.keys(sections).map((section) => (
             
@@ -67,28 +66,25 @@ class SingleSong extends React.Component {
                     this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
                 ))
             }
-            
         ))
         
         this.setState({
             key: newKey,
             sections: newSections
         });
-       
-        
     };
 
-    handleDelete() {
 
+    handleDelete() {
         this.props.deleteSong(this.props.song.id);
         this.props.history.push("/songs");
     };
+
     
     chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
 
         let chordValue = chord.val;
         
-    
         if(newKeyValue > oldKeyValue) {
             
             if(steps + chordValue > 12) {
@@ -99,7 +95,7 @@ class SingleSong extends React.Component {
             } else {
                 
                 return chordValue + steps - 1;
-            } 
+            };
         };
 
         if(newKeyValue < oldKeyValue) {
@@ -111,10 +107,10 @@ class SingleSong extends React.Component {
             } else {
 
                 return chordValue - steps - 1;
-            }
+            };
         };
-        
     };
+
 
     typeAssign(notesChord, oldChord) {
 
@@ -122,8 +118,7 @@ class SingleSong extends React.Component {
             note: notesChord.note,
             type: null,
             val: notesChord.val
-        }
-
+        };
         
         if(oldChord.type) {
 
@@ -131,28 +126,24 @@ class SingleSong extends React.Component {
 
             return newChord;
 
-        }
+        };
         if(oldChord.type === null) {
 
             return newChord;
 
-        }
-    }
+        };
+    };
+
 
     handleEditRedirect() {
         this.props.history.push(`${this.props.match.params.songId}/editSong`)
-    }
+    };
 
-    handleOrder() {
-
-    }
 
     componentDidMount() {
-
         this.props.fetchSingleSong(this.props.match.params.songId);
-        
-
     };
+
 
     componentDidUpdate(prevProps) {
 
@@ -164,32 +155,41 @@ class SingleSong extends React.Component {
                 name: name,
                 key: key,
                 sections: sections,
+                keyArray: Object.keys(sections),
 
                 // checks if there is a type, and than if that type is minor
                 minorOr: key.type ? key.type.includes("M") ? true : false : false
 
             })
-        }
+        };
     };
 
 
     render() {
 
-        const { id, name, key, sections, minorOr, notes} = this.state;
+        const { id, name, key, sections, keyArray, minorOr, notes} = this.state;
 
-        const keyArray = Object.keys(sections)
+        //const keyArray = Object.keys(sections);
 
-        console.log(minorOr)
         return (
             <div key={id}>
                 <h2>{name}</h2>
                 
-                <h3>Key of {key.type ? key.note + key.type.toLowerCase() : key.note}</h3>
+                <h3>Key of {key.type ?
+                key.note + key.type.toLowerCase() : 
+                key.note
+                }
+                </h3>
+
                 <p>Transpose</p>
                 <select name="transpose" onChange={this.handleChange}>
+
                     {notes.map((chord, index) => (
-                        minorOr ? <option value={chord.val} key={index}>{chord.note}m</option> :
+
+                        minorOr ? 
+                        <option value={chord.val} key={index}>{chord.note}m</option> :
                         <option value={chord.val} key={index}>{chord.note}</option>
+
                     ))}
                 </select>
                 {keyArray.map((section) => {
@@ -198,14 +198,15 @@ class SingleSong extends React.Component {
                     return (
                         
                         <div key={sections[section].name}>
-                            <h4>{sections[section].name}
-                            <button>^</button>
-                            <button>v</button>
-                            </h4>
+            
+                            <h4>{sections[section].name}</h4>
                             {sections[section].chords.map((chord) => (
-                                chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "
-                                
+
+                                chord.type ?
+                                chord.note + chord.type.toLowerCase() + ", " : 
+                                chord.note + ", "
                             ))}
+                            
                         </div>
                         
                     )

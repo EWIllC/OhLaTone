@@ -2544,12 +2544,14 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       },
       songName: "",
       key: "",
-      sections: {}
+      sections: {},
+      keyArray: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.newSection = this.newSection.bind(this);
     this.mapper = this.mapper.bind(this);
+    this.handleOrder = this.handleOrder.bind(this);
   }
 
   handleChange(event) {
@@ -2682,11 +2684,50 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     return arr.map(chord => chord.type !== null ? chord.note + chord.type.toLowerCase() : chord.note).join(", ");
   }
 
+  handleOrder(direction, event) {
+    event.preventDefault();
+    const {
+      keyArray
+    } = this.state;
+    const currentIndex = keyArray.indexOf(event.target.name);
+    const indexToBeSwapped = direction === "down" ? currentIndex + 1 : currentIndex - 1;
+
+    if (direction === "down") {
+      if (indexToBeSwapped >= keyArray.length) {
+        console.log("error");
+      } else {
+        const swapped = keyArray[currentIndex];
+        keyArray[currentIndex] = keyArray[indexToBeSwapped];
+        keyArray[indexToBeSwapped] = swapped;
+        this.setState({
+          keyArray: keyArray
+        });
+      }
+
+      ;
+    }
+
+    ;
+
+    if (direction === "up") {
+      if (indexToBeSwapped < 0) {
+        console.log("error");
+      } else {
+        const swapped = keyArray[currentIndex];
+        keyArray[currentIndex] = keyArray[indexToBeSwapped];
+        keyArray[indexToBeSwapped] = swapped;
+        this.setState({
+          keyArray: keyArray
+        });
+      }
+    }
+  }
+
   componentDidMount() {
     this.props.fetchSingleSong(this.props.match.params.songId);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.song !== this.props.song) {
       let {
         name,
@@ -2696,7 +2737,8 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       this.setState({
         songName: name,
         key: key.type ? key.note + key.type.toLowerCase() : key.note,
-        sections: sections
+        sections: sections,
+        keyArray: Object.keys(sections)
       });
     }
   }
@@ -2705,7 +2747,8 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       songName,
       key,
-      sections
+      sections,
+      keyArray
     } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Edit Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
       onSubmit: this.handleSubmit
@@ -2723,10 +2766,16 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       value: key //placeholder={key.note + key.type.toLowerCase()}
       ,
       onChange: this.handleChange
-    }), Object.keys(sections).map(section => {
+    }), keyArray.map(section => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: sections[section].name
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: event => this.handleOrder("up", event),
+        name: `${sections[section].name}`
+      }, "^"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: event => this.handleOrder("down", event),
+        name: `${sections[section].name}`
+      }, "v")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "songForm",
         type: "text",
         name: sections[section].name,
@@ -2894,12 +2943,12 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }],
       key: {},
       sections: {},
+      keyArray: [],
       minorOr: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleEditRedirect = this.handleEditRedirect.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleOrder = this.handleOrder.bind(this);
     this.chordValueMachine = this.chordValueMachine.bind(this);
     this.typeAssign = this.typeAssign.bind(this);
   }
@@ -2943,6 +2992,8 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       } else {
         return chordValue + steps - 1;
       }
+
+      ;
     }
 
     ;
@@ -2953,6 +3004,8 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       } else {
         return chordValue - steps - 1;
       }
+
+      ;
     }
 
     ;
@@ -2970,16 +3023,18 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       return newChord;
     }
 
+    ;
+
     if (oldChord.type === null) {
       return newChord;
     }
+
+    ;
   }
 
   handleEditRedirect() {
     this.props.history.push(`${this.props.match.params.songId}/editSong`);
   }
-
-  handleOrder() {}
 
   componentDidMount() {
     this.props.fetchSingleSong(this.props.match.params.songId);
@@ -2996,10 +3051,13 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         name: name,
         key: key,
         sections: sections,
+        keyArray: Object.keys(sections),
         // checks if there is a type, and than if that type is minor
         minorOr: key.type ? key.type.includes("M") ? true : false : false
       });
     }
+
+    ;
   }
 
   render() {
@@ -3008,11 +3066,11 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       name,
       key,
       sections,
+      keyArray,
       minorOr,
       notes
-    } = this.state;
-    const keyArray = Object.keys(sections);
-    console.log(minorOr);
+    } = this.state; //const keyArray = Object.keys(sections);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type.toLowerCase() : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
@@ -3027,7 +3085,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, chord.note))), keyArray.map(section => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: sections[section].name
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "^"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "v")), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: this.handleEditRedirect
     }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
