@@ -40,7 +40,7 @@ class EditSong extends React.Component {
     };
 
     handleChange(event) {
-        console.log(event.target.value)
+        
         const { sections } = this.state;
 
         if(event.target.name === "songName") {
@@ -79,26 +79,95 @@ class EditSong extends React.Component {
     };
 
     handleSubmit(event) {
-        event.preventDefault();
+
         event.preventDefault();
 
+
         const { songName, key, sections } = this.state;
+
+
+        const keyArray = Object.keys(sections);
+
+        //make a hash table for unifoom chords
+        let uniformChords = {};
+
+        console.log(sections)
+        
+        keyArray.map((section) => (
+            sections[section].chords.map((chord, index) => {
+                
+                if(chord.type) {
+
+                    if(index < sections[section].chords.length - 1) {
+                        console.log("worked")
+                        chord.type += ","
+                    };
+
+                    if(uniformChords[section]) {
+
+                        if(uniformChords[section].note) {
+
+                            uniformChords[section].note += chord.note + chord.type;
+
+                        } else {
+
+                            uniformChords[section] = {note: chord.note + chord.type};
+                            
+                        };
+
+                    } else {
+
+                        uniformChords[section] = {note: chord.note + chord.type};
+
+                    };
+                    
+                };
+
+                if(!chord.type) {
+
+                    if(index < sections[section].chords.length - 1) {
+                        chord.note += ","
+                    };
+
+                    if(uniformChords[section]) {
+
+                        if(uniformChords[section].note) {
+
+                            uniformChords[section].note += chord.note;
+
+                        } else {
+
+                            uniformChords[section] = {note: chord.note};
+
+                        };
+
+                    } else {
+
+                        uniformChords[section] = {note: chord.note};
+                    };
+                };
+            })
+        )).join();
+
+        //console.log(uniformChords)
+
+        const sectionsHash = {};
+
+        
+        keyArray.map((section) => {
+            return sectionsHash[section] = { name: section, chords: this.newSection(uniformChords[section].note) };
+        });
+        // Object.keys(sections).map((section) => {
+           
+        //         return sectionsHash[section] = { name: `${sections[section].name}`, chords: [...sections[section].chords,this.newSection(sections[section])] }}
+                
+        // );
 
         if(!this.state.notes[key[0]]) {
             alert("song needs a valid key");
         };
 
-        
-        
-        const sectionsHash = {};
-        
-        Object.keys(sections).map((section) => {
-           
-                return sectionsHash[section] = { name: `${sections[section].name}`, chords: this.newSection(sections[section]) }}
-                
-        );
 
-        console.log(key)
         const newSong = {
             id: this.props.song.id,
             name: songName,
@@ -106,23 +175,25 @@ class EditSong extends React.Component {
             sections: sectionsHash
         };
         
+        //console.log(newSong)
         this.props.editSong(newSong);
         this.props.history.push("/songs");
     };
 
     newSection(section) {
+
         const{ notes } = this.state;
         
         // the key is just a string while the sections are stored in an object "note", in an array to make
         // the mappping of notes consistent with initial object.
-        section = typeof(section) === "string" ? section : section.chords[0].note;
-        console.log(section)
+        //section = typeof(section) === "string" ? section : section.chords[0].note;
 
         const spaceless = section.replace(/\s/g, '').toUpperCase();
 
         const split = spaceless.split(",");
 
         return split.map((chord) => {
+
 
             if(!chord.includes("#") && chord.length) {
 
@@ -230,7 +301,8 @@ class EditSong extends React.Component {
                 sections: sections,
                 keyArray: Object.keys(sections)
             })
-        }
+        };
+
     };
     
 
