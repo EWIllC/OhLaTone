@@ -11,18 +11,24 @@ class EditSong extends React.Component {
         this.state = {
 
             notes: {
-            "A":{val: 1, note:"A", type: ""},
-            "A#":{val: 2, note:"A#", type: ""},
-            "B":{val: 3, note:"B", type: ""},
-            "C":{val: 4, note:"C", type: ""},
-            "C#":{val: 5, note:"C#", type: ""},
-            "D":{val: 6, note:"D", type: ""},
-            "D#":{val: 7, note:"D#", type: ""},
-            "E":{val: 8, note:"E", type: ""},
-            "F":{val: 9, note:"F", type: ""},
-            "F#":{val: 10, note:"F#", type: ""},
-            "G":{val: 11, note:"G", type: ""},
-            "G#":{val: 12, note:"G#", type: ""}},
+                "A": {val: 1, note:"A", type: null},
+                "A#": {val: 2, note:"A#", type: null},
+                "Bb": {val: 2, note:"Bb", type: null},
+                "B": {val: 3, note:"B", type: null},
+                "C": {val: 4, note:"C", type: null},
+                "C#": {val: 5, note:"C#", type: null},
+                "Db": {val: 5, note:"Db", type: null},
+                "D": {val: 6, note:"D", type: null},
+                "D#": {val: 7, note:"D#", type: null},
+                "Eb": {val: 7, note:"Eb", type: null},
+                "E": {val: 8, note:"E", type: null},
+                "F": {val: 9, note:"F", type: null},
+                "F#": {val: 10, note:"F#", type: null},
+                "Gb": {val: 10, note:"Gb", type: null},
+                "G": {val: 11, note:"G", type: null},
+                "G#": {val: 12, note:"G#", type: null},
+                "Ab": {val: 12, note:"Ab", type: null}
+            },
                 
             songName: "",
             key: "",
@@ -91,9 +97,9 @@ class EditSong extends React.Component {
         //make a hash table for unifoom chords
         let uniformChords = {};
 
-        console.log(sections)
         
         keyArray.map((section) => (
+
             sections[section].chords.map((chord, index) => {
                 
                 if(chord.type) {
@@ -149,7 +155,6 @@ class EditSong extends React.Component {
             })
         )).join();
 
-        //console.log(uniformChords)
 
         const sectionsHash = {};
 
@@ -157,11 +162,7 @@ class EditSong extends React.Component {
         keyArray.map((section) => {
             return sectionsHash[section] = { name: section, chords: this.newSection(uniformChords[section].note) };
         });
-        // Object.keys(sections).map((section) => {
-           
-        //         return sectionsHash[section] = { name: `${sections[section].name}`, chords: [...sections[section].chords,this.newSection(sections[section])] }}
-                
-        // );
+
 
         if(!this.state.notes[key[0]]) {
             alert("song needs a valid key");

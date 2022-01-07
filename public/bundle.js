@@ -2135,66 +2135,105 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
+      // notes: {
+      // "A":{val: 1, note:"A", type: ""},
+      // "A#":{val: 2, note:"A#", type: ""},
+      // "B":{val: 3, note:"B", type: ""},
+      // "C":{val: 4, note:"C", type: ""},
+      // "C#":{val: 5, note:"C#", type: ""},
+      // "D":{val: 6, note:"D", type: ""},
+      // "D#":{val: 7, note:"D#", type: ""},
+      // "E":{val: 8, note:"E", type: ""},
+      // "F":{val: 9, note:"F", type: ""},
+      // "F#":{val: 10, note:"F#", type: ""},
+      // "G":{val: 11, note:"G", type: ""},
+      // "G#":{val: 12, note:"G#", type: ""}
+      // },
       notes: {
         "A": {
           val: 1,
           note: "A",
-          type: ""
+          type: null
         },
         "A#": {
           val: 2,
           note: "A#",
-          type: ""
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
         },
         "B": {
           val: 3,
           note: "B",
-          type: ""
+          type: null
         },
         "C": {
           val: 4,
           note: "C",
-          type: ""
+          type: null
         },
         "C#": {
           val: 5,
           note: "C#",
-          type: ""
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
         },
         "D": {
           val: 6,
           note: "D",
-          type: ""
+          type: null
         },
         "D#": {
           val: 7,
           note: "D#",
-          type: ""
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
         },
         "E": {
           val: 8,
           note: "E",
-          type: ""
+          type: null
         },
         "F": {
           val: 9,
           note: "F",
-          type: ""
+          type: null
         },
         "F#": {
           val: 10,
           note: "F#",
-          type: ""
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
         },
         "G": {
           val: 11,
           note: "G",
-          type: ""
+          type: null
         },
         "G#": {
           val: 12,
           note: "G#",
-          type: ""
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
         }
       },
       songName: "",
@@ -2264,8 +2303,11 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       key,
       sections
     } = this.state;
+    let keyEnding = key.slice(1);
+    let keyFirst = key[0].toUpperCase();
+    let newKey = keyFirst + keyEnding;
 
-    if (!this.state.notes[key[0]]) {
+    if (!this.state.notes[newKey[0]]) {
       alert("song needs a valid key");
     }
 
@@ -2279,11 +2321,10 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
     const newSong = {
       name: songName,
-      key: this.newSection(key.toUpperCase())[0],
+      key: this.newSection(key)[0],
       sections: sectionsHash
-    };
-    this.props.addSong(newSong);
-    this.props.history.push("/songs");
+    }; // this.props.addSong(newSong);
+    // this.props.history.push("/songs");
   }
 
   handleAddSectionSubmit(event) {
@@ -2293,7 +2334,6 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       sections,
       addSection
     } = this.state;
-    console.log(secName);
     this.setState({
       addSection: {
         name: "",
@@ -2305,59 +2345,61 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
           chords: addSection.chords
         }
       }
-    }); // this.setState({
-    //     addSection: { name: "", chords: "" },
-    //     sections: {...sections,
-    //     [addSection.name]: {
-    //         name: addSection.name,
-    //         chords: addSection.chords }
-    //     }
-    // })
-  } // fromats the text into the standard data type for a song section
+    });
+  }
+
+  // fromats the text into the standard data type for a song section
   // removes spaces, formats to an array, 
   // decernes weather or not a note is sharp so it may set the type accodingly
-
-
   newSection(section) {
-    console.log(section);
     const {
       notes
     } = this.state;
-    const spaceless = section.chords ? section.chords.replace(/\s/g, '').toUpperCase() : section;
+    const spaceless = section.chords ? section.chords.replace(/\s/g, '') : section;
     const split = spaceless.split(",");
     return split.map(chord => {
-      if (!chord.includes("#") && chord.length) {
-        let type = chord.slice(1);
-        chord = chord.slice(0, 1);
+      if (chord.length) {
+        let chordEnding = chord.slice(1);
+        let chordFirst = chord[0].toUpperCase();
+        let newChord = chordFirst + chordEnding;
 
-        if (!notes[chord]) {
-          alert("not a valid chord");
+        if (newChord.includes("b") || newChord.includes("#")) {
+          console.log("is sharp or flat");
+          let type = newChord.includes("b") ? newChord.slice(newChord.indexOf("b") + 1) : newChord.slice(newChord.indexOf("#") + 1);
+          newChord = newChord.slice(0, 2);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          console.log(createChord);
+          return createChord;
+        } else {
+          console.log("is NOT sharp or flat");
+          let type = newChord.slice(1);
+          newChord = newChord.slice(0, 1);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          console.log(createChord);
+          return createChord;
         }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
-      } else if (chord.length) {
-        let type = chord.slice(chord.indexOf("#") + 1);
-        chord = chord.slice(0, 2);
-
-        if (!notes[chord]) {
-          alert("not a valid chord");
-        }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
       }
     });
   }
@@ -2484,62 +2526,87 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         "A": {
           val: 1,
           note: "A",
-          type: ""
+          type: null
         },
         "A#": {
           val: 2,
           note: "A#",
-          type: ""
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
         },
         "B": {
           val: 3,
           note: "B",
-          type: ""
+          type: null
         },
         "C": {
           val: 4,
           note: "C",
-          type: ""
+          type: null
         },
         "C#": {
           val: 5,
           note: "C#",
-          type: ""
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
         },
         "D": {
           val: 6,
           note: "D",
-          type: ""
+          type: null
         },
         "D#": {
           val: 7,
           note: "D#",
-          type: ""
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
         },
         "E": {
           val: 8,
           note: "E",
-          type: ""
+          type: null
         },
         "F": {
           val: 9,
           note: "F",
-          type: ""
+          type: null
         },
         "F#": {
           val: 10,
           note: "F#",
-          type: ""
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
         },
         "G": {
           val: 11,
           note: "G",
-          type: ""
+          type: null
         },
         "G#": {
           val: 12,
           note: "G#",
-          type: ""
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
         }
       },
       songName: "",
@@ -2610,7 +2677,6 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const keyArray = Object.keys(sections); //make a hash table for unifoom chords
 
     let uniformChords = {};
-    console.log(sections);
     keyArray.map(section => sections[section].chords.map((chord, index) => {
       if (chord.type) {
         if (index < sections[section].chords.length - 1) {
@@ -2668,17 +2734,14 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }
 
       ;
-    })).join(); //console.log(uniformChords)
-
+    })).join();
     const sectionsHash = {};
     keyArray.map(section => {
       return sectionsHash[section] = {
         name: section,
         chords: this.newSection(uniformChords[section].note)
       };
-    }); // Object.keys(sections).map((section) => {
-    //         return sectionsHash[section] = { name: `${sections[section].name}`, chords: [...sections[section].chords,this.newSection(sections[section])] }}
-    // );
+    });
 
     if (!this.state.notes[key[0]]) {
       alert("song needs a valid key");
@@ -2965,6 +3028,10 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         note: "A#",
         type: null
       }, {
+        val: 2,
+        note: "Bb",
+        type: null
+      }, {
         val: 3,
         note: "B",
         type: null
@@ -2977,12 +3044,20 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         note: "C#",
         type: null
       }, {
+        val: 5,
+        note: "Db",
+        type: null
+      }, {
         val: 6,
         note: "D",
         type: null
       }, {
         val: 7,
         note: "D#",
+        type: null
+      }, {
+        val: 7,
+        note: "Eb",
         type: null
       }, {
         val: 8,
@@ -2997,12 +3072,20 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         note: "F#",
         type: null
       }, {
+        val: 10,
+        note: "Gb",
+        type: null
+      }, {
         val: 11,
         note: "G",
         type: null
       }, {
         val: 12,
         note: "G#",
+        type: null
+      }, {
+        val: 12,
+        note: "Ab#",
         type: null
       }],
       key: {},

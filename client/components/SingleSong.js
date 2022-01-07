@@ -13,16 +13,21 @@ class SingleSong extends React.Component {
             notes: [
                 {val: 1, note:"A", type: null},
                 {val: 2, note:"A#", type: null},
+                {val: 2, note:"Bb", type: null},
                 {val: 3, note:"B", type: null},
                 {val: 4, note:"C", type: null},
                 {val: 5, note:"C#", type: null},
+                {val: 5, note:"Db", type: null},
                 {val: 6, note:"D", type: null},
                 {val: 7, note:"D#", type: null},
+                {val: 7, note:"Eb", type: null},
                 {val: 8, note:"E", type: null},
                 {val: 9, note:"F", type: null},
                 {val: 10, note:"F#", type: null},
+                {val: 10, note:"Gb", type: null},
                 {val: 11, note:"G", type: null},
-                {val: 12, note:"G#", type: null}
+                {val: 12, note:"G#", type: null},
+                {val: 12, note:"Ab#", type: null}
             ],
         
             key: {},
