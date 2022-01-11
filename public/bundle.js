@@ -2135,20 +2135,6 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      // notes: {
-      // "A":{val: 1, note:"A", type: ""},
-      // "A#":{val: 2, note:"A#", type: ""},
-      // "B":{val: 3, note:"B", type: ""},
-      // "C":{val: 4, note:"C", type: ""},
-      // "C#":{val: 5, note:"C#", type: ""},
-      // "D":{val: 6, note:"D", type: ""},
-      // "D#":{val: 7, note:"D#", type: ""},
-      // "E":{val: 8, note:"E", type: ""},
-      // "F":{val: 9, note:"F", type: ""},
-      // "F#":{val: 10, note:"F#", type: ""},
-      // "G":{val: 11, note:"G", type: ""},
-      // "G#":{val: 12, note:"G#", type: ""}
-      // },
       notes: {
         "A": {
           val: 1,
@@ -2323,8 +2309,9 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       name: songName,
       key: this.newSection(key)[0],
       sections: sectionsHash
-    }; // this.props.addSong(newSong);
-    // this.props.history.push("/songs");
+    };
+    this.props.addSong(newSong);
+    this.props.history.push("/songs");
   }
 
   handleAddSectionSubmit(event) {
@@ -2522,6 +2509,20 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
+      // notes: {
+      // "A":{val: 1, note:"A", type: ""},
+      // "A#":{val: 2, note:"A#", type: ""},
+      // "B":{val: 3, note:"B", type: ""},
+      // "C":{val: 4, note:"C", type: ""},
+      // "C#":{val: 5, note:"C#", type: ""},
+      // "D":{val: 6, note:"D", type: ""},
+      // "D#":{val: 7, note:"D#", type: ""},
+      // "E":{val: 8, note:"E", type: ""},
+      // "F":{val: 9, note:"F", type: ""},
+      // "F#":{val: 10, note:"F#", type: ""},
+      // "G":{val: 11, note:"G", type: ""},
+      // "G#":{val: 12, note:"G#", type: ""}
+      // },
       notes: {
         "A": {
           val: 1,
@@ -2674,8 +2675,7 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       key,
       sections
     } = this.state;
-    const keyArray = Object.keys(sections); //make a hash table for unifoom chords
-
+    const keyArray = Object.keys(sections);
     let uniformChords = {};
     keyArray.map(section => sections[section].chords.map((chord, index) => {
       if (chord.type) {
@@ -2751,10 +2751,10 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const newSong = {
       id: this.props.song.id,
       name: songName,
-      key: this.newSection(key.toUpperCase())[0],
+      key: this.newSection(key)[0],
       sections: sectionsHash
-    }; //console.log(newSong)
-
+    };
+    console.log(newSong);
     this.props.editSong(newSong);
     this.props.history.push("/songs");
   }
@@ -2766,41 +2766,51 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     // the mappping of notes consistent with initial object.
     //section = typeof(section) === "string" ? section : section.chords[0].note;
 
-    const spaceless = section.replace(/\s/g, '').toUpperCase();
+    const spaceless = section.replace(/\s/g, '');
     const split = spaceless.split(",");
     return split.map(chord => {
-      if (!chord.includes("#") && chord.length) {
-        let type = chord.slice(1);
-        chord = chord.slice(0, 1);
+      if (chord.length) {
+        let chordEnding = chord.slice(1);
+        let chordFirst = chord[0].toUpperCase();
+        let newChord = chordFirst + chordEnding;
 
-        if (!notes[chord]) {
-          alert("not a valid chord");
+        if (newChord.includes("b") || newChord.includes("#")) {
+          console.log("is sharp or flat");
+          let type = newChord.includes("b") ? newChord.slice(newChord.indexOf("b") + 1) : newChord.slice(newChord.indexOf("#") + 1);
+          newChord = newChord.slice(0, 2);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          console.log(createChord);
+          return createChord;
+        } else {
+          console.log("is NOT sharp or flat");
+          let type = newChord.slice(1);
+          newChord = newChord.slice(0, 1);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          console.log(createChord);
+          return createChord;
         }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
-      } else if (chord.length) {
-        let type = chord.slice(chord.indexOf("#") + 1);
-        chord = chord.slice(0, 2);
-
-        if (!notes[chord]) {
-          alert("not a valid chord");
-        }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
       }
     });
   }
@@ -3019,75 +3029,112 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      notes: [{
-        val: 1,
-        note: "A",
-        type: null
-      }, {
-        val: 2,
-        note: "A#",
-        type: null
-      }, {
-        val: 2,
-        note: "Bb",
-        type: null
-      }, {
-        val: 3,
-        note: "B",
-        type: null
-      }, {
-        val: 4,
-        note: "C",
-        type: null
-      }, {
-        val: 5,
-        note: "C#",
-        type: null
-      }, {
-        val: 5,
-        note: "Db",
-        type: null
-      }, {
-        val: 6,
-        note: "D",
-        type: null
-      }, {
-        val: 7,
-        note: "D#",
-        type: null
-      }, {
-        val: 7,
-        note: "Eb",
-        type: null
-      }, {
-        val: 8,
-        note: "E",
-        type: null
-      }, {
-        val: 9,
-        note: "F",
-        type: null
-      }, {
-        val: 10,
-        note: "F#",
-        type: null
-      }, {
-        val: 10,
-        note: "Gb",
-        type: null
-      }, {
-        val: 11,
-        note: "G",
-        type: null
-      }, {
-        val: 12,
-        note: "G#",
-        type: null
-      }, {
-        val: 12,
-        note: "Ab#",
-        type: null
-      }],
+      notes: {
+        "A": {
+          val: 1,
+          note: "A",
+          type: null
+        },
+        "A#": {
+          val: 2,
+          note: "A#",
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
+        },
+        "B": {
+          val: 3,
+          note: "B",
+          type: null
+        },
+        "C": {
+          val: 4,
+          note: "C",
+          type: null
+        },
+        "C#": {
+          val: 5,
+          note: "C#",
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
+        },
+        "D": {
+          val: 6,
+          note: "D",
+          type: null
+        },
+        "D#": {
+          val: 7,
+          note: "D#",
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
+        },
+        "E": {
+          val: 8,
+          note: "E",
+          type: null
+        },
+        "F": {
+          val: 9,
+          note: "F",
+          type: null
+        },
+        "F#": {
+          val: 10,
+          note: "F#",
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
+        },
+        "G": {
+          val: 11,
+          note: "G",
+          type: null
+        },
+        "G#": {
+          val: 12,
+          note: "G#",
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
+        }
+      },
+      // notes: [
+      //     {val: 1, note:"A", type: null},
+      //     {val: 2, note:"A#", type: null},
+      //     {val: 2, note:"Bb", type: null},
+      //     {val: 3, note:"B", type: null},
+      //     {val: 4, note:"C", type: null},
+      //     {val: 5, note:"C#", type: null},
+      //     {val: 5, note:"Db", type: null},
+      //     {val: 6, note:"D", type: null},
+      //     {val: 7, note:"D#", type: null},
+      //     {val: 7, note:"Eb", type: null},
+      //     {val: 8, note:"E", type: null},
+      //     {val: 9, note:"F", type: null},
+      //     {val: 10, note:"F#", type: null},
+      //     {val: 10, note:"Gb", type: null},
+      //     {val: 11, note:"G", type: null},
+      //     {val: 12, note:"G#", type: null},
+      //     {val: 12, note:"Ab", type: null}
+      // ],
       key: {},
       sections: {},
       keyArray: [],
@@ -3106,23 +3153,85 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       notes,
       sections
     } = this.state;
-    let keyType = key.type;
-    let value = parseInt(event.target.value);
+    const newKey = notes[event.target.value];
+    const value = newKey.val;
     let steps = value > key.val ? value - key.val : key.val - value;
+
+    if (key.type) {
+      newKey.type = key.type;
+    }
+
+    ;
+    let sharpOrFlat = null;
+
+    if (newKey.note.includes("#")) {
+      sharpOrFlat = "#";
+    }
+
+    ;
+
+    if (newKey.note.includes("b")) {
+      sharpOrFlat = "b";
+    }
+
+    ;
     let newSections = {};
-    let newKey = {
-      val: notes[value - 1].val,
-      note: notes[value - 1].note,
-      type: keyType
-    };
-    Object.keys(sections).map(section => newSections[section] = {
-      name: sections[section].name,
-      chords: sections[section].chords.map(chord => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord))
+    Object.keys(sections).map(section => {
+      const newChords = [];
+      sections[section].chords.map((chord, index) => {
+        let chordValue = this.chordValueMachine(steps, chord, newKey.val, key.val) + 1; // console.log(sections[section].chords.length)
+        // console.log(index)
+
+        const newChord = [];
+        return Object.keys(notes).map(note => {
+          if (chordValue === notes[note].val) {
+            newChord.push(notes[note]);
+
+            if (newChord.length < 2) {
+              //console.log(newChord[0])
+              //return newChord[0]
+              newChords.push(newChord[0]);
+              console.log(newChords);
+            }
+
+            if (index === sections[section].chords.length - 1) {
+              console.log("hit");
+              newSections[section] = {
+                name: section,
+                chords: newChords
+              };
+            }
+          }
+        });
+      });
     });
+    console.log(newSections);
     this.setState({
       key: newKey,
       sections: newSections
-    });
+    }); //console.log(this.state)
+    // let keyType = key.type;
+    // let value = parseInt(event.target.value);
+    // let steps = value > key.val ? value - key.val : key.val - value;
+    // let newKey = {
+    //     val: notes[value - 1].val,
+    //     note: notes[value - 1].note,
+    //     type: keyType
+    // };
+    // Object.keys(sections).map((section) => (
+    //     newSections[section] = {
+    //         name: sections[section].name,
+    //         chords: sections[section].chords.map((chord) => (
+    //             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
+    //         ))
+    //     }
+    // ))
+    //console.log("key:", newKey)
+    //console.log("newScetion:", newSections)
+    // this.setState({
+    //     key: newKey,
+    //     sections: newSections
+    // });
   }
 
   handleDelete() {
@@ -3135,6 +3244,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
     if (newKeyValue > oldKeyValue) {
       if (steps + chordValue > 12) {
+        //console.log(chordValue + steps - 13)
         return chordValue + steps - 13;
       } else {
         return chordValue + steps - 1;
@@ -3159,6 +3269,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   typeAssign(notesChord, oldChord) {
+    //console.log(notesChord)
     let newChord = {
       note: notesChord.note,
       type: null,
@@ -3218,18 +3329,19 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       notes
     } = this.state; //const keyArray = Object.keys(sections);
 
+    const notesArray = Object.keys(notes);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type.toLowerCase() : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       name: "transpose",
       onChange: this.handleChange
-    }, notes.map((chord, index) => minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: chord.val,
+    }, notesArray.map((chord, index) => minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: chord,
       key: index
-    }, chord.note, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: chord.val,
+    }, chord, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: chord,
       key: index
-    }, chord.note))), keyArray.map(section => {
+    }, chord))), keyArray.map(section => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: sections[section].name
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));

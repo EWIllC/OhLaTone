@@ -8,21 +8,6 @@ class AddSong extends React.Component {
         super();
         this.state = {
 
-            // notes: {
-            // "A":{val: 1, note:"A", type: ""},
-            // "A#":{val: 2, note:"A#", type: ""},
-            // "B":{val: 3, note:"B", type: ""},
-            // "C":{val: 4, note:"C", type: ""},
-            // "C#":{val: 5, note:"C#", type: ""},
-            // "D":{val: 6, note:"D", type: ""},
-            // "D#":{val: 7, note:"D#", type: ""},
-            // "E":{val: 8, note:"E", type: ""},
-            // "F":{val: 9, note:"F", type: ""},
-            // "F#":{val: 10, note:"F#", type: ""},
-            // "G":{val: 11, note:"G", type: ""},
-            // "G#":{val: 12, note:"G#", type: ""}
-            // },
-
             notes: {
                 "A": {val: 1, note:"A", type: null},
                 "A#": {val: 2, note:"A#", type: null},
@@ -125,8 +110,8 @@ class AddSong extends React.Component {
         };
 
         
-        // this.props.addSong(newSong);
-        // this.props.history.push("/songs");
+        this.props.addSong(newSong);
+        this.props.history.push("/songs");
     };
 
     handleAddSectionSubmit(event) {
