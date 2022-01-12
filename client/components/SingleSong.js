@@ -107,12 +107,13 @@ class SingleSong extends React.Component {
                 return Object.keys(notes).map((note) => {
                     if(chordValue === notes[note].val) {
                         
-                        newChord.push(notes[note])
+                        const typeAssigned = this.typeAssign(notes[note],chord)
+                        console.log(typeAssigned)
+                        newChord.push(typeAssigned)
                         if(newChord.length < 2) {
                             //console.log(newChord[0])
                             //return newChord[0]
                             newChords.push(newChord[0])
-                            console.log(newChords)
                         }
                         if(index === sections[section].chords.length - 1) {
                             console.log("hit")
@@ -207,11 +208,11 @@ class SingleSong extends React.Component {
 
     typeAssign(notesChord, oldChord) {
 
-        //console.log(notesChord)
+        console.log(notesChord, oldChord)
         let newChord = {
+            val: notesChord.val,
             note: notesChord.note,
             type: null,
-            val: notesChord.val
         };
         
         if(oldChord.type) {
