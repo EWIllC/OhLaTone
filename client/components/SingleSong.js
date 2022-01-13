@@ -29,30 +29,12 @@ class SingleSong extends React.Component {
                 "G#": {val: 12, note:"G#", type: null},
                 "Ab": {val: 12, note:"Ab", type: null}
             },
-            // notes: [
-            //     {val: 1, note:"A", type: null},
-            //     {val: 2, note:"A#", type: null},
-            //     {val: 2, note:"Bb", type: null},
-            //     {val: 3, note:"B", type: null},
-            //     {val: 4, note:"C", type: null},
-            //     {val: 5, note:"C#", type: null},
-            //     {val: 5, note:"Db", type: null},
-            //     {val: 6, note:"D", type: null},
-            //     {val: 7, note:"D#", type: null},
-            //     {val: 7, note:"Eb", type: null},
-            //     {val: 8, note:"E", type: null},
-            //     {val: 9, note:"F", type: null},
-            //     {val: 10, note:"F#", type: null},
-            //     {val: 10, note:"Gb", type: null},
-            //     {val: 11, note:"G", type: null},
-            //     {val: 12, note:"G#", type: null},
-            //     {val: 12, note:"Ab", type: null}
-            // ],
         
             key: {},
             sections: {},
             keyArray: [],
-            minorOr: false
+            minorOr: false,
+            keyShouldBe: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -75,19 +57,8 @@ class SingleSong extends React.Component {
         let steps = value > key.val ? value - key.val : key.val - value;
 
         if(key.type) {
-            newKey.type = key.type
+            newKey.type = key.type;
         };
-
-        let sharpOrFlat = null;
-
-        if(newKey.note.includes("#")) {
-            sharpOrFlat = "#"
-        };
-
-        if(newKey.note.includes("b")) {
-            sharpOrFlat = "b"
-        };
-
         
         let newSections = {};
 
@@ -100,24 +71,23 @@ class SingleSong extends React.Component {
                 
         
                 let chordValue = this.chordValueMachine(steps, chord, newKey.val, key.val) + 1;
-                // console.log(sections[section].chords.length)
-                // console.log(index)
+               
                 const newChord = [];
                 
                 return Object.keys(notes).map((note) => {
                     if(chordValue === notes[note].val) {
                         
-                        const typeAssigned = this.typeAssign(notes[note],chord)
-                        console.log(typeAssigned)
-                        newChord.push(typeAssigned)
+                        const typeAssigned = this.typeAssign(notes[note],chord);
+                        
+                        newChord.push(typeAssigned);
+
                         if(newChord.length < 2) {
-                            //console.log(newChord[0])
-                            //return newChord[0]
-                            newChords.push(newChord[0])
+                            
+                            newChords.push(newChord[0]);
                         }
                         if(index === sections[section].chords.length - 1) {
-                            console.log("hit")
-                            newSections[section] = {name: section, chords: newChords}
+                        
+                            newSections[section] = {name: section, chords: newChords};
                         }
                     }
                 })
@@ -125,47 +95,11 @@ class SingleSong extends React.Component {
             })
     });
 
-        console.log(newSections)
-
-        
-
         this.setState({
             key: newKey,
             sections: newSections
         });
 
-        //console.log(this.state)
-
-        // let keyType = key.type;
-
-        // let value = parseInt(event.target.value);
-        
-        // let steps = value > key.val ? value - key.val : key.val - value;
-
-
-        // let newKey = {
-        //     val: notes[value - 1].val,
-        //     note: notes[value - 1].note,
-        //     type: keyType
-        // };
-
-
-        // Object.keys(sections).map((section) => (
-            
-        //     newSections[section] = {
-        //         name: sections[section].name,
-        //         chords: sections[section].chords.map((chord) => (
-        //             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-        //         ))
-        //     }
-        // ))
-        //console.log("key:", newKey)
-        //console.log("newScetion:", newSections)
-        
-        // this.setState({
-        //     key: newKey,
-        //     sections: newSections
-        // });
     };
 
 
@@ -183,7 +117,6 @@ class SingleSong extends React.Component {
             
             if(steps + chordValue > 12) {
                 
-                //console.log(chordValue + steps - 13)
                 return chordValue + steps - 13;
                 
             } else {
@@ -208,7 +141,6 @@ class SingleSong extends React.Component {
 
     typeAssign(notesChord, oldChord) {
 
-        console.log(notesChord, oldChord)
         let newChord = {
             val: notesChord.val,
             note: notesChord.note,
@@ -240,7 +172,11 @@ class SingleSong extends React.Component {
     };
 
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
+        
+        if(prevState.key.val === this.state.key.val) {
+            console.log("i worked")
+        }
 
         if(prevProps.song !== this.props.song) {
 
@@ -264,7 +200,7 @@ class SingleSong extends React.Component {
 
         const { id, name, key, sections, keyArray, minorOr, notes} = this.state;
 
-        //const keyArray = Object.keys(sections);
+        //const keyArray = Object.keys(sections)
         const notesArray = Object.keys(notes)
 
         return (
@@ -280,13 +216,37 @@ class SingleSong extends React.Component {
                 <p>Transpose</p>
                 <select name="transpose" onChange={this.handleChange}>
 
-                    {notesArray.map((chord, index) => (
+                    {notesArray.map((chord, index) => {
+                        if(key.note) {
+                            
+                            if(!key.note.includes("b")) {
+                
+                                if(!chord.includes("b")) {
 
-                        minorOr ? 
-                        <option value={chord} key={index}>{chord}m</option> :
-                        <option value={chord} key={index}>{chord}</option>
+                                    return (
+                                        minorOr ? 
+                                        <option value={chord} key={index}>{chord}m</option> :
+                                        <option value={chord} key={index}>{chord}</option>
+                                    )
+                                }
 
-                    ))}
+                            } else {
+
+                                if(!chord.includes("#")) {
+
+                                    return (
+                                        minorOr ? 
+                                        <option value={chord} key={index}>{chord}m</option> :
+                                        <option value={chord} key={index}>{chord}</option>
+    
+                                    )
+                                }
+                            }
+                        } else {
+                            console.log(key.note)
+                        }
+                        
+                    })}
                 </select>
                 {keyArray.map((section) => {
                     

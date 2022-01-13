@@ -3116,29 +3116,11 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
           type: null
         }
       },
-      // notes: [
-      //     {val: 1, note:"A", type: null},
-      //     {val: 2, note:"A#", type: null},
-      //     {val: 2, note:"Bb", type: null},
-      //     {val: 3, note:"B", type: null},
-      //     {val: 4, note:"C", type: null},
-      //     {val: 5, note:"C#", type: null},
-      //     {val: 5, note:"Db", type: null},
-      //     {val: 6, note:"D", type: null},
-      //     {val: 7, note:"D#", type: null},
-      //     {val: 7, note:"Eb", type: null},
-      //     {val: 8, note:"E", type: null},
-      //     {val: 9, note:"F", type: null},
-      //     {val: 10, note:"F#", type: null},
-      //     {val: 10, note:"Gb", type: null},
-      //     {val: 11, note:"G", type: null},
-      //     {val: 12, note:"G#", type: null},
-      //     {val: 12, note:"Ab", type: null}
-      // ],
       key: {},
       sections: {},
       keyArray: [],
-      minorOr: false
+      minorOr: false,
+      keyShouldBe: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleEditRedirect = this.handleEditRedirect.bind(this);
@@ -3162,41 +3144,22 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }
 
     ;
-    let sharpOrFlat = null;
-
-    if (newKey.note.includes("#")) {
-      sharpOrFlat = "#";
-    }
-
-    ;
-
-    if (newKey.note.includes("b")) {
-      sharpOrFlat = "b";
-    }
-
-    ;
     let newSections = {};
     Object.keys(sections).map(section => {
       const newChords = [];
       sections[section].chords.map((chord, index) => {
-        let chordValue = this.chordValueMachine(steps, chord, newKey.val, key.val) + 1; // console.log(sections[section].chords.length)
-        // console.log(index)
-
+        let chordValue = this.chordValueMachine(steps, chord, newKey.val, key.val) + 1;
         const newChord = [];
         return Object.keys(notes).map(note => {
           if (chordValue === notes[note].val) {
             const typeAssigned = this.typeAssign(notes[note], chord);
-            console.log(typeAssigned);
             newChord.push(typeAssigned);
 
             if (newChord.length < 2) {
-              //console.log(newChord[0])
-              //return newChord[0]
               newChords.push(newChord[0]);
             }
 
             if (index === sections[section].chords.length - 1) {
-              console.log("hit");
               newSections[section] = {
                 name: section,
                 chords: newChords
@@ -3206,33 +3169,10 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         });
       });
     });
-    console.log(newSections);
     this.setState({
       key: newKey,
       sections: newSections
-    }); //console.log(this.state)
-    // let keyType = key.type;
-    // let value = parseInt(event.target.value);
-    // let steps = value > key.val ? value - key.val : key.val - value;
-    // let newKey = {
-    //     val: notes[value - 1].val,
-    //     note: notes[value - 1].note,
-    //     type: keyType
-    // };
-    // Object.keys(sections).map((section) => (
-    //     newSections[section] = {
-    //         name: sections[section].name,
-    //         chords: sections[section].chords.map((chord) => (
-    //             this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)
-    //         ))
-    //     }
-    // ))
-    //console.log("key:", newKey)
-    //console.log("newScetion:", newSections)
-    // this.setState({
-    //     key: newKey,
-    //     sections: newSections
-    // });
+    });
   }
 
   handleDelete() {
@@ -3245,7 +3185,6 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
     if (newKeyValue > oldKeyValue) {
       if (steps + chordValue > 12) {
-        //console.log(chordValue + steps - 13)
         return chordValue + steps - 13;
       } else {
         return chordValue + steps - 1;
@@ -3270,7 +3209,6 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   typeAssign(notesChord, oldChord) {
-    console.log(notesChord, oldChord);
     let newChord = {
       val: notesChord.val,
       note: notesChord.note,
@@ -3299,7 +3237,11 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.fetchSingleSong(this.props.match.params.songId);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.key.val === this.state.key.val) {
+      console.log("i worked");
+    }
+
     if (prevProps.song !== this.props.song) {
       let {
         name,
@@ -3328,7 +3270,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       keyArray,
       minorOr,
       notes
-    } = this.state; //const keyArray = Object.keys(sections);
+    } = this.state; //const keyArray = Object.keys(sections)
 
     const notesArray = Object.keys(notes);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3336,13 +3278,33 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type.toLowerCase() : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       name: "transpose",
       onChange: this.handleChange
-    }, notesArray.map((chord, index) => minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: chord,
-      key: index
-    }, chord, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: chord,
-      key: index
-    }, chord))), keyArray.map(section => {
+    }, notesArray.map((chord, index) => {
+      if (key.note) {
+        if (!key.note.includes("b")) {
+          if (!chord.includes("b")) {
+            return minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord);
+          }
+        } else {
+          if (!chord.includes("#")) {
+            return minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord);
+          }
+        }
+      } else {
+        console.log(key.note);
+      }
+    })), keyArray.map(section => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: sections[section].name
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));
