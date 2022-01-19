@@ -9,18 +9,24 @@ class AddSong extends React.Component {
         this.state = {
 
             notes: {
-            "A":{val: 1, note:"A", type: ""},
-            "A#":{val: 2, note:"A#", type: ""},
-            "B":{val: 3, note:"B", type: ""},
-            "C":{val: 4, note:"C", type: ""},
-            "C#":{val: 5, note:"C#", type: ""},
-            "D":{val: 6, note:"D", type: ""},
-            "D#":{val: 7, note:"D#", type: ""},
-            "E":{val: 8, note:"E", type: ""},
-            "F":{val: 9, note:"F", type: ""},
-            "F#":{val: 10, note:"F#", type: ""},
-            "G":{val: 11, note:"G", type: ""},
-            "G#":{val: 12, note:"G#", type: ""}},
+                "A": {val: 1, note:"A", type: null},
+                "A#": {val: 2, note:"A#", type: null},
+                "Bb": {val: 2, note:"Bb", type: null},
+                "B": {val: 3, note:"B", type: null},
+                "C": {val: 4, note:"C", type: null},
+                "C#": {val: 5, note:"C#", type: null},
+                "Db": {val: 5, note:"Db", type: null},
+                "D": {val: 6, note:"D", type: null},
+                "D#": {val: 7, note:"D#", type: null},
+                "Eb": {val: 7, note:"Eb", type: null},
+                "E": {val: 8, note:"E", type: null},
+                "F": {val: 9, note:"F", type: null},
+                "F#": {val: 10, note:"F#", type: null},
+                "Gb": {val: 10, note:"Gb", type: null},
+                "G": {val: 11, note:"G", type: null},
+                "G#": {val: 12, note:"G#", type: null},
+                "Ab": {val: 12, note:"Ab", type: null}
+            },
                 
             songName: "",
             key: "",
@@ -79,7 +85,11 @@ class AddSong extends React.Component {
 
         const { songName, key, sections } = this.state;
 
-        if(!this.state.notes[key[0]]) {
+        let keyEnding = key.slice(1);
+        let keyFirst = key[0].toUpperCase();
+        let newKey = keyFirst + keyEnding
+
+        if(!this.state.notes[newKey[0]]) {
             alert("song needs a valid key");
         };
 
@@ -95,7 +105,7 @@ class AddSong extends React.Component {
 
         const newSong = {
             name: songName,
-            key: this.newSection(key.toUpperCase())[0],
+            key: this.newSection(key)[0],
             sections: sectionsHash
         };
 
@@ -107,9 +117,11 @@ class AddSong extends React.Component {
     handleAddSectionSubmit(event) {
         event.preventDefault();
 
-        const secName = event.target.name !== "" ? event.target.name : this.state.addSection.name
+        const secName = event.target.name !== "" ?
+        event.target.name : 
+        this.state.addSection.name;
+
         const { sections, addSection} = this.state;
-        console.log(secName)
 
         this.setState({
             addSection: { name: "", chords: "" },
@@ -119,70 +131,73 @@ class AddSong extends React.Component {
                 chords: addSection.chords }
             }
         })
-
-        // this.setState({
-        //     addSection: { name: "", chords: "" },
-        //     sections: {...sections,
-        //     [addSection.name]: {
-        //         name: addSection.name,
-        //         chords: addSection.chords }
-        //     }
-        // })
-    }
+    };
 
     // fromats the text into the standard data type for a song section
     // removes spaces, formats to an array, 
     // decernes weather or not a note is sharp so it may set the type accodingly
     newSection(section) {
 
-        console.log(section);
-
         const{ notes } = this.state;
 
-        const spaceless = section.chords ? section.chords.replace(/\s/g, '').toUpperCase() : section;
+        const spaceless = section.chords ? section.chords.replace(/\s/g, '') : section;
 
         const split = spaceless.split(",");
 
         
         return split.map((chord) => {
+            
+            if(chord.length) {
 
+                let chordEnding = chord.slice(1);
+                let chordFirst = chord[0].toUpperCase();
+                let newChord = chordFirst + chordEnding;
 
-            if(!chord.includes("#") && chord.length) {
+                if(newChord.includes("b") || newChord.includes("#")) {
+                    console.log("is sharp or flat")
 
-                let type = chord.slice(1);
-                chord = chord.slice(0,1);
+                    let type = newChord.includes("b") ? 
+                    newChord.slice(newChord.indexOf("b") + 1) :
+                    newChord.slice(newChord.indexOf("#") + 1);
 
-                if(!notes[chord]) {
-                    alert("not a valid chord");
-                };
+                    newChord = newChord.slice(0,2);
 
-                let newChord = {
-                    val: notes[chord].val,
-                    note: notes[chord].note,
-                    type: type
-                };
-                
-                type.length > 0 ? newChord.type = type : newChord.type = null;
-                
-                return newChord;
+                    if(!notes[newChord]) {
+                        alert("not a valid chord");
+                    };
 
-            } else if (chord.length) {
+                    let createChord = {
+                        val: notes[newChord].val,
+                        note: notes[newChord].note,
+                        type: type
+                    };
+                    
+                    type.length > 0 ? createChord.type = type : createChord.type = null;
+                    
+                    console.log(createChord)
+                    return createChord;
 
-                let type = chord.slice(chord.indexOf("#") + 1);
-                chord = chord.slice(0,2);
+                } else {
+                    console.log("is NOT sharp or flat")
 
-                if(!notes[chord]) {
-                    alert("not a valid chord");
-                };
+                    let type = newChord.slice(1);
+                    newChord = newChord.slice(0,1);
 
-                let newChord = {
-                    val: notes[chord].val,
-                    note: notes[chord].note,
-                    type: type
-                };
-                type.length > 0 ? newChord.type = type : newChord.type = null;
+                    if(!notes[newChord]) {
+                        alert("not a valid chord");
+                    };
 
-                return newChord;
+                    let createChord = {
+                        val: notes[newChord].val,
+                        note: notes[newChord].note,
+                        type: type
+                    };
+                    
+                    type.length > 0 ? createChord.type = type : createChord.type = null;
+                    
+                    console.log(createChord)
+                    return createChord;
+                }
             }
         });
     };

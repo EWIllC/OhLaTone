@@ -1,3 +1,4 @@
+import { crossOriginEmbedderPolicy } from "helmet";
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleSong } from "../store/singleSong";
@@ -10,20 +11,40 @@ class EditSong extends React.Component {
 
         this.state = {
 
-            notes: {
-            "A":{val: 1, note:"A", type: ""},
-            "A#":{val: 2, note:"A#", type: ""},
-            "B":{val: 3, note:"B", type: ""},
-            "C":{val: 4, note:"C", type: ""},
-            "C#":{val: 5, note:"C#", type: ""},
-            "D":{val: 6, note:"D", type: ""},
-            "D#":{val: 7, note:"D#", type: ""},
-            "E":{val: 8, note:"E", type: ""},
-            "F":{val: 9, note:"F", type: ""},
-            "F#":{val: 10, note:"F#", type: ""},
-            "G":{val: 11, note:"G", type: ""},
-            "G#":{val: 12, note:"G#", type: ""}},
+            // notes: {
+            // "A":{val: 1, note:"A", type: ""},
+            // "A#":{val: 2, note:"A#", type: ""},
+            // "B":{val: 3, note:"B", type: ""},
+            // "C":{val: 4, note:"C", type: ""},
+            // "C#":{val: 5, note:"C#", type: ""},
+            // "D":{val: 6, note:"D", type: ""},
+            // "D#":{val: 7, note:"D#", type: ""},
+            // "E":{val: 8, note:"E", type: ""},
+            // "F":{val: 9, note:"F", type: ""},
+            // "F#":{val: 10, note:"F#", type: ""},
+            // "G":{val: 11, note:"G", type: ""},
+            // "G#":{val: 12, note:"G#", type: ""}
+            // },
                 
+            notes: {
+                "A": {val: 1, note:"A", type: null},
+                "A#": {val: 2, note:"A#", type: null},
+                "Bb": {val: 2, note:"Bb", type: null},
+                "B": {val: 3, note:"B", type: null},
+                "C": {val: 4, note:"C", type: null},
+                "C#": {val: 5, note:"C#", type: null},
+                "Db": {val: 5, note:"Db", type: null},
+                "D": {val: 6, note:"D", type: null},
+                "D#": {val: 7, note:"D#", type: null},
+                "Eb": {val: 7, note:"Eb", type: null},
+                "E": {val: 8, note:"E", type: null},
+                "F": {val: 9, note:"F", type: null},
+                "F#": {val: 10, note:"F#", type: null},
+                "Gb": {val: 10, note:"Gb", type: null},
+                "G": {val: 11, note:"G", type: null},
+                "G#": {val: 12, note:"G#", type: null},
+                "Ab": {val: 12, note:"Ab", type: null}
+            },
             songName: "",
             key: "",
             sections: {},
@@ -36,7 +57,20 @@ class EditSong extends React.Component {
         this.newSection = this.newSection.bind(this);
         this.mapper = this.mapper.bind(this);
         this.handleOrder = this.handleOrder.bind(this);
+        this.removeSection = this.removeSection.bind(this);
 
+    };
+
+    removeSection(event) {
+        event.preventDefault();
+
+        const { keyArray } = this.state;
+
+        this.setState({
+            keyArray: keyArray.filter((section) => (
+                section !== event.target.name
+            ))
+        });
     };
 
     handleChange(event) {
@@ -83,23 +117,20 @@ class EditSong extends React.Component {
         event.preventDefault();
 
 
-        const { songName, key, sections } = this.state;
+        const { songName, key, sections, keyArray } = this.state;
 
 
-        const keyArray = Object.keys(sections);
+        //const keyArray = Object.keys(sections);
 
-        //make a hash table for unifoom chords
         let uniformChords = {};
 
-        console.log(sections)
-        
         keyArray.map((section) => (
+
             sections[section].chords.map((chord, index) => {
                 
                 if(chord.type) {
 
                     if(index < sections[section].chords.length - 1) {
-                        console.log("worked")
                         chord.type += ","
                     };
 
@@ -149,19 +180,15 @@ class EditSong extends React.Component {
             })
         )).join();
 
-        //console.log(uniformChords)
-
         const sectionsHash = {};
 
         
         keyArray.map((section) => {
+            
             return sectionsHash[section] = { name: section, chords: this.newSection(uniformChords[section].note) };
-        });
-        // Object.keys(sections).map((section) => {
            
-        //         return sectionsHash[section] = { name: `${sections[section].name}`, chords: [...sections[section].chords,this.newSection(sections[section])] }}
-                
-        // );
+        });
+
 
         if(!this.state.notes[key[0]]) {
             alert("song needs a valid key");
@@ -171,11 +198,9 @@ class EditSong extends React.Component {
         const newSong = {
             id: this.props.song.id,
             name: songName,
-            key: this.newSection(key.toUpperCase())[0],
+            key: this.newSection(key)[0],
             sections: sectionsHash
         };
-        
-        //console.log(newSong)
         this.props.editSong(newSong);
         this.props.history.push("/songs");
     };
@@ -188,49 +213,59 @@ class EditSong extends React.Component {
         // the mappping of notes consistent with initial object.
         //section = typeof(section) === "string" ? section : section.chords[0].note;
 
-        const spaceless = section.replace(/\s/g, '').toUpperCase();
+        const spaceless = section.replace(/\s/g, '');
 
         const split = spaceless.split(",");
 
         return split.map((chord) => {
 
+            if(chord.length) {
 
-            if(!chord.includes("#") && chord.length) {
+                let chordEnding = chord.slice(1);
+                let chordFirst = chord[0].toUpperCase();
+                let newChord = chordFirst + chordEnding;
 
-                let type = chord.slice(1);
-                chord = chord.slice(0,1);
+                if(newChord.includes("b") || newChord.includes("#")) {
 
-                if(!notes[chord]) {
-                    alert("not a valid chord");
-                };
+                    let type = newChord.includes("b") ? 
+                    newChord.slice(newChord.indexOf("b") + 1) :
+                    newChord.slice(newChord.indexOf("#") + 1);
 
-                let newChord = {
-                    val: notes[chord].val,
-                    note: notes[chord].note,
-                    type: type
-                };
-                
-                type.length > 0 ? newChord.type = type : newChord.type = null;
-                
-                return newChord;
+                    newChord = newChord.slice(0,2);
 
-            } else if (chord.length) {
+                    if(!notes[newChord]) {
+                        alert("not a valid chord");
+                    };
 
-                let type = chord.slice(chord.indexOf("#") + 1);
-                chord = chord.slice(0,2);
+                    let createChord = {
+                        val: notes[newChord].val,
+                        note: notes[newChord].note,
+                        type: type
+                    };
+                    
+                    type.length > 0 ? createChord.type = type : createChord.type = null;
+                    
+                    return createChord;
 
-                if(!notes[chord]) {
-                    alert("not a valid chord");
-                };
+                } else {
 
-                let newChord = {
-                    val: notes[chord].val,
-                    note: notes[chord].note,
-                    type: type
-                };
-                type.length > 0 ? newChord.type = type : newChord.type = null;
+                    let type = newChord.slice(1);
+                    newChord = newChord.slice(0,1);
 
-                return newChord;
+                    if(!notes[newChord]) {
+                        alert("not a valid chord");
+                    };
+
+                    let createChord = {
+                        val: notes[newChord].val,
+                        note: notes[newChord].note,
+                        type: type
+                    };
+                    
+                    type.length > 0 ? createChord.type = type : createChord.type = null;
+                    
+                    return createChord;
+                }
             }
         });
     };
@@ -278,9 +313,9 @@ class EditSong extends React.Component {
                 
                 this.setState({
                     keyArray: keyArray
-                })
-            }
-        }
+                });
+            };
+        };
     };
 
     componentDidMount() {
@@ -300,7 +335,8 @@ class EditSong extends React.Component {
                 key: key.type ? key.note + key.type.toLowerCase() : key.note,
                 sections: sections,
                 keyArray: Object.keys(sections)
-            })
+            });
+            
         };
 
     };
@@ -345,6 +381,7 @@ class EditSong extends React.Component {
 
                             <button onClick={(event) => this.handleOrder("up", event)} name={`${sections[section].name}`}>^</button>
                             <button onClick={(event) => this.handleOrder("down", event)} name={`${sections[section].name}`}>v</button>
+                            <button onClick={(event) => this.removeSection(event)} name={`${sections[section].name}`}>delete</button>
                             </h4>
 
                             <input

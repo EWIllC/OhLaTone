@@ -2139,62 +2139,87 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         "A": {
           val: 1,
           note: "A",
-          type: ""
+          type: null
         },
         "A#": {
           val: 2,
           note: "A#",
-          type: ""
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
         },
         "B": {
           val: 3,
           note: "B",
-          type: ""
+          type: null
         },
         "C": {
           val: 4,
           note: "C",
-          type: ""
+          type: null
         },
         "C#": {
           val: 5,
           note: "C#",
-          type: ""
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
         },
         "D": {
           val: 6,
           note: "D",
-          type: ""
+          type: null
         },
         "D#": {
           val: 7,
           note: "D#",
-          type: ""
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
         },
         "E": {
           val: 8,
           note: "E",
-          type: ""
+          type: null
         },
         "F": {
           val: 9,
           note: "F",
-          type: ""
+          type: null
         },
         "F#": {
           val: 10,
           note: "F#",
-          type: ""
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
         },
         "G": {
           val: 11,
           note: "G",
-          type: ""
+          type: null
         },
         "G#": {
           val: 12,
           note: "G#",
-          type: ""
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
         }
       },
       songName: "",
@@ -2264,8 +2289,11 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       key,
       sections
     } = this.state;
+    let keyEnding = key.slice(1);
+    let keyFirst = key[0].toUpperCase();
+    let newKey = keyFirst + keyEnding;
 
-    if (!this.state.notes[key[0]]) {
+    if (!this.state.notes[newKey[0]]) {
       alert("song needs a valid key");
     }
 
@@ -2279,7 +2307,7 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
     const newSong = {
       name: songName,
-      key: this.newSection(key.toUpperCase())[0],
+      key: this.newSection(key)[0],
       sections: sectionsHash
     };
     this.props.addSong(newSong);
@@ -2293,7 +2321,6 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       sections,
       addSection
     } = this.state;
-    console.log(secName);
     this.setState({
       addSection: {
         name: "",
@@ -2305,59 +2332,61 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
           chords: addSection.chords
         }
       }
-    }); // this.setState({
-    //     addSection: { name: "", chords: "" },
-    //     sections: {...sections,
-    //     [addSection.name]: {
-    //         name: addSection.name,
-    //         chords: addSection.chords }
-    //     }
-    // })
-  } // fromats the text into the standard data type for a song section
+    });
+  }
+
+  // fromats the text into the standard data type for a song section
   // removes spaces, formats to an array, 
   // decernes weather or not a note is sharp so it may set the type accodingly
-
-
   newSection(section) {
-    console.log(section);
     const {
       notes
     } = this.state;
-    const spaceless = section.chords ? section.chords.replace(/\s/g, '').toUpperCase() : section;
+    const spaceless = section.chords ? section.chords.replace(/\s/g, '') : section;
     const split = spaceless.split(",");
     return split.map(chord => {
-      if (!chord.includes("#") && chord.length) {
-        let type = chord.slice(1);
-        chord = chord.slice(0, 1);
+      if (chord.length) {
+        let chordEnding = chord.slice(1);
+        let chordFirst = chord[0].toUpperCase();
+        let newChord = chordFirst + chordEnding;
 
-        if (!notes[chord]) {
-          alert("not a valid chord");
+        if (newChord.includes("b") || newChord.includes("#")) {
+          console.log("is sharp or flat");
+          let type = newChord.includes("b") ? newChord.slice(newChord.indexOf("b") + 1) : newChord.slice(newChord.indexOf("#") + 1);
+          newChord = newChord.slice(0, 2);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          console.log(createChord);
+          return createChord;
+        } else {
+          console.log("is NOT sharp or flat");
+          let type = newChord.slice(1);
+          newChord = newChord.slice(0, 1);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          console.log(createChord);
+          return createChord;
         }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
-      } else if (chord.length) {
-        let type = chord.slice(chord.indexOf("#") + 1);
-        chord = chord.slice(0, 2);
-
-        if (!notes[chord]) {
-          alert("not a valid chord");
-        }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
       }
     });
   }
@@ -2467,79 +2496,121 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
-/* harmony import */ var _store_songs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/songs */ "./client/store/songs.js");
+/* harmony import */ var helmet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! helmet */ "./node_modules/helmet/dist/index.js");
+/* harmony import */ var helmet__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(helmet__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
+/* harmony import */ var _store_songs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/songs */ "./client/store/songs.js");
 
 
 
 
 
-class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+
+class EditSong extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
   constructor() {
     super();
     this.state = {
+      // notes: {
+      // "A":{val: 1, note:"A", type: ""},
+      // "A#":{val: 2, note:"A#", type: ""},
+      // "B":{val: 3, note:"B", type: ""},
+      // "C":{val: 4, note:"C", type: ""},
+      // "C#":{val: 5, note:"C#", type: ""},
+      // "D":{val: 6, note:"D", type: ""},
+      // "D#":{val: 7, note:"D#", type: ""},
+      // "E":{val: 8, note:"E", type: ""},
+      // "F":{val: 9, note:"F", type: ""},
+      // "F#":{val: 10, note:"F#", type: ""},
+      // "G":{val: 11, note:"G", type: ""},
+      // "G#":{val: 12, note:"G#", type: ""}
+      // },
       notes: {
         "A": {
           val: 1,
           note: "A",
-          type: ""
+          type: null
         },
         "A#": {
           val: 2,
           note: "A#",
-          type: ""
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
         },
         "B": {
           val: 3,
           note: "B",
-          type: ""
+          type: null
         },
         "C": {
           val: 4,
           note: "C",
-          type: ""
+          type: null
         },
         "C#": {
           val: 5,
           note: "C#",
-          type: ""
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
         },
         "D": {
           val: 6,
           note: "D",
-          type: ""
+          type: null
         },
         "D#": {
           val: 7,
           note: "D#",
-          type: ""
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
         },
         "E": {
           val: 8,
           note: "E",
-          type: ""
+          type: null
         },
         "F": {
           val: 9,
           note: "F",
-          type: ""
+          type: null
         },
         "F#": {
           val: 10,
           note: "F#",
-          type: ""
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
         },
         "G": {
           val: 11,
           note: "G",
-          type: ""
+          type: null
         },
         "G#": {
           val: 12,
           note: "G#",
-          type: ""
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
         }
       },
       songName: "",
@@ -2552,6 +2623,17 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.newSection = this.newSection.bind(this);
     this.mapper = this.mapper.bind(this);
     this.handleOrder = this.handleOrder.bind(this);
+    this.removeSection = this.removeSection.bind(this);
+  }
+
+  removeSection(event) {
+    event.preventDefault();
+    const {
+      keyArray
+    } = this.state;
+    this.setState({
+      keyArray: keyArray.filter(section => section !== event.target.name)
+    });
   }
 
   handleChange(event) {
@@ -2605,16 +2687,14 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       songName,
       key,
-      sections
-    } = this.state;
-    const keyArray = Object.keys(sections); //make a hash table for unifoom chords
+      sections,
+      keyArray
+    } = this.state; //const keyArray = Object.keys(sections);
 
     let uniformChords = {};
-    console.log(sections);
     keyArray.map(section => sections[section].chords.map((chord, index) => {
       if (chord.type) {
         if (index < sections[section].chords.length - 1) {
-          console.log("worked");
           chord.type += ",";
         }
 
@@ -2668,17 +2748,14 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }
 
       ;
-    })).join(); //console.log(uniformChords)
-
+    })).join();
     const sectionsHash = {};
     keyArray.map(section => {
       return sectionsHash[section] = {
         name: section,
         chords: this.newSection(uniformChords[section].note)
       };
-    }); // Object.keys(sections).map((section) => {
-    //         return sectionsHash[section] = { name: `${sections[section].name}`, chords: [...sections[section].chords,this.newSection(sections[section])] }}
-    // );
+    });
 
     if (!this.state.notes[key[0]]) {
       alert("song needs a valid key");
@@ -2688,10 +2765,9 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const newSong = {
       id: this.props.song.id,
       name: songName,
-      key: this.newSection(key.toUpperCase())[0],
+      key: this.newSection(key)[0],
       sections: sectionsHash
-    }; //console.log(newSong)
-
+    };
     this.props.editSong(newSong);
     this.props.history.push("/songs");
   }
@@ -2703,41 +2779,47 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     // the mappping of notes consistent with initial object.
     //section = typeof(section) === "string" ? section : section.chords[0].note;
 
-    const spaceless = section.replace(/\s/g, '').toUpperCase();
+    const spaceless = section.replace(/\s/g, '');
     const split = spaceless.split(",");
     return split.map(chord => {
-      if (!chord.includes("#") && chord.length) {
-        let type = chord.slice(1);
-        chord = chord.slice(0, 1);
+      if (chord.length) {
+        let chordEnding = chord.slice(1);
+        let chordFirst = chord[0].toUpperCase();
+        let newChord = chordFirst + chordEnding;
 
-        if (!notes[chord]) {
-          alert("not a valid chord");
+        if (newChord.includes("b") || newChord.includes("#")) {
+          let type = newChord.includes("b") ? newChord.slice(newChord.indexOf("b") + 1) : newChord.slice(newChord.indexOf("#") + 1);
+          newChord = newChord.slice(0, 2);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          return createChord;
+        } else {
+          let type = newChord.slice(1);
+          newChord = newChord.slice(0, 1);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          return createChord;
         }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
-      } else if (chord.length) {
-        let type = chord.slice(chord.indexOf("#") + 1);
-        chord = chord.slice(0, 2);
-
-        if (!notes[chord]) {
-          alert("not a valid chord");
-        }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
       }
     });
   }
@@ -2782,7 +2864,11 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
           keyArray: keyArray
         });
       }
+
+      ;
     }
+
+    ;
   }
 
   componentDidMount() {
@@ -2814,16 +2900,16 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       sections,
       keyArray
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Edit Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "Edit Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
       onSubmit: this.handleSubmit
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
       className: "songForm",
       type: "text",
       name: "songName",
       value: songName //placeholder={songName}
       ,
       onChange: this.handleChange
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Key:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "Key:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
       className: "songForm",
       type: "text",
       name: "key",
@@ -2831,22 +2917,25 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       ,
       onChange: this.handleChange
     }), keyArray.map(section => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         key: sections[section].name
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, sections[section].name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
         onClick: event => this.handleOrder("up", event),
         name: `${sections[section].name}`
-      }, "^"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, "^"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
         onClick: event => this.handleOrder("down", event),
         name: `${sections[section].name}`
-      }, "v")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "v"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        onClick: event => this.removeSection(event),
+        name: `${sections[section].name}`
+      }, "delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
         className: "songForm",
         type: "text",
         name: sections[section].name,
         value: sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() : chord.note),
         onChange: this.handleChange
       }));
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
       type: "submit"
     }, "Submit"))));
   }
@@ -2863,12 +2952,12 @@ const mapDispatch = (dispatch, {
   history
 }) => ({
   fetchSingleSong: songId => {
-    dispatch((0,_store_singleSong__WEBPACK_IMPORTED_MODULE_2__.fetchSingleSong)(songId));
+    dispatch((0,_store_singleSong__WEBPACK_IMPORTED_MODULE_3__.fetchSingleSong)(songId));
   },
-  editSong: song => dispatch((0,_store_songs__WEBPACK_IMPORTED_MODULE_3__.editSong)(song))
+  editSong: song => dispatch((0,_store_songs__WEBPACK_IMPORTED_MODULE_4__.editSong)(song))
 });
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(EditSong));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapState, mapDispatch)(EditSong));
 
 /***/ }),
 
@@ -2956,59 +3045,98 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      notes: [{
-        val: 1,
-        note: "A",
-        type: null
-      }, {
-        val: 2,
-        note: "A#",
-        type: null
-      }, {
-        val: 3,
-        note: "B",
-        type: null
-      }, {
-        val: 4,
-        note: "C",
-        type: null
-      }, {
-        val: 5,
-        note: "C#",
-        type: null
-      }, {
-        val: 6,
-        note: "D",
-        type: null
-      }, {
-        val: 7,
-        note: "D#",
-        type: null
-      }, {
-        val: 8,
-        note: "E",
-        type: null
-      }, {
-        val: 9,
-        note: "F",
-        type: null
-      }, {
-        val: 10,
-        note: "F#",
-        type: null
-      }, {
-        val: 11,
-        note: "G",
-        type: null
-      }, {
-        val: 12,
-        note: "G#",
-        type: null
-      }],
+      notes: {
+        "A": {
+          val: 1,
+          note: "A",
+          type: null
+        },
+        "A#": {
+          val: 2,
+          note: "A#",
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
+        },
+        "B": {
+          val: 3,
+          note: "B",
+          type: null
+        },
+        "C": {
+          val: 4,
+          note: "C",
+          type: null
+        },
+        "C#": {
+          val: 5,
+          note: "C#",
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
+        },
+        "D": {
+          val: 6,
+          note: "D",
+          type: null
+        },
+        "D#": {
+          val: 7,
+          note: "D#",
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
+        },
+        "E": {
+          val: 8,
+          note: "E",
+          type: null
+        },
+        "F": {
+          val: 9,
+          note: "F",
+          type: null
+        },
+        "F#": {
+          val: 10,
+          note: "F#",
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
+        },
+        "G": {
+          val: 11,
+          note: "G",
+          type: null
+        },
+        "G#": {
+          val: 12,
+          note: "G#",
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
+        }
+      },
       key: {},
       sections: {},
       keyArray: [],
-      minorOr: false
+      minorOr: false,
+      keyShouldBe: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleEditRedirect = this.handleEditRedirect.bind(this);
@@ -3023,18 +3151,39 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       notes,
       sections
     } = this.state;
-    let keyType = key.type;
-    let value = parseInt(event.target.value);
+    const newKey = notes[event.target.value];
+    const value = newKey.val;
     let steps = value > key.val ? value - key.val : key.val - value;
+
+    if (key.type) {
+      newKey.type = key.type;
+    }
+
+    ;
     let newSections = {};
-    let newKey = {
-      val: notes[value - 1].val,
-      note: notes[value - 1].note,
-      type: keyType
-    };
-    Object.keys(sections).map(section => newSections[section] = {
-      name: sections[section].name,
-      chords: sections[section].chords.map(chord => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord))
+    Object.keys(sections).map(section => {
+      const newChords = [];
+      sections[section].chords.map((chord, index) => {
+        let chordValue = this.chordValueMachine(steps, chord, newKey.val, key.val) + 1;
+        const newChord = [];
+        return Object.keys(notes).map(note => {
+          if (chordValue === notes[note].val) {
+            const typeAssigned = this.typeAssign(notes[note], chord);
+            newChord.push(typeAssigned);
+
+            if (newChord.length < 2) {
+              newChords.push(newChord[0]);
+            }
+
+            if (index === sections[section].chords.length - 1) {
+              newSections[section] = {
+                name: section,
+                chords: newChords
+              };
+            }
+          }
+        });
+      });
     });
     this.setState({
       key: newKey,
@@ -3077,9 +3226,9 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   typeAssign(notesChord, oldChord) {
     let newChord = {
+      val: notesChord.val,
       note: notesChord.note,
-      type: null,
-      val: notesChord.val
+      type: null
     };
 
     if (oldChord.type) {
@@ -3104,7 +3253,7 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.fetchSingleSong(this.props.match.params.songId);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.song !== this.props.song) {
       let {
         name,
@@ -3133,20 +3282,41 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       keyArray,
       minorOr,
       notes
-    } = this.state; //const keyArray = Object.keys(sections);
+    } = this.state; //const keyArray = Object.keys(sections)
 
+    const notesArray = Object.keys(notes);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type.toLowerCase() : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       name: "transpose",
       onChange: this.handleChange
-    }, notes.map((chord, index) => minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: chord.val,
-      key: index
-    }, chord.note, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: chord.val,
-      key: index
-    }, chord.note))), keyArray.map(section => {
+    }, notesArray.map((chord, index) => {
+      if (key.note) {
+        if (!key.note.includes("b")) {
+          if (!chord.includes("b")) {
+            return minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord);
+          }
+        } else {
+          if (!chord.includes("#")) {
+            return minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord);
+          }
+        }
+      } else {
+        console.log(key.note);
+      }
+    })), keyArray.map(section => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         key: sections[section].name
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));
@@ -3453,6 +3623,737 @@ function songsReducer(state = [], action) {
   ;
 }
 ;
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/helmet/dist/index.js ***!
+  \*******************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault =
+	(this && this.__importDefault) ||
+	function (mod) {
+		return mod && mod.__esModule ? mod : { default: mod }
+	}
+const content_security_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/content-security-policy */ "./node_modules/helmet/dist/middlewares/content-security-policy/index.js"))
+const cross_origin_embedder_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/cross-origin-embedder-policy */ "./node_modules/helmet/dist/middlewares/cross-origin-embedder-policy/index.js"))
+const cross_origin_opener_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/cross-origin-opener-policy */ "./node_modules/helmet/dist/middlewares/cross-origin-opener-policy/index.js"))
+const cross_origin_resource_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/cross-origin-resource-policy */ "./node_modules/helmet/dist/middlewares/cross-origin-resource-policy/index.js"))
+const expect_ct_1 = __importDefault(__webpack_require__(/*! ./middlewares/expect-ct */ "./node_modules/helmet/dist/middlewares/expect-ct/index.js"))
+const origin_agent_cluster_1 = __importDefault(__webpack_require__(/*! ./middlewares/origin-agent-cluster */ "./node_modules/helmet/dist/middlewares/origin-agent-cluster/index.js"))
+const referrer_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/referrer-policy */ "./node_modules/helmet/dist/middlewares/referrer-policy/index.js"))
+const strict_transport_security_1 = __importDefault(__webpack_require__(/*! ./middlewares/strict-transport-security */ "./node_modules/helmet/dist/middlewares/strict-transport-security/index.js"))
+const x_content_type_options_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-content-type-options */ "./node_modules/helmet/dist/middlewares/x-content-type-options/index.js"))
+const x_dns_prefetch_control_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-dns-prefetch-control */ "./node_modules/helmet/dist/middlewares/x-dns-prefetch-control/index.js"))
+const x_download_options_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-download-options */ "./node_modules/helmet/dist/middlewares/x-download-options/index.js"))
+const x_frame_options_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-frame-options */ "./node_modules/helmet/dist/middlewares/x-frame-options/index.js"))
+const x_permitted_cross_domain_policies_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-permitted-cross-domain-policies */ "./node_modules/helmet/dist/middlewares/x-permitted-cross-domain-policies/index.js"))
+const x_powered_by_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-powered-by */ "./node_modules/helmet/dist/middlewares/x-powered-by/index.js"))
+const x_xss_protection_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-xss-protection */ "./node_modules/helmet/dist/middlewares/x-xss-protection/index.js"))
+function getArgs(option, middlewareConfig = {}) {
+	const { enabledByDefault = true } = middlewareConfig
+	switch (option) {
+		case undefined:
+			return enabledByDefault ? [] : null
+		case false:
+			return null
+		case true:
+			return []
+		default:
+			if (middlewareConfig.takesOptions === false) {
+				console.warn(`${middlewareConfig.name} does not take options. ${enabledByDefault ? "Remove the property" : "Set the property to `true`"} to silence this warning.`)
+				return []
+			} else {
+				return [option]
+			}
+	}
+}
+function getMiddlewareFunctionsFromOptions(options) {
+	const result = []
+	const contentSecurityPolicyArgs = getArgs(options.contentSecurityPolicy)
+	if (contentSecurityPolicyArgs) {
+		result.push(content_security_policy_1.default(...contentSecurityPolicyArgs))
+	}
+	const crossOriginEmbedderPolicyArgs = getArgs(options.crossOriginEmbedderPolicy, {
+		name: "crossOriginEmbedderPolicy",
+		takesOptions: false,
+		enabledByDefault: false
+	})
+	if (crossOriginEmbedderPolicyArgs) {
+		result.push(cross_origin_embedder_policy_1.default())
+	}
+	const crossOriginOpenerPolicyArgs = getArgs(options.crossOriginOpenerPolicy, {
+		enabledByDefault: false
+	})
+	if (crossOriginOpenerPolicyArgs) {
+		result.push(cross_origin_opener_policy_1.default(...crossOriginOpenerPolicyArgs))
+	}
+	const crossOriginResourcePolicyArgs = getArgs(options.crossOriginResourcePolicy, { enabledByDefault: false })
+	if (crossOriginResourcePolicyArgs) {
+		result.push(cross_origin_resource_policy_1.default(...crossOriginResourcePolicyArgs))
+	}
+	const xDnsPrefetchControlArgs = getArgs(options.dnsPrefetchControl)
+	if (xDnsPrefetchControlArgs) {
+		result.push(x_dns_prefetch_control_1.default(...xDnsPrefetchControlArgs))
+	}
+	const expectCtArgs = getArgs(options.expectCt)
+	if (expectCtArgs) {
+		result.push(expect_ct_1.default(...expectCtArgs))
+	}
+	const xFrameOptionsArgs = getArgs(options.frameguard)
+	if (xFrameOptionsArgs) {
+		result.push(x_frame_options_1.default(...xFrameOptionsArgs))
+	}
+	const xPoweredByArgs = getArgs(options.hidePoweredBy, {
+		name: "hidePoweredBy",
+		takesOptions: false
+	})
+	if (xPoweredByArgs) {
+		result.push(x_powered_by_1.default())
+	}
+	const strictTransportSecurityArgs = getArgs(options.hsts)
+	if (strictTransportSecurityArgs) {
+		result.push(strict_transport_security_1.default(...strictTransportSecurityArgs))
+	}
+	const xDownloadOptionsArgs = getArgs(options.ieNoOpen, {
+		name: "ieNoOpen",
+		takesOptions: false
+	})
+	if (xDownloadOptionsArgs) {
+		result.push(x_download_options_1.default())
+	}
+	const xContentTypeOptionsArgs = getArgs(options.noSniff, {
+		name: "noSniff",
+		takesOptions: false
+	})
+	if (xContentTypeOptionsArgs) {
+		result.push(x_content_type_options_1.default())
+	}
+	const originAgentClusterArgs = getArgs(options.originAgentCluster, {
+		name: "originAgentCluster",
+		takesOptions: false,
+		enabledByDefault: false
+	})
+	if (originAgentClusterArgs) {
+		result.push(origin_agent_cluster_1.default())
+	}
+	const xPermittedCrossDomainPoliciesArgs = getArgs(options.permittedCrossDomainPolicies)
+	if (xPermittedCrossDomainPoliciesArgs) {
+		result.push(x_permitted_cross_domain_policies_1.default(...xPermittedCrossDomainPoliciesArgs))
+	}
+	const referrerPolicyArgs = getArgs(options.referrerPolicy)
+	if (referrerPolicyArgs) {
+		result.push(referrer_policy_1.default(...referrerPolicyArgs))
+	}
+	const xXssProtectionArgs = getArgs(options.xssFilter, {
+		name: "xssFilter",
+		takesOptions: false
+	})
+	if (xXssProtectionArgs) {
+		result.push(x_xss_protection_1.default())
+	}
+	return result
+}
+const helmet = Object.assign(
+	function helmet(options = {}) {
+		var _a
+		if (((_a = options.constructor) === null || _a === void 0 ? void 0 : _a.name) === "IncomingMessage") {
+			throw new Error("It appears you have done something like `app.use(helmet)`, but it should be `app.use(helmet())`.")
+		}
+		const middlewareFunctions = getMiddlewareFunctionsFromOptions(options)
+		return function helmetMiddleware(req, res, next) {
+			const iterator = middlewareFunctions[Symbol.iterator]()
+			;(function internalNext(err) {
+				if (err) {
+					next(err)
+					return
+				}
+				const iteration = iterator.next()
+				if (iteration.done) {
+					next()
+				} else {
+					const middlewareFunction = iteration.value
+					middlewareFunction(req, res, internalNext)
+				}
+			})()
+		}
+	},
+	{
+		contentSecurityPolicy: content_security_policy_1.default,
+		crossOriginEmbedderPolicy: cross_origin_embedder_policy_1.default,
+		crossOriginOpenerPolicy: cross_origin_opener_policy_1.default,
+		crossOriginResourcePolicy: cross_origin_resource_policy_1.default,
+		dnsPrefetchControl: x_dns_prefetch_control_1.default,
+		expectCt: expect_ct_1.default,
+		frameguard: x_frame_options_1.default,
+		hidePoweredBy: x_powered_by_1.default,
+		hsts: strict_transport_security_1.default,
+		ieNoOpen: x_download_options_1.default,
+		noSniff: x_content_type_options_1.default,
+		originAgentCluster: origin_agent_cluster_1.default,
+		permittedCrossDomainPolicies: x_permitted_cross_domain_policies_1.default,
+		referrerPolicy: referrer_policy_1.default,
+		xssFilter: x_xss_protection_1.default,
+		featurePolicy() {
+			throw new Error("helmet.featurePolicy was removed because the Feature-Policy header is deprecated. If you still need this header, you can use the `feature-policy` module.")
+		},
+		hpkp() {
+			throw new Error("helmet.hpkp was removed because the header has been deprecated. If you still need this header, you can use the `hpkp` module. For more, see <https://github.com/helmetjs/helmet/issues/180>.")
+		},
+		noCache() {
+			throw new Error("helmet.noCache was removed. You can use the `nocache` module instead. For more, see <https://github.com/helmetjs/helmet/issues/215>.")
+		}
+	}
+)
+module.exports = helmet
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/content-security-policy/index.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/content-security-policy/index.js ***!
+  \*******************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+exports.dangerouslyDisableDefaultSrc = exports.getDefaultDirectives = void 0
+const dangerouslyDisableDefaultSrc = Symbol("dangerouslyDisableDefaultSrc")
+exports.dangerouslyDisableDefaultSrc = dangerouslyDisableDefaultSrc
+const DEFAULT_DIRECTIVES = {
+	"default-src": ["'self'"],
+	"base-uri": ["'self'"],
+	"block-all-mixed-content": [],
+	"font-src": ["'self'", "https:", "data:"],
+	"frame-ancestors": ["'self'"],
+	"img-src": ["'self'", "data:"],
+	"object-src": ["'none'"],
+	"script-src": ["'self'"],
+	"script-src-attr": ["'none'"],
+	"style-src": ["'self'", "https:", "'unsafe-inline'"],
+	"upgrade-insecure-requests": []
+}
+const getDefaultDirectives = () => Object.assign({}, DEFAULT_DIRECTIVES)
+exports.getDefaultDirectives = getDefaultDirectives
+const dashify = str => str.replace(/[A-Z]/g, capitalLetter => "-" + capitalLetter.toLowerCase())
+const isDirectiveValueInvalid = directiveValue => /;|,/.test(directiveValue)
+const has = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key)
+function normalizeDirectives(options) {
+	const defaultDirectives = getDefaultDirectives()
+	const { useDefaults = false, directives: rawDirectives = defaultDirectives } = options
+	const result = new Map()
+	const directiveNamesSeen = new Set()
+	const directivesExplicitlyDisabled = new Set()
+	for (const rawDirectiveName in rawDirectives) {
+		if (!has(rawDirectives, rawDirectiveName)) {
+			continue
+		}
+		if (rawDirectiveName.length === 0 || /[^a-zA-Z0-9-]/.test(rawDirectiveName)) {
+			throw new Error(`Content-Security-Policy received an invalid directive name ${JSON.stringify(rawDirectiveName)}`)
+		}
+		const directiveName = dashify(rawDirectiveName)
+		if (directiveNamesSeen.has(directiveName)) {
+			throw new Error(`Content-Security-Policy received a duplicate directive ${JSON.stringify(directiveName)}`)
+		}
+		directiveNamesSeen.add(directiveName)
+		const rawDirectiveValue = rawDirectives[rawDirectiveName]
+		let directiveValue
+		if (rawDirectiveValue === null) {
+			if (directiveName === "default-src") {
+				throw new Error("Content-Security-Policy needs a default-src but it was set to `null`. If you really want to disable it, set it to `contentSecurityPolicy.dangerouslyDisableDefaultSrc`.")
+			}
+			directivesExplicitlyDisabled.add(directiveName)
+			continue
+		} else if (typeof rawDirectiveValue === "string") {
+			directiveValue = [rawDirectiveValue]
+		} else if (!rawDirectiveValue) {
+			throw new Error(`Content-Security-Policy received an invalid directive value for ${JSON.stringify(directiveName)}`)
+		} else if (rawDirectiveValue === dangerouslyDisableDefaultSrc) {
+			if (directiveName === "default-src") {
+				directivesExplicitlyDisabled.add("default-src")
+				continue
+			} else {
+				throw new Error(`Content-Security-Policy: tried to disable ${JSON.stringify(directiveName)} as if it were default-src; simply omit the key`)
+			}
+		} else {
+			directiveValue = rawDirectiveValue
+		}
+		for (const element of directiveValue) {
+			if (typeof element === "string" && isDirectiveValueInvalid(element)) {
+				throw new Error(`Content-Security-Policy received an invalid directive value for ${JSON.stringify(directiveName)}`)
+			}
+		}
+		result.set(directiveName, directiveValue)
+	}
+	if (useDefaults) {
+		Object.entries(defaultDirectives).forEach(([defaultDirectiveName, defaultDirectiveValue]) => {
+			if (!result.has(defaultDirectiveName) && !directivesExplicitlyDisabled.has(defaultDirectiveName)) {
+				result.set(defaultDirectiveName, defaultDirectiveValue)
+			}
+		})
+	}
+	if (!result.size) {
+		throw new Error("Content-Security-Policy has no directives. Either set some or disable the header")
+	}
+	if (!result.has("default-src") && !directivesExplicitlyDisabled.has("default-src")) {
+		throw new Error("Content-Security-Policy needs a default-src but none was provided. If you really want to disable it, set it to `contentSecurityPolicy.dangerouslyDisableDefaultSrc`.")
+	}
+	return result
+}
+function getHeaderValue(req, res, normalizedDirectives) {
+	let err
+	const result = []
+	normalizedDirectives.forEach((rawDirectiveValue, directiveName) => {
+		let directiveValue = ""
+		for (const element of rawDirectiveValue) {
+			directiveValue += " " + (element instanceof Function ? element(req, res) : element)
+		}
+		if (!directiveValue) {
+			result.push(directiveName)
+		} else if (isDirectiveValueInvalid(directiveValue)) {
+			err = new Error(`Content-Security-Policy received an invalid directive value for ${JSON.stringify(directiveName)}`)
+		} else {
+			result.push(`${directiveName}${directiveValue}`)
+		}
+	})
+	return err ? err : result.join(";")
+}
+const contentSecurityPolicy = function contentSecurityPolicy(options = {}) {
+	if ("loose" in options) {
+		console.warn("Content-Security-Policy middleware no longer needs the `loose` parameter. You should remove it.")
+	}
+	if ("setAllHeaders" in options) {
+		console.warn("Content-Security-Policy middleware no longer supports the `setAllHeaders` parameter. See <https://github.com/helmetjs/helmet/wiki/Setting-legacy-Content-Security-Policy-headers-in-Helmet-4>.")
+	}
+	;["disableAndroid", "browserSniff"].forEach(deprecatedOption => {
+		if (deprecatedOption in options) {
+			console.warn(`Content-Security-Policy middleware no longer does browser sniffing, so you can remove the \`${deprecatedOption}\` option. See <https://github.com/helmetjs/csp/issues/97> for discussion.`)
+		}
+	})
+	const headerName = options.reportOnly ? "Content-Security-Policy-Report-Only" : "Content-Security-Policy"
+	const normalizedDirectives = normalizeDirectives(options)
+	return function contentSecurityPolicyMiddleware(req, res, next) {
+		const result = getHeaderValue(req, res, normalizedDirectives)
+		if (result instanceof Error) {
+			next(result)
+		} else {
+			res.setHeader(headerName, result)
+			next()
+		}
+	}
+}
+contentSecurityPolicy.getDefaultDirectives = getDefaultDirectives
+contentSecurityPolicy.dangerouslyDisableDefaultSrc = dangerouslyDisableDefaultSrc
+module.exports = contentSecurityPolicy
+exports.default = contentSecurityPolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/cross-origin-embedder-policy/index.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/cross-origin-embedder-policy/index.js ***!
+  \************************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function crossOriginEmbedderPolicy() {
+	return function crossOriginEmbedderPolicyMiddleware(_req, res, next) {
+		res.setHeader("Cross-Origin-Embedder-Policy", "require-corp")
+		next()
+	}
+}
+module.exports = crossOriginEmbedderPolicy
+exports.default = crossOriginEmbedderPolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/cross-origin-opener-policy/index.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/cross-origin-opener-policy/index.js ***!
+  \**********************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const ALLOWED_POLICIES = new Set(["same-origin", "same-origin-allow-popups", "unsafe-none"])
+function getHeaderValueFromOptions({ policy = "same-origin" }) {
+	if (ALLOWED_POLICIES.has(policy)) {
+		return policy
+	} else {
+		throw new Error(`Cross-Origin-Opener-Policy does not support the ${JSON.stringify(policy)} policy`)
+	}
+}
+function crossOriginOpenerPolicy(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function crossOriginOpenerPolicyMiddleware(_req, res, next) {
+		res.setHeader("Cross-Origin-Opener-Policy", headerValue)
+		next()
+	}
+}
+module.exports = crossOriginOpenerPolicy
+exports.default = crossOriginOpenerPolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/cross-origin-resource-policy/index.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/cross-origin-resource-policy/index.js ***!
+  \************************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const ALLOWED_POLICIES = new Set(["same-origin", "same-site", "cross-origin"])
+function getHeaderValueFromOptions({ policy = "same-origin" }) {
+	if (ALLOWED_POLICIES.has(policy)) {
+		return policy
+	} else {
+		throw new Error(`Cross-Origin-Resource-Policy does not support the ${JSON.stringify(policy)} policy`)
+	}
+}
+function crossOriginResourcePolicy(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function crossOriginResourcePolicyMiddleware(_req, res, next) {
+		res.setHeader("Cross-Origin-Resource-Policy", headerValue)
+		next()
+	}
+}
+module.exports = crossOriginResourcePolicy
+exports.default = crossOriginResourcePolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/expect-ct/index.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/expect-ct/index.js ***!
+  \*****************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function parseMaxAge(value = 0) {
+	if (value >= 0 && Number.isFinite(value)) {
+		return Math.floor(value)
+	} else {
+		throw new Error(`Expect-CT: ${JSON.stringify(value)} is not a valid value for maxAge. Please choose a positive integer.`)
+	}
+}
+function getHeaderValueFromOptions(options) {
+	const directives = [`max-age=${parseMaxAge(options.maxAge)}`]
+	if (options.enforce) {
+		directives.push("enforce")
+	}
+	if (options.reportUri) {
+		directives.push(`report-uri="${options.reportUri}"`)
+	}
+	return directives.join(", ")
+}
+function expectCt(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function expectCtMiddleware(_req, res, next) {
+		res.setHeader("Expect-CT", headerValue)
+		next()
+	}
+}
+module.exports = expectCt
+exports.default = expectCt
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/origin-agent-cluster/index.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/origin-agent-cluster/index.js ***!
+  \****************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function originAgentCluster() {
+	return function originAgentClusterMiddleware(_req, res, next) {
+		res.setHeader("Origin-Agent-Cluster", "?1")
+		next()
+	}
+}
+module.exports = originAgentCluster
+exports.default = originAgentCluster
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/referrer-policy/index.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/referrer-policy/index.js ***!
+  \***********************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const ALLOWED_TOKENS = new Set(["no-referrer", "no-referrer-when-downgrade", "same-origin", "origin", "strict-origin", "origin-when-cross-origin", "strict-origin-when-cross-origin", "unsafe-url", ""])
+function getHeaderValueFromOptions({ policy = ["no-referrer"] }) {
+	const tokens = typeof policy === "string" ? [policy] : policy
+	if (tokens.length === 0) {
+		throw new Error("Referrer-Policy received no policy tokens")
+	}
+	const tokensSeen = new Set()
+	tokens.forEach(token => {
+		if (!ALLOWED_TOKENS.has(token)) {
+			throw new Error(`Referrer-Policy received an unexpected policy token ${JSON.stringify(token)}`)
+		} else if (tokensSeen.has(token)) {
+			throw new Error(`Referrer-Policy received a duplicate policy token ${JSON.stringify(token)}`)
+		}
+		tokensSeen.add(token)
+	})
+	return tokens.join(",")
+}
+function referrerPolicy(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function referrerPolicyMiddleware(_req, res, next) {
+		res.setHeader("Referrer-Policy", headerValue)
+		next()
+	}
+}
+module.exports = referrerPolicy
+exports.default = referrerPolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/strict-transport-security/index.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/strict-transport-security/index.js ***!
+  \*********************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const DEFAULT_MAX_AGE = 180 * 24 * 60 * 60
+function parseMaxAge(value = DEFAULT_MAX_AGE) {
+	if (value >= 0 && Number.isFinite(value)) {
+		return Math.floor(value)
+	} else {
+		throw new Error(`Strict-Transport-Security: ${JSON.stringify(value)} is not a valid value for maxAge. Please choose a positive integer.`)
+	}
+}
+function getHeaderValueFromOptions(options) {
+	if ("maxage" in options) {
+		throw new Error("Strict-Transport-Security received an unsupported property, `maxage`. Did you mean to pass `maxAge`?")
+	}
+	if ("includeSubdomains" in options) {
+		console.warn('Strict-Transport-Security middleware should use `includeSubDomains` instead of `includeSubdomains`. (The correct one has an uppercase "D".)')
+	}
+	if ("setIf" in options) {
+		console.warn("Strict-Transport-Security middleware no longer supports the `setIf` parameter. See the documentation and <https://github.com/helmetjs/helmet/wiki/Conditionally-using-middleware> if you need help replicating this behavior.")
+	}
+	const directives = [`max-age=${parseMaxAge(options.maxAge)}`]
+	if (options.includeSubDomains === undefined || options.includeSubDomains) {
+		directives.push("includeSubDomains")
+	}
+	if (options.preload) {
+		directives.push("preload")
+	}
+	return directives.join("; ")
+}
+function strictTransportSecurity(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function strictTransportSecurityMiddleware(_req, res, next) {
+		res.setHeader("Strict-Transport-Security", headerValue)
+		next()
+	}
+}
+module.exports = strictTransportSecurity
+exports.default = strictTransportSecurity
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-content-type-options/index.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-content-type-options/index.js ***!
+  \******************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xContentTypeOptions() {
+	return function xContentTypeOptionsMiddleware(_req, res, next) {
+		res.setHeader("X-Content-Type-Options", "nosniff")
+		next()
+	}
+}
+module.exports = xContentTypeOptions
+exports.default = xContentTypeOptions
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-dns-prefetch-control/index.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-dns-prefetch-control/index.js ***!
+  \******************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xDnsPrefetchControl(options = {}) {
+	const headerValue = options.allow ? "on" : "off"
+	return function xDnsPrefetchControlMiddleware(_req, res, next) {
+		res.setHeader("X-DNS-Prefetch-Control", headerValue)
+		next()
+	}
+}
+module.exports = xDnsPrefetchControl
+exports.default = xDnsPrefetchControl
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-download-options/index.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-download-options/index.js ***!
+  \**************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xDownloadOptions() {
+	return function xDownloadOptionsMiddleware(_req, res, next) {
+		res.setHeader("X-Download-Options", "noopen")
+		next()
+	}
+}
+module.exports = xDownloadOptions
+exports.default = xDownloadOptions
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-frame-options/index.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-frame-options/index.js ***!
+  \***********************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function getHeaderValueFromOptions({ action = "SAMEORIGIN" }) {
+	const normalizedAction = typeof action === "string" ? action.toUpperCase() : action
+	switch (normalizedAction) {
+		case "SAME-ORIGIN":
+			return "SAMEORIGIN"
+		case "DENY":
+		case "SAMEORIGIN":
+			return normalizedAction
+		case "ALLOW-FROM":
+			throw new Error("X-Frame-Options no longer supports `ALLOW-FROM` due to poor browser support. See <https://github.com/helmetjs/helmet/wiki/How-to-use-X%E2%80%93Frame%E2%80%93Options's-%60ALLOW%E2%80%93FROM%60-directive> for more info.")
+		default:
+			throw new Error(`X-Frame-Options received an invalid action ${JSON.stringify(action)}`)
+	}
+}
+function xFrameOptions(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function xFrameOptionsMiddleware(_req, res, next) {
+		res.setHeader("X-Frame-Options", headerValue)
+		next()
+	}
+}
+module.exports = xFrameOptions
+exports.default = xFrameOptions
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-permitted-cross-domain-policies/index.js":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-permitted-cross-domain-policies/index.js ***!
+  \*****************************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const ALLOWED_PERMITTED_POLICIES = new Set(["none", "master-only", "by-content-type", "all"])
+function getHeaderValueFromOptions({ permittedPolicies = "none" }) {
+	if (ALLOWED_PERMITTED_POLICIES.has(permittedPolicies)) {
+		return permittedPolicies
+	} else {
+		throw new Error(`X-Permitted-Cross-Domain-Policies does not support ${JSON.stringify(permittedPolicies)}`)
+	}
+}
+function xPermittedCrossDomainPolicies(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function xPermittedCrossDomainPoliciesMiddleware(_req, res, next) {
+		res.setHeader("X-Permitted-Cross-Domain-Policies", headerValue)
+		next()
+	}
+}
+module.exports = xPermittedCrossDomainPolicies
+exports.default = xPermittedCrossDomainPolicies
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-powered-by/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-powered-by/index.js ***!
+  \********************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xPoweredBy() {
+	return function xPoweredByMiddleware(_req, res, next) {
+		res.removeHeader("X-Powered-By")
+		next()
+	}
+}
+module.exports = xPoweredBy
+exports.default = xPoweredBy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-xss-protection/index.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-xss-protection/index.js ***!
+  \************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xXssProtection() {
+	return function xXssProtectionMiddleware(_req, res, next) {
+		res.setHeader("X-XSS-Protection", "0")
+		next()
+	}
+}
+module.exports = xXssProtection
+exports.default = xXssProtection
+
 
 /***/ }),
 
