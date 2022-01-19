@@ -173,10 +173,7 @@ class SingleSong extends React.Component {
 
 
     componentDidUpdate(prevProps, prevState) {
-        
-        if(prevState.key.val === this.state.key.val) {
-            console.log("i worked")
-        }
+    
 
         if(prevProps.song !== this.props.song) {
 

@@ -1,3 +1,4 @@
+import { crossOriginEmbedderPolicy } from "helmet";
 import React from "react";
 import { connect } from "react-redux";
 import { fetchSingleSong } from "../store/singleSong";
@@ -56,7 +57,20 @@ class EditSong extends React.Component {
         this.newSection = this.newSection.bind(this);
         this.mapper = this.mapper.bind(this);
         this.handleOrder = this.handleOrder.bind(this);
+        this.removeSection = this.removeSection.bind(this);
 
+    };
+
+    removeSection(event) {
+        event.preventDefault();
+
+        const { keyArray } = this.state;
+
+        this.setState({
+            keyArray: keyArray.filter((section) => (
+                section !== event.target.name
+            ))
+        });
     };
 
     handleChange(event) {
@@ -103,10 +117,10 @@ class EditSong extends React.Component {
         event.preventDefault();
 
 
-        const { songName, key, sections } = this.state;
+        const { songName, key, sections, keyArray } = this.state;
 
 
-        const keyArray = Object.keys(sections);
+        //const keyArray = Object.keys(sections);
 
         let uniformChords = {};
 
@@ -117,7 +131,6 @@ class EditSong extends React.Component {
                 if(chord.type) {
 
                     if(index < sections[section].chords.length - 1) {
-                        console.log("worked")
                         chord.type += ","
                     };
 
@@ -171,7 +184,9 @@ class EditSong extends React.Component {
 
         
         keyArray.map((section) => {
+            
             return sectionsHash[section] = { name: section, chords: this.newSection(uniformChords[section].note) };
+           
         });
 
 
@@ -186,8 +201,6 @@ class EditSong extends React.Component {
             key: this.newSection(key)[0],
             sections: sectionsHash
         };
-        
-        console.log(newSong)
         this.props.editSong(newSong);
         this.props.history.push("/songs");
     };
@@ -213,7 +226,6 @@ class EditSong extends React.Component {
                 let newChord = chordFirst + chordEnding;
 
                 if(newChord.includes("b") || newChord.includes("#")) {
-                    console.log("is sharp or flat")
 
                     let type = newChord.includes("b") ? 
                     newChord.slice(newChord.indexOf("b") + 1) :
@@ -233,11 +245,9 @@ class EditSong extends React.Component {
                     
                     type.length > 0 ? createChord.type = type : createChord.type = null;
                     
-                    console.log(createChord)
                     return createChord;
 
                 } else {
-                    console.log("is NOT sharp or flat")
 
                     let type = newChord.slice(1);
                     newChord = newChord.slice(0,1);
@@ -254,7 +264,6 @@ class EditSong extends React.Component {
                     
                     type.length > 0 ? createChord.type = type : createChord.type = null;
                     
-                    console.log(createChord)
                     return createChord;
                 }
             }
@@ -304,9 +313,9 @@ class EditSong extends React.Component {
                 
                 this.setState({
                     keyArray: keyArray
-                })
-            }
-        }
+                });
+            };
+        };
     };
 
     componentDidMount() {
@@ -326,7 +335,8 @@ class EditSong extends React.Component {
                 key: key.type ? key.note + key.type.toLowerCase() : key.note,
                 sections: sections,
                 keyArray: Object.keys(sections)
-            })
+            });
+            
         };
 
     };
@@ -371,6 +381,7 @@ class EditSong extends React.Component {
 
                             <button onClick={(event) => this.handleOrder("up", event)} name={`${sections[section].name}`}>^</button>
                             <button onClick={(event) => this.handleOrder("down", event)} name={`${sections[section].name}`}>v</button>
+                            <button onClick={(event) => this.removeSection(event)} name={`${sections[section].name}`}>delete</button>
                             </h4>
 
                             <input
