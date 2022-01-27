@@ -21,7 +21,7 @@ class AddSong extends React.Component {
             "F#":{val: 10, note:"F#", type: ""},
             "G":{val: 11, note:"G", type: ""},
             "G#":{val: 12, note:"G#", type: ""}},
-                
+
             songName: "",
             key: "",
             intro: "",
@@ -70,7 +70,7 @@ class AddSong extends React.Component {
         const spaceless = section.replace(/\s/g, '');
         const split = spaceless.split(",");
 
-        
+
         return split.map((chord) => {
 
 
@@ -88,9 +88,9 @@ class AddSong extends React.Component {
                     note: notes[chord].note,
                     type: type
                 };
-                
+
                 type.length > 0 ? newChord.type = type : newChord.type = null;
-                
+
                 return newChord;
 
             } else if (chord.length) {
@@ -117,7 +117,7 @@ class AddSong extends React.Component {
     render() {
         const { name, key, intro, verse, preChorus, chorus, bridge } = this.state;
         return (
-            <div>Add a Song
+            <div>
                 <form onSubmit={this.handleSubmit}>
                     <h4>Name:</h4>
 

@@ -1,8 +1,18 @@
+body {
+    background-color: darkblue;
+}
+
 nav a {
+    color:#FFFCE4;
     display: inline-block;
     margin: 1em;
 }
 
 h2 {
+    color:#FFFCE4;
     text-align: center;
+}
+
+h4 {
+    color:#FFFCE4;
 }
