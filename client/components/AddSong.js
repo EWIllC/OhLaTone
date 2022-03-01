@@ -27,7 +27,7 @@ class AddSong extends React.Component {
                 "G#": {val: 12, note:"G#", type: null},
                 "Ab": {val: 12, note:"Ab", type: null}
             },
-                
+
             songName: "",
             key: "",
             addSection: { name: "", chords: "" },
@@ -47,7 +47,7 @@ class AddSong extends React.Component {
         const { sections } = this.state
 
         if(event.target.name === "songName") {
-            
+
             this.setState({
                 [event.target.name]: event.target.value
             });
@@ -68,7 +68,7 @@ class AddSong extends React.Component {
         };
 
         if(this.state.sections[event.target.name]) {
-            
+
             this.setState({
                 sections: {...sections,
                     [event.target.name]: {
@@ -93,14 +93,14 @@ class AddSong extends React.Component {
             alert("song needs a valid key");
         };
 
-        
-        
+
+
         const sectionsHash = {};
-        
+
         Object.keys(sections).map((section) => {
-           
+
                 return sectionsHash[section] = { name: `${sections[section].name}`, chords: this.newSection(sections[section]) }}
-                
+
         );
 
         const newSong = {
@@ -109,7 +109,7 @@ class AddSong extends React.Component {
             sections: sectionsHash
         };
 
-        
+
         this.props.addSong(newSong);
         this.props.history.push("/songs");
     };
@@ -118,7 +118,7 @@ class AddSong extends React.Component {
         event.preventDefault();
 
         const secName = event.target.name !== "" ?
-        event.target.name : 
+        event.target.name :
         this.state.addSection.name;
 
         const { sections, addSection} = this.state;
@@ -134,7 +134,7 @@ class AddSong extends React.Component {
     };
 
     // fromats the text into the standard data type for a song section
-    // removes spaces, formats to an array, 
+    // removes spaces, formats to an array,
     // decernes weather or not a note is sharp so it may set the type accodingly
     newSection(section) {
 
@@ -144,9 +144,9 @@ class AddSong extends React.Component {
 
         const split = spaceless.split(",");
 
-        
+
         return split.map((chord) => {
-            
+
             if(chord.length) {
 
                 let chordEnding = chord.slice(1);
@@ -156,7 +156,7 @@ class AddSong extends React.Component {
                 if(newChord.includes("b") || newChord.includes("#")) {
                     console.log("is sharp or flat")
 
-                    let type = newChord.includes("b") ? 
+                    let type = newChord.includes("b") ?
                     newChord.slice(newChord.indexOf("b") + 1) :
                     newChord.slice(newChord.indexOf("#") + 1);
 
@@ -171,9 +171,9 @@ class AddSong extends React.Component {
                         note: notes[newChord].note,
                         type: type
                     };
-                    
+
                     type.length > 0 ? createChord.type = type : createChord.type = null;
-                    
+
                     console.log(createChord)
                     return createChord;
 
@@ -192,9 +192,9 @@ class AddSong extends React.Component {
                         note: notes[newChord].note,
                         type: type
                     };
-                    
+
                     type.length > 0 ? createChord.type = type : createChord.type = null;
-                    
+
                     console.log(createChord)
                     return createChord;
                 }
@@ -206,7 +206,7 @@ class AddSong extends React.Component {
     render() {
         const { name, key, sections, addSection } = this.state;
         return (
-            <div>Add a Song
+            <div id="description">Add a Song
 
                 <form onSubmit={this.handleAddSectionSubmit}>
                     <h3>Add a Section?</h3>
