@@ -1,8 +1,44 @@
+body {
+    background-color: rgb(49, 49, 49)
+}
+
 nav a {
+    color:#FFFCE4;
     display: inline-block;
     margin: 1em;
 }
 
 h2 {
-    text-align: center;
+    color:#FFFCE4;
+
+}
+
+h3 {
+    color:#FFFCE4;
+
+}
+
+h4 {
+    font-size: 21px;
+    color:#FFFCE4;
+    text-decoration: underline;
+
+
+}
+
+p {
+    color:#FFFCE4;
+}
+
+option {
+    color:#FFFCE4;
+}
+
+#description {
+    color:#FFFCE4;
+}
+
+#songsList {
+    margin-top: 30px;
+
 }

@@ -9,7 +9,7 @@ class SingleSong extends React.Component {
         super();
 
         this.state = {
-        
+
             notes: {
                 "A": {val: 1, note:"A", type: null},
                 "A#": {val: 2, note:"A#", type: null},
@@ -29,7 +29,7 @@ class SingleSong extends React.Component {
                 "G#": {val: 12, note:"G#", type: null},
                 "Ab": {val: 12, note:"Ab", type: null}
             },
-        
+
             key: {},
             sections: {},
             keyArray: [],
@@ -47,7 +47,7 @@ class SingleSong extends React.Component {
 
 
     handleChange(event) {
-        
+
         const { key, notes, sections} = this.state;
 
         const newKey = notes[event.target.value];
@@ -59,39 +59,39 @@ class SingleSong extends React.Component {
         if(key.type) {
             newKey.type = key.type;
         };
-        
+
         let newSections = {};
 
         Object.keys(sections).map((section) => {
 
             const newChords = [];
-            
+
             sections[section].chords.map((chord, index) => {
 
-                
-        
+
+
                 let chordValue = this.chordValueMachine(steps, chord, newKey.val, key.val) + 1;
-               
+
                 const newChord = [];
-                
+
                 return Object.keys(notes).map((note) => {
                     if(chordValue === notes[note].val) {
-                        
+
                         const typeAssigned = this.typeAssign(notes[note],chord);
-                        
+
                         newChord.push(typeAssigned);
 
                         if(newChord.length < 2) {
-                            
+
                             newChords.push(newChord[0]);
                         }
                         if(index === sections[section].chords.length - 1) {
-                        
+
                             newSections[section] = {name: section, chords: newChords};
                         }
                     }
                 })
-                
+
             })
     });
 
@@ -108,27 +108,27 @@ class SingleSong extends React.Component {
         this.props.history.push("/songs");
     };
 
-    
+
     chordValueMachine(steps, chord, newKeyValue, oldKeyValue) {
 
         let chordValue = chord.val;
-        
+
         if(newKeyValue > oldKeyValue) {
-            
+
             if(steps + chordValue > 12) {
-                
+
                 return chordValue + steps - 13;
-                
+
             } else {
-                
+
                 return chordValue + steps - 1;
             };
         };
 
         if(newKeyValue < oldKeyValue) {
-            
+
             if(chordValue - steps < 1) {
-                
+
                 return chordValue - steps + 11;
 
             } else {
@@ -146,7 +146,7 @@ class SingleSong extends React.Component {
             note: notesChord.note,
             type: null,
         };
-        
+
         if(oldChord.type) {
 
             newChord.type = oldChord.type;
@@ -173,7 +173,7 @@ class SingleSong extends React.Component {
 
 
     componentDidUpdate(prevProps, prevState) {
-    
+
 
         if(prevProps.song !== this.props.song) {
 
@@ -203,9 +203,9 @@ class SingleSong extends React.Component {
         return (
             <div key={id}>
                 <h2>{name}</h2>
-                
+
                 <h3>Key of {key.type ?
-                key.note + key.type.toLowerCase() : 
+                key.note + key.type.toLowerCase() :
                 key.note
                 }
                 </h3>
@@ -215,15 +215,17 @@ class SingleSong extends React.Component {
 
                     {notesArray.map((chord, index) => {
                         if(key.note) {
-                            
+
                             if(!key.note.includes("b")) {
-                
+
                                 if(!chord.includes("b")) {
 
                                     return (
-                                        minorOr ? 
+                                        minorOr ?
                                         <option value={chord} key={index}>{chord}m</option> :
                                         <option value={chord} key={index}>{chord}</option>
+
+
                                     )
                                 }
 
@@ -232,44 +234,45 @@ class SingleSong extends React.Component {
                                 if(!chord.includes("#")) {
 
                                     return (
-                                        minorOr ? 
+                                        minorOr ?
                                         <option value={chord} key={index}>{chord}m</option> :
                                         <option value={chord} key={index}>{chord}</option>
-    
+
+
                                     )
                                 }
                             }
                         } else {
                             console.log(key.note)
                         }
-                        
+
                     })}
                 </select>
                 {keyArray.map((section) => {
-                    
-                    
+
+
                     return (
-                        
-                        <div key={sections[section].name}>
-            
+
+                        <div style={{color:"#FFFCE4"}} key={sections[section].name}>
+
                             <h4>{sections[section].name}</h4>
                             {sections[section].chords.map((chord) => (
 
                                 chord.type ?
-                                chord.note + chord.type.toLowerCase() + ", " : 
+                                chord.note + chord.type.toLowerCase() + ", " :
                                 chord.note + ", "
                             ))}
-                            
+
                         </div>
-                        
+
                     )
                 })}
-                
+
                 <p>
                 <button onClick={this.handleEditRedirect}>Edit</button>
                 <button onClick={this.handleDelete}>Delete</button>
                 </p>
-        
+
             </div>
 
         )

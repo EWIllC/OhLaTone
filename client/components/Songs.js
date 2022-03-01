@@ -6,7 +6,7 @@ import { fetchSongs } from "../store/songs";
 class Songs extends React.Component {
     constructor() {
         super();
-        
+
         this.state = {
             songs: []
         };
@@ -30,11 +30,11 @@ class Songs extends React.Component {
 
         return (
             <div>
-                <div>This is the Songs</div>
+                <div id="description">Your Songs</div>
                 {songs.map((song) => {
                     return (
-                        <div key={song.id}>
-                        <Link to={`/songs/${song.id}`}>{song.name}</Link>
+                        <div id="songsList" key={song.id}>
+                        <Link style={{color:"#FFFCE4"}} to={`/songs/${song.id}`}>{song.name}</Link>
                     </div>
                     );
                 })}
