@@ -1,190 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _defineProperty)
-/* harmony export */ });
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _extends)
-/* harmony export */ });
-function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _inheritsLoose)
-/* harmony export */ });
-/* harmony import */ var _setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setPrototypeOf.js */ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js");
-
-function _inheritsLoose(subClass, superClass) {
-  subClass.prototype = Object.create(superClass.prototype);
-  subClass.prototype.constructor = subClass;
-  (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__.default)(subClass, superClass);
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _objectSpread2)
-/* harmony export */ });
-/* harmony import */ var _defineProperty_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./defineProperty.js */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        (0,_defineProperty_js__WEBPACK_IMPORTED_MODULE_0__.default)(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _objectWithoutPropertiesLoose)
-/* harmony export */ });
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ _setPrototypeOf)
-/* harmony export */ });
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -447,7 +263,7 @@ axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_m
 module.exports = axios;
 
 // Allow use of default import syntax in TypeScript
-module.exports.default = axios;
+module.exports["default"] = axios;
 
 
 /***/ }),
@@ -2041,7 +1857,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Routes__WEBPACK_IMPORTED_MODULE_1__.default, null));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Routes__WEBPACK_IMPORTED_MODULE_1__["default"], null));
   }
 
 }
@@ -2082,25 +1898,25 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   render() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/home",
-      component: _components_Home__WEBPACK_IMPORTED_MODULE_1__.default
+      component: _components_Home__WEBPACK_IMPORTED_MODULE_1__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       exact: true,
       path: "/songs",
-      component: _components_Songs__WEBPACK_IMPORTED_MODULE_2__.default
+      component: _components_Songs__WEBPACK_IMPORTED_MODULE_2__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       exact: true,
       path: "/songs/:songId",
-      component: _components_SingleSong__WEBPACK_IMPORTED_MODULE_3__.default
+      component: _components_SingleSong__WEBPACK_IMPORTED_MODULE_3__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/addSong",
-      component: _components_AddSong__WEBPACK_IMPORTED_MODULE_4__.default
+      component: _components_AddSong__WEBPACK_IMPORTED_MODULE_4__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       exact: true,
       path: "/songs/:songId/editSong",
-      component: _components_EditSong__WEBPACK_IMPORTED_MODULE_5__.default
+      component: _components_EditSong__WEBPACK_IMPORTED_MODULE_5__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/contact",
-      component: _components_Contact__WEBPACK_IMPORTED_MODULE_6__.default
+      component: _components_Contact__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Redirect, {
       to: "/home"
     }));
@@ -2139,81 +1955,147 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         "A": {
           val: 1,
           note: "A",
-          type: ""
+          type: null
         },
         "A#": {
           val: 2,
           note: "A#",
-          type: ""
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
         },
         "B": {
           val: 3,
           note: "B",
-          type: ""
+          type: null
         },
         "C": {
           val: 4,
           note: "C",
-          type: ""
+          type: null
         },
         "C#": {
           val: 5,
           note: "C#",
-          type: ""
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
         },
         "D": {
           val: 6,
           note: "D",
-          type: ""
+          type: null
         },
         "D#": {
           val: 7,
           note: "D#",
-          type: ""
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
         },
         "E": {
           val: 8,
           note: "E",
-          type: ""
+          type: null
         },
         "F": {
           val: 9,
           note: "F",
-          type: ""
+          type: null
         },
         "F#": {
           val: 10,
           note: "F#",
-          type: ""
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
         },
         "G": {
           val: 11,
           note: "G",
-          type: ""
+          type: null
         },
         "G#": {
           val: 12,
           note: "G#",
-          type: ""
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
         }
       },
       songName: "",
       key: "",
-      intro: "",
-      verse: "",
-      preChorus: "",
-      chorus: "",
-      bridge: ""
+      addSection: {
+        name: "",
+        chords: ""
+      },
+      sections: {}
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.newSection = this.newSection.bind(this);
+    this.handleAddSectionSubmit = this.handleAddSectionSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    const {
+      sections
+    } = this.state;
+
+    if (event.target.name === "songName") {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+
+    ;
+
+    if (event.target.name === "key") {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+
+    ;
+
+    if (event.target.name === "addSection") {
+      this.setState({
+        [event.target.name]: {
+          name: event.target.value,
+          chords: this.state[event.target.name].chords
+        }
+      });
+    }
+
+    ;
+
+    if (this.state.sections[event.target.name]) {
+      this.setState({
+        sections: { ...sections,
+          [event.target.name]: {
+            name: event.target.name,
+            chords: event.target.value
+          }
+        }
+      });
+    }
+
+    ;
   }
 
   handleSubmit(event) {
@@ -2221,70 +2103,106 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       songName,
       key,
-      intro,
-      verse,
-      preChorus,
-      chorus,
-      bridge
+      sections
     } = this.state;
+    let keyEnding = key.slice(1);
+    let keyFirst = key[0].toUpperCase();
+    let newKey = keyFirst + keyEnding;
 
-    if (!this.state.notes[key[0]]) {
+    if (!this.state.notes[newKey[0]]) {
       alert("song needs a valid key");
     }
 
     ;
+    const sectionsHash = {};
+    Object.keys(sections).map(section => {
+      return sectionsHash[section] = {
+        name: `${sections[section].name}`,
+        chords: this.newSection(sections[section])
+      };
+    });
     const newSong = {
       name: songName,
-      key: this.newSection(key.toUpperCase())[0],
-      intro: this.newSection(intro.toUpperCase()),
-      verse: this.newSection(verse.toUpperCase()),
-      preChorus: this.newSection(preChorus.toUpperCase()),
-      chorus: this.newSection(chorus.toUpperCase()),
-      bridge: this.newSection(bridge.toUpperCase())
+      key: this.newSection(key)[0],
+      sections: sectionsHash
     };
     this.props.addSong(newSong);
     this.props.history.push("/songs");
   }
 
+  handleAddSectionSubmit(event) {
+    event.preventDefault();
+    const secName = event.target.name !== "" ? event.target.name : this.state.addSection.name;
+    const {
+      sections,
+      addSection
+    } = this.state;
+    this.setState({
+      addSection: {
+        name: "",
+        chords: ""
+      },
+      sections: { ...sections,
+        [secName]: {
+          name: secName,
+          chords: addSection.chords
+        }
+      }
+    });
+  }
+
+  // fromats the text into the standard data type for a song section
+  // removes spaces, formats to an array,
+  // decernes weather or not a note is sharp so it may set the type accodingly
   newSection(section) {
     const {
       notes
     } = this.state;
-    const spaceless = section.replace(/\s/g, '');
+    const spaceless = section.chords ? section.chords.replace(/\s/g, '') : section;
     const split = spaceless.split(",");
     return split.map(chord => {
-      if (!chord.includes("#") && chord.length) {
-        let type = chord.slice(1);
-        chord = chord.slice(0, 1);
+      if (chord.length) {
+        let chordEnding = chord.slice(1);
+        let chordFirst = chord[0].toUpperCase();
+        let newChord = chordFirst + chordEnding;
 
-        if (!notes[chord]) {
-          alert("not a valid chord");
+        if (newChord.includes("b") || newChord.includes("#")) {
+          console.log("is sharp or flat");
+          let type = newChord.includes("b") ? newChord.slice(newChord.indexOf("b") + 1) : newChord.slice(newChord.indexOf("#") + 1);
+          newChord = newChord.slice(0, 2);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          console.log(createChord);
+          return createChord;
+        } else {
+          console.log("is NOT sharp or flat");
+          let type = newChord.slice(1);
+          newChord = newChord.slice(0, 1);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          console.log(createChord);
+          return createChord;
         }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
-      } else if (chord.length) {
-        let type = chord.slice(chord.indexOf("#") + 1);
-        chord = chord.slice(0, 2);
-
-        if (!notes[chord]) {
-          alert("not a valid chord");
-        }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
       }
     });
   }
@@ -2293,13 +2211,31 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       name,
       key,
-      intro,
-      verse,
-      preChorus,
-      chorus,
-      bridge
+      sections,
+      addSection
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Add a Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      id: "description"
+    }, "Add a Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      onSubmit: this.handleAddSectionSubmit
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add a Section?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "addSection",
+      value: addSection.name,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      type: "submit"
+    }, "Submit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      onClick: event => this.handleAddSectionSubmit(event),
+      name: "Verse"
+    }, "Verse"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      onClick: event => this.handleAddSectionSubmit(event),
+      name: "Chorus"
+    }, "Chorus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      onClick: event => this.handleAddSectionSubmit(event),
+      name: "Bridge"
+    }, "Bridge"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
       onSubmit: this.handleSubmit
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       className: "songForm",
@@ -2313,36 +2249,16 @@ class AddSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       name: "key",
       value: key,
       onChange: this.handleChange
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-      className: "songForm",
-      type: "text",
-      name: "intro",
-      value: intro,
-      onChange: this.handleChange
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-      className: "songForm",
-      type: "text",
-      name: "verse",
-      value: verse,
-      onChange: this.handleChange
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Pre-Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-      className: "songForm",
-      type: "text",
-      name: "preChorus",
-      value: preChorus,
-      onChange: this.handleChange
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-      className: "songForm",
-      type: "text",
-      name: "chorus",
-      value: chorus,
-      onChange: this.handleChange
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-      className: "songForm",
-      type: "text",
-      name: "bridge",
-      value: bridge,
-      onChange: this.handleChange
+    }), Object.keys(sections).map(section => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        key: sections[section].name
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "songForm",
+        type: "text",
+        name: sections[section].name,
+        value: sections[section].chords,
+        onChange: this.handleChange
+      }));
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "submit"
     }, "Submit"))));
@@ -2398,99 +2314,190 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
-/* harmony import */ var _store_songs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/songs */ "./client/store/songs.js");
+/* harmony import */ var helmet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! helmet */ "./node_modules/helmet/dist/index.js");
+/* harmony import */ var helmet__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(helmet__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_singleSong__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/singleSong */ "./client/store/singleSong.js");
+/* harmony import */ var _store_songs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/songs */ "./client/store/songs.js");
 
 
 
 
 
-class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+
+class EditSong extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
   constructor() {
     super();
     this.state = {
+      // notes: {
+      // "A":{val: 1, note:"A", type: ""},
+      // "A#":{val: 2, note:"A#", type: ""},
+      // "B":{val: 3, note:"B", type: ""},
+      // "C":{val: 4, note:"C", type: ""},
+      // "C#":{val: 5, note:"C#", type: ""},
+      // "D":{val: 6, note:"D", type: ""},
+      // "D#":{val: 7, note:"D#", type: ""},
+      // "E":{val: 8, note:"E", type: ""},
+      // "F":{val: 9, note:"F", type: ""},
+      // "F#":{val: 10, note:"F#", type: ""},
+      // "G":{val: 11, note:"G", type: ""},
+      // "G#":{val: 12, note:"G#", type: ""}
+      // },
       notes: {
         "A": {
           val: 1,
           note: "A",
-          type: ""
+          type: null
         },
         "A#": {
           val: 2,
           note: "A#",
-          type: ""
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
         },
         "B": {
           val: 3,
           note: "B",
-          type: ""
+          type: null
         },
         "C": {
           val: 4,
           note: "C",
-          type: ""
+          type: null
         },
         "C#": {
           val: 5,
           note: "C#",
-          type: ""
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
         },
         "D": {
           val: 6,
           note: "D",
-          type: ""
+          type: null
         },
         "D#": {
           val: 7,
           note: "D#",
-          type: ""
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
         },
         "E": {
           val: 8,
           note: "E",
-          type: ""
+          type: null
         },
         "F": {
           val: 9,
           note: "F",
-          type: ""
+          type: null
         },
         "F#": {
           val: 10,
           note: "F#",
-          type: ""
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
         },
         "G": {
           val: 11,
           note: "G",
-          type: ""
+          type: null
         },
         "G#": {
           val: 12,
           note: "G#",
-          type: ""
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
         }
       },
       songName: "",
       key: "",
-      intro: "",
-      verse: "",
-      preChorus: "",
-      chorus: "",
-      bridge: ""
+      sections: {},
+      keyArray: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.newSection = this.newSection.bind(this);
     this.mapper = this.mapper.bind(this);
+    this.handleOrder = this.handleOrder.bind(this);
+    this.removeSection = this.removeSection.bind(this);
+  }
+
+  removeSection(event) {
+    event.preventDefault();
+    const {
+      keyArray
+    } = this.state;
+    this.setState({
+      keyArray: keyArray.filter(section => section !== event.target.name)
+    });
   }
 
   handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    const {
+      sections
+    } = this.state;
+
+    if (event.target.name === "songName") {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+
+    ;
+
+    if (event.target.name === "key") {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+
+    ;
+
+    if (event.target.name === "addSection") {
+      this.setState({
+        [event.target.name]: {
+          name: event.target.value,
+          chords: this.state[event.target.name].chords
+        }
+      });
+    }
+
+    ;
+
+    if (this.state.sections[event.target.name]) {
+      let chord = {};
+      chord.note = event.target.value;
+      this.setState({
+        sections: { ...sections,
+          [event.target.name]: {
+            name: event.target.name,
+            chords: [chord]
+          }
+        }
+      });
+    }
   }
 
   handleSubmit(event) {
@@ -2498,12 +2505,75 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       songName,
       key,
-      intro,
-      verse,
-      preChorus,
-      chorus,
-      bridge
-    } = this.state;
+      sections,
+      keyArray
+    } = this.state; //const keyArray = Object.keys(sections);
+
+    let uniformChords = {};
+    keyArray.map(section => sections[section].chords.map((chord, index) => {
+      if (chord.type) {
+        if (index < sections[section].chords.length - 1) {
+          chord.type += ",";
+        }
+
+        ;
+
+        if (uniformChords[section]) {
+          if (uniformChords[section].note) {
+            uniformChords[section].note += chord.note + chord.type;
+          } else {
+            uniformChords[section] = {
+              note: chord.note + chord.type
+            };
+          }
+
+          ;
+        } else {
+          uniformChords[section] = {
+            note: chord.note + chord.type
+          };
+        }
+
+        ;
+      }
+
+      ;
+
+      if (!chord.type) {
+        if (index < sections[section].chords.length - 1) {
+          chord.note += ",";
+        }
+
+        ;
+
+        if (uniformChords[section]) {
+          if (uniformChords[section].note) {
+            uniformChords[section].note += chord.note;
+          } else {
+            uniformChords[section] = {
+              note: chord.note
+            };
+          }
+
+          ;
+        } else {
+          uniformChords[section] = {
+            note: chord.note
+          };
+        }
+
+        ;
+      }
+
+      ;
+    })).join();
+    const sectionsHash = {};
+    keyArray.map(section => {
+      return sectionsHash[section] = {
+        name: section,
+        chords: this.newSection(uniformChords[section].note)
+      };
+    });
 
     if (!this.state.notes[key[0]]) {
       alert("song needs a valid key");
@@ -2513,12 +2583,8 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const newSong = {
       id: this.props.song.id,
       name: songName,
-      key: this.newSection(key.toUpperCase())[0],
-      intro: this.newSection(intro.toUpperCase()),
-      verse: this.newSection(verse.toUpperCase()),
-      preChorus: this.newSection(preChorus.toUpperCase()),
-      chorus: this.newSection(chorus.toUpperCase()),
-      bridge: this.newSection(bridge.toUpperCase())
+      key: this.newSection(key)[0],
+      sections: sectionsHash
     };
     this.props.editSong(newSong);
     this.props.history.push("/songs");
@@ -2527,42 +2593,51 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   newSection(section) {
     const {
       notes
-    } = this.state;
+    } = this.state; // the key is just a string while the sections are stored in an object "note", in an array to make
+    // the mappping of notes consistent with initial object.
+    //section = typeof(section) === "string" ? section : section.chords[0].note;
+
     const spaceless = section.replace(/\s/g, '');
     const split = spaceless.split(",");
     return split.map(chord => {
-      if (!chord.includes("#") && chord.length) {
-        let type = chord.slice(1);
-        chord = chord.slice(0, 1);
+      if (chord.length) {
+        let chordEnding = chord.slice(1);
+        let chordFirst = chord[0].toUpperCase();
+        let newChord = chordFirst + chordEnding;
 
-        if (!notes[chord]) {
-          alert("not a valid chord");
+        if (newChord.includes("b") || newChord.includes("#")) {
+          let type = newChord.includes("b") ? newChord.slice(newChord.indexOf("b") + 1) : newChord.slice(newChord.indexOf("#") + 1);
+          newChord = newChord.slice(0, 2);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          return createChord;
+        } else {
+          let type = newChord.slice(1);
+          newChord = newChord.slice(0, 1);
+
+          if (!notes[newChord]) {
+            alert("not a valid chord");
+          }
+
+          ;
+          let createChord = {
+            val: notes[newChord].val,
+            note: notes[newChord].note,
+            type: type
+          };
+          type.length > 0 ? createChord.type = type : createChord.type = null;
+          return createChord;
         }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
-      } else if (chord.length) {
-        let type = chord.slice(chord.indexOf("#") + 1);
-        chord = chord.slice(0, 2);
-
-        if (!notes[chord]) {
-          alert("not a valid chord");
-        }
-
-        ;
-        let newChord = {
-          val: notes[chord].val,
-          note: notes[chord].note,
-          type: type
-        };
-        type.length > 0 ? newChord.type = type : newChord.type = null;
-        return newChord;
       }
     });
   }
@@ -2571,96 +2646,116 @@ class EditSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     return arr.map(chord => chord.type !== null ? chord.note + chord.type.toLowerCase() : chord.note).join(", ");
   }
 
+  handleOrder(direction, event) {
+    event.preventDefault();
+    const {
+      keyArray
+    } = this.state;
+    const currentIndex = keyArray.indexOf(event.target.name);
+    const indexToBeSwapped = direction === "down" ? currentIndex + 1 : currentIndex - 1;
+
+    if (direction === "down") {
+      if (indexToBeSwapped >= keyArray.length) {
+        console.log("error");
+      } else {
+        const swapped = keyArray[currentIndex];
+        keyArray[currentIndex] = keyArray[indexToBeSwapped];
+        keyArray[indexToBeSwapped] = swapped;
+        this.setState({
+          keyArray: keyArray
+        });
+      }
+
+      ;
+    }
+
+    ;
+
+    if (direction === "up") {
+      if (indexToBeSwapped < 0) {
+        console.log("error");
+      } else {
+        const swapped = keyArray[currentIndex];
+        keyArray[currentIndex] = keyArray[indexToBeSwapped];
+        keyArray[indexToBeSwapped] = swapped;
+        this.setState({
+          keyArray: keyArray
+        });
+      }
+
+      ;
+    }
+
+    ;
+  }
+
   componentDidMount() {
     this.props.fetchSingleSong(this.props.match.params.songId);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.song !== this.props.song) {
       let {
         name,
         key,
-        intro,
-        verse,
-        preChorus,
-        chorus,
-        bridge
+        sections
       } = this.props.song;
       this.setState({
         songName: name,
         key: key.type ? key.note + key.type.toLowerCase() : key.note,
-        intro: intro[0] !== null ? this.mapper(intro) : "",
-        verse: verse[0] !== null ? this.mapper(verse) : "",
-        preChorus: preChorus[0] !== null ? this.mapper(preChorus) : "",
-        chorus: chorus[0] !== null ? this.mapper(chorus) : "",
-        bridge: bridge[0] !== null ? this.mapper(bridge) : ""
+        sections: sections,
+        keyArray: Object.keys(sections)
       });
     }
+
+    ;
   }
 
   render() {
     const {
       songName,
       key,
-      intro,
-      verse,
-      preChorus,
-      chorus,
-      bridge
+      sections,
+      keyArray
     } = this.state;
-    return (
-      /*#__PURE__*/
-      //<p>hello world</p>
-      react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Edit Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, "Edit Song", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "songName",
+      value: songName //placeholder={songName}
+      ,
+      onChange: this.handleChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "Key:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+      className: "songForm",
+      type: "text",
+      name: "key",
+      value: key //placeholder={key.note + key.type.toLowerCase()}
+      ,
+      onChange: this.handleChange
+    }), keyArray.map(section => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        key: sections[section].name
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, sections[section].name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        onClick: event => this.handleOrder("up", event),
+        name: `${sections[section].name}`
+      }, "^"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        onClick: event => this.handleOrder("down", event),
+        name: `${sections[section].name}`
+      }, "v"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+        onClick: event => this.removeSection(event),
+        name: `${sections[section].name}`
+      }, "delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
         className: "songForm",
         type: "text",
-        name: "songName",
-        value: songName //placeholder={songName}
-        ,
+        name: sections[section].name,
+        value: sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() : chord.note),
         onChange: this.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Key:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "songForm",
-        type: "text",
-        name: "key",
-        value: key //placeholder={key.note + key.type.toLowerCase()}
-        ,
-        onChange: this.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "songForm",
-        type: "text",
-        name: "intro",
-        value: intro,
-        onChange: this.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "songForm",
-        type: "text",
-        name: "verse",
-        value: verse,
-        onChange: this.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Pre-Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "songForm",
-        type: "text",
-        name: "preChorus",
-        value: preChorus,
-        onChange: this.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "songForm",
-        type: "text",
-        name: "chorus",
-        value: chorus,
-        onChange: this.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "songForm",
-        type: "text",
-        name: "bridge",
-        value: bridge,
-        onChange: this.handleChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "submit"
-      }, "Submit"))))
-    );
+      }));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+      type: "submit"
+    }, "Submit"))));
   }
 
 }
@@ -2675,12 +2770,12 @@ const mapDispatch = (dispatch, {
   history
 }) => ({
   fetchSingleSong: songId => {
-    dispatch((0,_store_singleSong__WEBPACK_IMPORTED_MODULE_2__.fetchSingleSong)(songId));
+    dispatch((0,_store_singleSong__WEBPACK_IMPORTED_MODULE_3__.fetchSingleSong)(songId));
   },
-  editSong: song => dispatch((0,_store_songs__WEBPACK_IMPORTED_MODULE_3__.editSong)(song))
+  editSong: song => dispatch((0,_store_songs__WEBPACK_IMPORTED_MODULE_4__.editSong)(song))
 });
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(EditSong));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapState, mapDispatch)(EditSong));
 
 /***/ }),
 
@@ -2768,62 +2863,98 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      notes: [{
-        val: 1,
-        note: "A",
-        type: null
-      }, {
-        val: 2,
-        note: "A#",
-        type: null
-      }, {
-        val: 3,
-        note: "B",
-        type: null
-      }, {
-        val: 4,
-        note: "C",
-        type: null
-      }, {
-        val: 5,
-        note: "C#",
-        type: null
-      }, {
-        val: 6,
-        note: "D",
-        type: null
-      }, {
-        val: 7,
-        note: "D#",
-        type: null
-      }, {
-        val: 8,
-        note: "E",
-        type: null
-      }, {
-        val: 9,
-        note: "F",
-        type: null
-      }, {
-        val: 10,
-        note: "F#",
-        type: null
-      }, {
-        val: 11,
-        note: "G",
-        type: null
-      }, {
-        val: 12,
-        note: "G#",
-        type: null
-      }],
+      notes: {
+        "A": {
+          val: 1,
+          note: "A",
+          type: null
+        },
+        "A#": {
+          val: 2,
+          note: "A#",
+          type: null
+        },
+        "Bb": {
+          val: 2,
+          note: "Bb",
+          type: null
+        },
+        "B": {
+          val: 3,
+          note: "B",
+          type: null
+        },
+        "C": {
+          val: 4,
+          note: "C",
+          type: null
+        },
+        "C#": {
+          val: 5,
+          note: "C#",
+          type: null
+        },
+        "Db": {
+          val: 5,
+          note: "Db",
+          type: null
+        },
+        "D": {
+          val: 6,
+          note: "D",
+          type: null
+        },
+        "D#": {
+          val: 7,
+          note: "D#",
+          type: null
+        },
+        "Eb": {
+          val: 7,
+          note: "Eb",
+          type: null
+        },
+        "E": {
+          val: 8,
+          note: "E",
+          type: null
+        },
+        "F": {
+          val: 9,
+          note: "F",
+          type: null
+        },
+        "F#": {
+          val: 10,
+          note: "F#",
+          type: null
+        },
+        "Gb": {
+          val: 10,
+          note: "Gb",
+          type: null
+        },
+        "G": {
+          val: 11,
+          note: "G",
+          type: null
+        },
+        "G#": {
+          val: 12,
+          note: "G#",
+          type: null
+        },
+        "Ab": {
+          val: 12,
+          note: "Ab",
+          type: null
+        }
+      },
       key: {},
-      intro: [],
-      verse: [],
-      preChorus: [],
-      chorus: [],
-      bridge: [],
-      minorOr: false
+      sections: {},
+      keyArray: [],
+      minorOr: false,
+      keyShouldBe: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleEditRedirect = this.handleEditRedirect.bind(this);
@@ -2834,32 +2965,47 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   handleChange(event) {
     const {
-      id,
-      name,
       key,
-      intro,
-      verse,
-      chorus,
-      preChorus,
-      bridge,
-      minorOr,
-      notes
+      notes,
+      sections
     } = this.state;
-    let value = parseInt(event.target.value);
-    let steps = value > key.val ? value - key.val : key.val - value; //console.log(verse)
+    const newKey = notes[event.target.value];
+    const value = newKey.val;
+    let steps = value > key.val ? value - key.val : key.val - value;
 
-    let newIntro = intro[0] !== null ? intro.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    let newVerse = verse[0] !== null ? verse.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    let newPreChorus = preChorus[0] !== null ? preChorus.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    let newChorus = chorus[0] !== null ? chorus.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
-    let newBridge = bridge[0] !== null ? bridge.map((chord, index) => this.typeAssign(notes[this.chordValueMachine(steps, chord, notes[value - 1].val, key.val)], chord)) : [null];
+    if (key.type) {
+      newKey.type = key.type;
+    }
+
+    ;
+    let newSections = {};
+    Object.keys(sections).map(section => {
+      const newChords = [];
+      sections[section].chords.map((chord, index) => {
+        let chordValue = this.chordValueMachine(steps, chord, newKey.val, key.val) + 1;
+        const newChord = [];
+        return Object.keys(notes).map(note => {
+          if (chordValue === notes[note].val) {
+            const typeAssigned = this.typeAssign(notes[note], chord);
+            newChord.push(typeAssigned);
+
+            if (newChord.length < 2) {
+              newChords.push(newChord[0]);
+            }
+
+            if (index === sections[section].chords.length - 1) {
+              newSections[section] = {
+                name: section,
+                chords: newChords
+              };
+            }
+          }
+        });
+      });
+    });
     this.setState({
-      key: notes[value - 1],
-      intro: newIntro,
-      verse: newVerse,
-      preChorus: newPreChorus,
-      chorus: newChorus,
-      bridge: newBridge
+      key: newKey,
+      sections: newSections
     });
   }
 
@@ -2877,6 +3023,8 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       } else {
         return chordValue + steps - 1;
       }
+
+      ;
     }
 
     ;
@@ -2887,18 +3035,32 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       } else {
         return chordValue - steps - 1;
       }
+
+      ;
     }
 
     ;
   }
 
-  typeAssign(newChord, oldChord) {
+  typeAssign(notesChord, oldChord) {
+    let newChord = {
+      val: notesChord.val,
+      note: notesChord.note,
+      type: null
+    };
+
     if (oldChord.type) {
       newChord.type = oldChord.type;
       return newChord;
-    } else {
+    }
+
+    ;
+
+    if (oldChord.type === null) {
       return newChord;
     }
+
+    ;
   }
 
   handleEditRedirect() {
@@ -2909,29 +3071,24 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.fetchSingleSong(this.props.match.params.songId);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.song !== this.props.song) {
       let {
         name,
         key,
-        intro,
-        verse,
-        preChorus,
-        chorus,
-        bridge
+        sections
       } = this.props.song;
       this.setState({
         name: name,
         key: key,
-        intro: intro,
-        verse: verse,
-        preChorus: preChorus,
-        chorus: chorus,
-        bridge: bridge,
+        sections: sections,
+        keyArray: Object.keys(sections),
         // checks if there is a type, and than if that type is minor
         minorOr: key.type ? key.type.includes("M") ? true : false : false
       });
     }
+
+    ;
   }
 
   render() {
@@ -2939,26 +3096,52 @@ class SingleSong extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       id,
       name,
       key,
-      intro,
-      verse,
-      chorus,
-      preChorus,
-      bridge,
+      sections,
+      keyArray,
       minorOr,
       notes
-    } = this.state;
+    } = this.state; //const keyArray = Object.keys(sections)
+
+    const notesArray = Object.keys(notes);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Key of ", key.type ? key.note + key.type.toLowerCase() : key.note), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Transpose"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       name: "transpose",
       onChange: this.handleChange
-    }, notes.map((chord, index) => minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: chord.val,
-      key: index
-    }, chord.note, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: chord.val,
-      key: index
-    }, chord.note))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Intro"), intro[0] !== null ? intro.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Verse"), verse[0] !== null ? verse.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "PreChorus"), preChorus[0] !== null ? preChorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Chorus"), chorus[0] !== null ? chorus.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Bridge"), bridge[0] !== null ? bridge.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + " " : chord.note + " ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "n/a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    }, notesArray.map((chord, index) => {
+      if (key.note) {
+        if (!key.note.includes("b")) {
+          if (!chord.includes("b")) {
+            return minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord);
+          }
+        } else {
+          if (!chord.includes("#")) {
+            return minorOr ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord, "m") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+              value: chord,
+              key: index
+            }, chord);
+          }
+        }
+      } else {
+        console.log(key.note);
+      }
+    })), keyArray.map(section => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        style: {
+          color: "#FFFCE4"
+        },
+        key: sections[section].name
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, sections[section].name), sections[section].chords.map(chord => chord.type ? chord.note + chord.type.toLowerCase() + ", " : chord.note + ", "));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: this.handleEditRedirect
     }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: this.handleDelete
@@ -3030,10 +3213,16 @@ class Songs extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       songs
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "This is the Songs"), songs.map(song => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      id: "description"
+    }, "Your Songs"), songs.map(song => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "songsList",
         key: song.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        style: {
+          color: "#FFFCE4"
+        },
         to: `/songs/${song.id}`
       }, song.name));
     }));
@@ -3100,10 +3289,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
-  songs: _songs__WEBPACK_IMPORTED_MODULE_3__.default,
-  song: _singleSong__WEBPACK_IMPORTED_MODULE_4__.default
+  songs: _songs__WEBPACK_IMPORTED_MODULE_3__["default"],
+  song: _singleSong__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
-const middleWare = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_5__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
+const middleWare = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_5__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
 })));
 const store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(reducer, middleWare);
@@ -3219,6 +3408,7 @@ const addSong = song => {
   };
 };
 const editSong = song => {
+  console.log(song);
   return async dispatch => {
     await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/songs/${song.id}`, song);
     dispatch(setEditSong(song));
@@ -3226,7 +3416,7 @@ const editSong = song => {
 };
 const deleteSong = songId => {
   return async dispatch => {
-    await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/songs/${songId}`);
+    await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/songs/${songId}`);
     dispatch(fetchSongs());
   };
 };
@@ -3260,6 +3450,737 @@ function songsReducer(state = [], action) {
   ;
 }
 ;
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/helmet/dist/index.js ***!
+  \*******************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault =
+	(this && this.__importDefault) ||
+	function (mod) {
+		return mod && mod.__esModule ? mod : { default: mod }
+	}
+const content_security_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/content-security-policy */ "./node_modules/helmet/dist/middlewares/content-security-policy/index.js"))
+const cross_origin_embedder_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/cross-origin-embedder-policy */ "./node_modules/helmet/dist/middlewares/cross-origin-embedder-policy/index.js"))
+const cross_origin_opener_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/cross-origin-opener-policy */ "./node_modules/helmet/dist/middlewares/cross-origin-opener-policy/index.js"))
+const cross_origin_resource_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/cross-origin-resource-policy */ "./node_modules/helmet/dist/middlewares/cross-origin-resource-policy/index.js"))
+const expect_ct_1 = __importDefault(__webpack_require__(/*! ./middlewares/expect-ct */ "./node_modules/helmet/dist/middlewares/expect-ct/index.js"))
+const origin_agent_cluster_1 = __importDefault(__webpack_require__(/*! ./middlewares/origin-agent-cluster */ "./node_modules/helmet/dist/middlewares/origin-agent-cluster/index.js"))
+const referrer_policy_1 = __importDefault(__webpack_require__(/*! ./middlewares/referrer-policy */ "./node_modules/helmet/dist/middlewares/referrer-policy/index.js"))
+const strict_transport_security_1 = __importDefault(__webpack_require__(/*! ./middlewares/strict-transport-security */ "./node_modules/helmet/dist/middlewares/strict-transport-security/index.js"))
+const x_content_type_options_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-content-type-options */ "./node_modules/helmet/dist/middlewares/x-content-type-options/index.js"))
+const x_dns_prefetch_control_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-dns-prefetch-control */ "./node_modules/helmet/dist/middlewares/x-dns-prefetch-control/index.js"))
+const x_download_options_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-download-options */ "./node_modules/helmet/dist/middlewares/x-download-options/index.js"))
+const x_frame_options_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-frame-options */ "./node_modules/helmet/dist/middlewares/x-frame-options/index.js"))
+const x_permitted_cross_domain_policies_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-permitted-cross-domain-policies */ "./node_modules/helmet/dist/middlewares/x-permitted-cross-domain-policies/index.js"))
+const x_powered_by_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-powered-by */ "./node_modules/helmet/dist/middlewares/x-powered-by/index.js"))
+const x_xss_protection_1 = __importDefault(__webpack_require__(/*! ./middlewares/x-xss-protection */ "./node_modules/helmet/dist/middlewares/x-xss-protection/index.js"))
+function getArgs(option, middlewareConfig = {}) {
+	const { enabledByDefault = true } = middlewareConfig
+	switch (option) {
+		case undefined:
+			return enabledByDefault ? [] : null
+		case false:
+			return null
+		case true:
+			return []
+		default:
+			if (middlewareConfig.takesOptions === false) {
+				console.warn(`${middlewareConfig.name} does not take options. ${enabledByDefault ? "Remove the property" : "Set the property to `true`"} to silence this warning.`)
+				return []
+			} else {
+				return [option]
+			}
+	}
+}
+function getMiddlewareFunctionsFromOptions(options) {
+	const result = []
+	const contentSecurityPolicyArgs = getArgs(options.contentSecurityPolicy)
+	if (contentSecurityPolicyArgs) {
+		result.push(content_security_policy_1.default(...contentSecurityPolicyArgs))
+	}
+	const crossOriginEmbedderPolicyArgs = getArgs(options.crossOriginEmbedderPolicy, {
+		name: "crossOriginEmbedderPolicy",
+		takesOptions: false,
+		enabledByDefault: false
+	})
+	if (crossOriginEmbedderPolicyArgs) {
+		result.push(cross_origin_embedder_policy_1.default())
+	}
+	const crossOriginOpenerPolicyArgs = getArgs(options.crossOriginOpenerPolicy, {
+		enabledByDefault: false
+	})
+	if (crossOriginOpenerPolicyArgs) {
+		result.push(cross_origin_opener_policy_1.default(...crossOriginOpenerPolicyArgs))
+	}
+	const crossOriginResourcePolicyArgs = getArgs(options.crossOriginResourcePolicy, { enabledByDefault: false })
+	if (crossOriginResourcePolicyArgs) {
+		result.push(cross_origin_resource_policy_1.default(...crossOriginResourcePolicyArgs))
+	}
+	const xDnsPrefetchControlArgs = getArgs(options.dnsPrefetchControl)
+	if (xDnsPrefetchControlArgs) {
+		result.push(x_dns_prefetch_control_1.default(...xDnsPrefetchControlArgs))
+	}
+	const expectCtArgs = getArgs(options.expectCt)
+	if (expectCtArgs) {
+		result.push(expect_ct_1.default(...expectCtArgs))
+	}
+	const xFrameOptionsArgs = getArgs(options.frameguard)
+	if (xFrameOptionsArgs) {
+		result.push(x_frame_options_1.default(...xFrameOptionsArgs))
+	}
+	const xPoweredByArgs = getArgs(options.hidePoweredBy, {
+		name: "hidePoweredBy",
+		takesOptions: false
+	})
+	if (xPoweredByArgs) {
+		result.push(x_powered_by_1.default())
+	}
+	const strictTransportSecurityArgs = getArgs(options.hsts)
+	if (strictTransportSecurityArgs) {
+		result.push(strict_transport_security_1.default(...strictTransportSecurityArgs))
+	}
+	const xDownloadOptionsArgs = getArgs(options.ieNoOpen, {
+		name: "ieNoOpen",
+		takesOptions: false
+	})
+	if (xDownloadOptionsArgs) {
+		result.push(x_download_options_1.default())
+	}
+	const xContentTypeOptionsArgs = getArgs(options.noSniff, {
+		name: "noSniff",
+		takesOptions: false
+	})
+	if (xContentTypeOptionsArgs) {
+		result.push(x_content_type_options_1.default())
+	}
+	const originAgentClusterArgs = getArgs(options.originAgentCluster, {
+		name: "originAgentCluster",
+		takesOptions: false,
+		enabledByDefault: false
+	})
+	if (originAgentClusterArgs) {
+		result.push(origin_agent_cluster_1.default())
+	}
+	const xPermittedCrossDomainPoliciesArgs = getArgs(options.permittedCrossDomainPolicies)
+	if (xPermittedCrossDomainPoliciesArgs) {
+		result.push(x_permitted_cross_domain_policies_1.default(...xPermittedCrossDomainPoliciesArgs))
+	}
+	const referrerPolicyArgs = getArgs(options.referrerPolicy)
+	if (referrerPolicyArgs) {
+		result.push(referrer_policy_1.default(...referrerPolicyArgs))
+	}
+	const xXssProtectionArgs = getArgs(options.xssFilter, {
+		name: "xssFilter",
+		takesOptions: false
+	})
+	if (xXssProtectionArgs) {
+		result.push(x_xss_protection_1.default())
+	}
+	return result
+}
+const helmet = Object.assign(
+	function helmet(options = {}) {
+		var _a
+		if (((_a = options.constructor) === null || _a === void 0 ? void 0 : _a.name) === "IncomingMessage") {
+			throw new Error("It appears you have done something like `app.use(helmet)`, but it should be `app.use(helmet())`.")
+		}
+		const middlewareFunctions = getMiddlewareFunctionsFromOptions(options)
+		return function helmetMiddleware(req, res, next) {
+			const iterator = middlewareFunctions[Symbol.iterator]()
+			;(function internalNext(err) {
+				if (err) {
+					next(err)
+					return
+				}
+				const iteration = iterator.next()
+				if (iteration.done) {
+					next()
+				} else {
+					const middlewareFunction = iteration.value
+					middlewareFunction(req, res, internalNext)
+				}
+			})()
+		}
+	},
+	{
+		contentSecurityPolicy: content_security_policy_1.default,
+		crossOriginEmbedderPolicy: cross_origin_embedder_policy_1.default,
+		crossOriginOpenerPolicy: cross_origin_opener_policy_1.default,
+		crossOriginResourcePolicy: cross_origin_resource_policy_1.default,
+		dnsPrefetchControl: x_dns_prefetch_control_1.default,
+		expectCt: expect_ct_1.default,
+		frameguard: x_frame_options_1.default,
+		hidePoweredBy: x_powered_by_1.default,
+		hsts: strict_transport_security_1.default,
+		ieNoOpen: x_download_options_1.default,
+		noSniff: x_content_type_options_1.default,
+		originAgentCluster: origin_agent_cluster_1.default,
+		permittedCrossDomainPolicies: x_permitted_cross_domain_policies_1.default,
+		referrerPolicy: referrer_policy_1.default,
+		xssFilter: x_xss_protection_1.default,
+		featurePolicy() {
+			throw new Error("helmet.featurePolicy was removed because the Feature-Policy header is deprecated. If you still need this header, you can use the `feature-policy` module.")
+		},
+		hpkp() {
+			throw new Error("helmet.hpkp was removed because the header has been deprecated. If you still need this header, you can use the `hpkp` module. For more, see <https://github.com/helmetjs/helmet/issues/180>.")
+		},
+		noCache() {
+			throw new Error("helmet.noCache was removed. You can use the `nocache` module instead. For more, see <https://github.com/helmetjs/helmet/issues/215>.")
+		}
+	}
+)
+module.exports = helmet
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/content-security-policy/index.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/content-security-policy/index.js ***!
+  \*******************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+exports.dangerouslyDisableDefaultSrc = exports.getDefaultDirectives = void 0
+const dangerouslyDisableDefaultSrc = Symbol("dangerouslyDisableDefaultSrc")
+exports.dangerouslyDisableDefaultSrc = dangerouslyDisableDefaultSrc
+const DEFAULT_DIRECTIVES = {
+	"default-src": ["'self'"],
+	"base-uri": ["'self'"],
+	"block-all-mixed-content": [],
+	"font-src": ["'self'", "https:", "data:"],
+	"frame-ancestors": ["'self'"],
+	"img-src": ["'self'", "data:"],
+	"object-src": ["'none'"],
+	"script-src": ["'self'"],
+	"script-src-attr": ["'none'"],
+	"style-src": ["'self'", "https:", "'unsafe-inline'"],
+	"upgrade-insecure-requests": []
+}
+const getDefaultDirectives = () => Object.assign({}, DEFAULT_DIRECTIVES)
+exports.getDefaultDirectives = getDefaultDirectives
+const dashify = str => str.replace(/[A-Z]/g, capitalLetter => "-" + capitalLetter.toLowerCase())
+const isDirectiveValueInvalid = directiveValue => /;|,/.test(directiveValue)
+const has = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key)
+function normalizeDirectives(options) {
+	const defaultDirectives = getDefaultDirectives()
+	const { useDefaults = false, directives: rawDirectives = defaultDirectives } = options
+	const result = new Map()
+	const directiveNamesSeen = new Set()
+	const directivesExplicitlyDisabled = new Set()
+	for (const rawDirectiveName in rawDirectives) {
+		if (!has(rawDirectives, rawDirectiveName)) {
+			continue
+		}
+		if (rawDirectiveName.length === 0 || /[^a-zA-Z0-9-]/.test(rawDirectiveName)) {
+			throw new Error(`Content-Security-Policy received an invalid directive name ${JSON.stringify(rawDirectiveName)}`)
+		}
+		const directiveName = dashify(rawDirectiveName)
+		if (directiveNamesSeen.has(directiveName)) {
+			throw new Error(`Content-Security-Policy received a duplicate directive ${JSON.stringify(directiveName)}`)
+		}
+		directiveNamesSeen.add(directiveName)
+		const rawDirectiveValue = rawDirectives[rawDirectiveName]
+		let directiveValue
+		if (rawDirectiveValue === null) {
+			if (directiveName === "default-src") {
+				throw new Error("Content-Security-Policy needs a default-src but it was set to `null`. If you really want to disable it, set it to `contentSecurityPolicy.dangerouslyDisableDefaultSrc`.")
+			}
+			directivesExplicitlyDisabled.add(directiveName)
+			continue
+		} else if (typeof rawDirectiveValue === "string") {
+			directiveValue = [rawDirectiveValue]
+		} else if (!rawDirectiveValue) {
+			throw new Error(`Content-Security-Policy received an invalid directive value for ${JSON.stringify(directiveName)}`)
+		} else if (rawDirectiveValue === dangerouslyDisableDefaultSrc) {
+			if (directiveName === "default-src") {
+				directivesExplicitlyDisabled.add("default-src")
+				continue
+			} else {
+				throw new Error(`Content-Security-Policy: tried to disable ${JSON.stringify(directiveName)} as if it were default-src; simply omit the key`)
+			}
+		} else {
+			directiveValue = rawDirectiveValue
+		}
+		for (const element of directiveValue) {
+			if (typeof element === "string" && isDirectiveValueInvalid(element)) {
+				throw new Error(`Content-Security-Policy received an invalid directive value for ${JSON.stringify(directiveName)}`)
+			}
+		}
+		result.set(directiveName, directiveValue)
+	}
+	if (useDefaults) {
+		Object.entries(defaultDirectives).forEach(([defaultDirectiveName, defaultDirectiveValue]) => {
+			if (!result.has(defaultDirectiveName) && !directivesExplicitlyDisabled.has(defaultDirectiveName)) {
+				result.set(defaultDirectiveName, defaultDirectiveValue)
+			}
+		})
+	}
+	if (!result.size) {
+		throw new Error("Content-Security-Policy has no directives. Either set some or disable the header")
+	}
+	if (!result.has("default-src") && !directivesExplicitlyDisabled.has("default-src")) {
+		throw new Error("Content-Security-Policy needs a default-src but none was provided. If you really want to disable it, set it to `contentSecurityPolicy.dangerouslyDisableDefaultSrc`.")
+	}
+	return result
+}
+function getHeaderValue(req, res, normalizedDirectives) {
+	let err
+	const result = []
+	normalizedDirectives.forEach((rawDirectiveValue, directiveName) => {
+		let directiveValue = ""
+		for (const element of rawDirectiveValue) {
+			directiveValue += " " + (element instanceof Function ? element(req, res) : element)
+		}
+		if (!directiveValue) {
+			result.push(directiveName)
+		} else if (isDirectiveValueInvalid(directiveValue)) {
+			err = new Error(`Content-Security-Policy received an invalid directive value for ${JSON.stringify(directiveName)}`)
+		} else {
+			result.push(`${directiveName}${directiveValue}`)
+		}
+	})
+	return err ? err : result.join(";")
+}
+const contentSecurityPolicy = function contentSecurityPolicy(options = {}) {
+	if ("loose" in options) {
+		console.warn("Content-Security-Policy middleware no longer needs the `loose` parameter. You should remove it.")
+	}
+	if ("setAllHeaders" in options) {
+		console.warn("Content-Security-Policy middleware no longer supports the `setAllHeaders` parameter. See <https://github.com/helmetjs/helmet/wiki/Setting-legacy-Content-Security-Policy-headers-in-Helmet-4>.")
+	}
+	;["disableAndroid", "browserSniff"].forEach(deprecatedOption => {
+		if (deprecatedOption in options) {
+			console.warn(`Content-Security-Policy middleware no longer does browser sniffing, so you can remove the \`${deprecatedOption}\` option. See <https://github.com/helmetjs/csp/issues/97> for discussion.`)
+		}
+	})
+	const headerName = options.reportOnly ? "Content-Security-Policy-Report-Only" : "Content-Security-Policy"
+	const normalizedDirectives = normalizeDirectives(options)
+	return function contentSecurityPolicyMiddleware(req, res, next) {
+		const result = getHeaderValue(req, res, normalizedDirectives)
+		if (result instanceof Error) {
+			next(result)
+		} else {
+			res.setHeader(headerName, result)
+			next()
+		}
+	}
+}
+contentSecurityPolicy.getDefaultDirectives = getDefaultDirectives
+contentSecurityPolicy.dangerouslyDisableDefaultSrc = dangerouslyDisableDefaultSrc
+module.exports = contentSecurityPolicy
+exports["default"] = contentSecurityPolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/cross-origin-embedder-policy/index.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/cross-origin-embedder-policy/index.js ***!
+  \************************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function crossOriginEmbedderPolicy() {
+	return function crossOriginEmbedderPolicyMiddleware(_req, res, next) {
+		res.setHeader("Cross-Origin-Embedder-Policy", "require-corp")
+		next()
+	}
+}
+module.exports = crossOriginEmbedderPolicy
+exports["default"] = crossOriginEmbedderPolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/cross-origin-opener-policy/index.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/cross-origin-opener-policy/index.js ***!
+  \**********************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const ALLOWED_POLICIES = new Set(["same-origin", "same-origin-allow-popups", "unsafe-none"])
+function getHeaderValueFromOptions({ policy = "same-origin" }) {
+	if (ALLOWED_POLICIES.has(policy)) {
+		return policy
+	} else {
+		throw new Error(`Cross-Origin-Opener-Policy does not support the ${JSON.stringify(policy)} policy`)
+	}
+}
+function crossOriginOpenerPolicy(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function crossOriginOpenerPolicyMiddleware(_req, res, next) {
+		res.setHeader("Cross-Origin-Opener-Policy", headerValue)
+		next()
+	}
+}
+module.exports = crossOriginOpenerPolicy
+exports["default"] = crossOriginOpenerPolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/cross-origin-resource-policy/index.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/cross-origin-resource-policy/index.js ***!
+  \************************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const ALLOWED_POLICIES = new Set(["same-origin", "same-site", "cross-origin"])
+function getHeaderValueFromOptions({ policy = "same-origin" }) {
+	if (ALLOWED_POLICIES.has(policy)) {
+		return policy
+	} else {
+		throw new Error(`Cross-Origin-Resource-Policy does not support the ${JSON.stringify(policy)} policy`)
+	}
+}
+function crossOriginResourcePolicy(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function crossOriginResourcePolicyMiddleware(_req, res, next) {
+		res.setHeader("Cross-Origin-Resource-Policy", headerValue)
+		next()
+	}
+}
+module.exports = crossOriginResourcePolicy
+exports["default"] = crossOriginResourcePolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/expect-ct/index.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/expect-ct/index.js ***!
+  \*****************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function parseMaxAge(value = 0) {
+	if (value >= 0 && Number.isFinite(value)) {
+		return Math.floor(value)
+	} else {
+		throw new Error(`Expect-CT: ${JSON.stringify(value)} is not a valid value for maxAge. Please choose a positive integer.`)
+	}
+}
+function getHeaderValueFromOptions(options) {
+	const directives = [`max-age=${parseMaxAge(options.maxAge)}`]
+	if (options.enforce) {
+		directives.push("enforce")
+	}
+	if (options.reportUri) {
+		directives.push(`report-uri="${options.reportUri}"`)
+	}
+	return directives.join(", ")
+}
+function expectCt(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function expectCtMiddleware(_req, res, next) {
+		res.setHeader("Expect-CT", headerValue)
+		next()
+	}
+}
+module.exports = expectCt
+exports["default"] = expectCt
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/origin-agent-cluster/index.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/origin-agent-cluster/index.js ***!
+  \****************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function originAgentCluster() {
+	return function originAgentClusterMiddleware(_req, res, next) {
+		res.setHeader("Origin-Agent-Cluster", "?1")
+		next()
+	}
+}
+module.exports = originAgentCluster
+exports["default"] = originAgentCluster
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/referrer-policy/index.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/referrer-policy/index.js ***!
+  \***********************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const ALLOWED_TOKENS = new Set(["no-referrer", "no-referrer-when-downgrade", "same-origin", "origin", "strict-origin", "origin-when-cross-origin", "strict-origin-when-cross-origin", "unsafe-url", ""])
+function getHeaderValueFromOptions({ policy = ["no-referrer"] }) {
+	const tokens = typeof policy === "string" ? [policy] : policy
+	if (tokens.length === 0) {
+		throw new Error("Referrer-Policy received no policy tokens")
+	}
+	const tokensSeen = new Set()
+	tokens.forEach(token => {
+		if (!ALLOWED_TOKENS.has(token)) {
+			throw new Error(`Referrer-Policy received an unexpected policy token ${JSON.stringify(token)}`)
+		} else if (tokensSeen.has(token)) {
+			throw new Error(`Referrer-Policy received a duplicate policy token ${JSON.stringify(token)}`)
+		}
+		tokensSeen.add(token)
+	})
+	return tokens.join(",")
+}
+function referrerPolicy(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function referrerPolicyMiddleware(_req, res, next) {
+		res.setHeader("Referrer-Policy", headerValue)
+		next()
+	}
+}
+module.exports = referrerPolicy
+exports["default"] = referrerPolicy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/strict-transport-security/index.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/strict-transport-security/index.js ***!
+  \*********************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const DEFAULT_MAX_AGE = 180 * 24 * 60 * 60
+function parseMaxAge(value = DEFAULT_MAX_AGE) {
+	if (value >= 0 && Number.isFinite(value)) {
+		return Math.floor(value)
+	} else {
+		throw new Error(`Strict-Transport-Security: ${JSON.stringify(value)} is not a valid value for maxAge. Please choose a positive integer.`)
+	}
+}
+function getHeaderValueFromOptions(options) {
+	if ("maxage" in options) {
+		throw new Error("Strict-Transport-Security received an unsupported property, `maxage`. Did you mean to pass `maxAge`?")
+	}
+	if ("includeSubdomains" in options) {
+		console.warn('Strict-Transport-Security middleware should use `includeSubDomains` instead of `includeSubdomains`. (The correct one has an uppercase "D".)')
+	}
+	if ("setIf" in options) {
+		console.warn("Strict-Transport-Security middleware no longer supports the `setIf` parameter. See the documentation and <https://github.com/helmetjs/helmet/wiki/Conditionally-using-middleware> if you need help replicating this behavior.")
+	}
+	const directives = [`max-age=${parseMaxAge(options.maxAge)}`]
+	if (options.includeSubDomains === undefined || options.includeSubDomains) {
+		directives.push("includeSubDomains")
+	}
+	if (options.preload) {
+		directives.push("preload")
+	}
+	return directives.join("; ")
+}
+function strictTransportSecurity(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function strictTransportSecurityMiddleware(_req, res, next) {
+		res.setHeader("Strict-Transport-Security", headerValue)
+		next()
+	}
+}
+module.exports = strictTransportSecurity
+exports["default"] = strictTransportSecurity
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-content-type-options/index.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-content-type-options/index.js ***!
+  \******************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xContentTypeOptions() {
+	return function xContentTypeOptionsMiddleware(_req, res, next) {
+		res.setHeader("X-Content-Type-Options", "nosniff")
+		next()
+	}
+}
+module.exports = xContentTypeOptions
+exports["default"] = xContentTypeOptions
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-dns-prefetch-control/index.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-dns-prefetch-control/index.js ***!
+  \******************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xDnsPrefetchControl(options = {}) {
+	const headerValue = options.allow ? "on" : "off"
+	return function xDnsPrefetchControlMiddleware(_req, res, next) {
+		res.setHeader("X-DNS-Prefetch-Control", headerValue)
+		next()
+	}
+}
+module.exports = xDnsPrefetchControl
+exports["default"] = xDnsPrefetchControl
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-download-options/index.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-download-options/index.js ***!
+  \**************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xDownloadOptions() {
+	return function xDownloadOptionsMiddleware(_req, res, next) {
+		res.setHeader("X-Download-Options", "noopen")
+		next()
+	}
+}
+module.exports = xDownloadOptions
+exports["default"] = xDownloadOptions
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-frame-options/index.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-frame-options/index.js ***!
+  \***********************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function getHeaderValueFromOptions({ action = "SAMEORIGIN" }) {
+	const normalizedAction = typeof action === "string" ? action.toUpperCase() : action
+	switch (normalizedAction) {
+		case "SAME-ORIGIN":
+			return "SAMEORIGIN"
+		case "DENY":
+		case "SAMEORIGIN":
+			return normalizedAction
+		case "ALLOW-FROM":
+			throw new Error("X-Frame-Options no longer supports `ALLOW-FROM` due to poor browser support. See <https://github.com/helmetjs/helmet/wiki/How-to-use-X%E2%80%93Frame%E2%80%93Options's-%60ALLOW%E2%80%93FROM%60-directive> for more info.")
+		default:
+			throw new Error(`X-Frame-Options received an invalid action ${JSON.stringify(action)}`)
+	}
+}
+function xFrameOptions(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function xFrameOptionsMiddleware(_req, res, next) {
+		res.setHeader("X-Frame-Options", headerValue)
+		next()
+	}
+}
+module.exports = xFrameOptions
+exports["default"] = xFrameOptions
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-permitted-cross-domain-policies/index.js":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-permitted-cross-domain-policies/index.js ***!
+  \*****************************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+const ALLOWED_PERMITTED_POLICIES = new Set(["none", "master-only", "by-content-type", "all"])
+function getHeaderValueFromOptions({ permittedPolicies = "none" }) {
+	if (ALLOWED_PERMITTED_POLICIES.has(permittedPolicies)) {
+		return permittedPolicies
+	} else {
+		throw new Error(`X-Permitted-Cross-Domain-Policies does not support ${JSON.stringify(permittedPolicies)}`)
+	}
+}
+function xPermittedCrossDomainPolicies(options = {}) {
+	const headerValue = getHeaderValueFromOptions(options)
+	return function xPermittedCrossDomainPoliciesMiddleware(_req, res, next) {
+		res.setHeader("X-Permitted-Cross-Domain-Policies", headerValue)
+		next()
+	}
+}
+module.exports = xPermittedCrossDomainPolicies
+exports["default"] = xPermittedCrossDomainPolicies
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-powered-by/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-powered-by/index.js ***!
+  \********************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xPoweredBy() {
+	return function xPoweredByMiddleware(_req, res, next) {
+		res.removeHeader("X-Powered-By")
+		next()
+	}
+}
+module.exports = xPoweredBy
+exports["default"] = xPoweredBy
+
+
+/***/ }),
+
+/***/ "./node_modules/helmet/dist/middlewares/x-xss-protection/index.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/helmet/dist/middlewares/x-xss-protection/index.js ***!
+  \************************************************************************/
+/***/ ((module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }))
+function xXssProtection() {
+	return function xXssProtectionMiddleware(_req, res, next) {
+		res.setHeader("X-XSS-Protection", "0")
+		next()
+	}
+}
+module.exports = xXssProtection
+exports["default"] = xXssProtection
+
 
 /***/ }),
 
@@ -3349,7 +4270,7 @@ function createLocation(path, state, key, currentLocation) {
     location.state = state;
   } else {
     // One-arg form: push(location)
-    location = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, path);
+    location = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, path);
     if (location.pathname === undefined) location.pathname = '';
 
     if (location.search) {
@@ -3384,7 +4305,7 @@ function createLocation(path, state, key, currentLocation) {
     if (!location.pathname) {
       location.pathname = currentLocation.pathname;
     } else if (location.pathname.charAt(0) !== '/') {
-      location.pathname = (0,resolve_pathname__WEBPACK_IMPORTED_MODULE_1__.default)(location.pathname, currentLocation.pathname);
+      location.pathname = (0,resolve_pathname__WEBPACK_IMPORTED_MODULE_1__["default"])(location.pathname, currentLocation.pathname);
     }
   } else {
     // When there is no prior location and pathname is empty, set it to /
@@ -3396,14 +4317,14 @@ function createLocation(path, state, key, currentLocation) {
   return location;
 }
 function locationsAreEqual(a, b) {
-  return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && (0,value_equal__WEBPACK_IMPORTED_MODULE_2__.default)(a.state, b.state);
+  return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && (0,value_equal__WEBPACK_IMPORTED_MODULE_2__["default"])(a.state, b.state);
 }
 
 function createTransitionManager() {
   var prompt = null;
 
   function setPrompt(nextPrompt) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(prompt == null, 'A history supports only one prompt at a time') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(prompt == null, 'A history supports only one prompt at a time') : 0;
     prompt = nextPrompt;
     return function () {
       if (prompt === nextPrompt) prompt = null;
@@ -3421,7 +4342,7 @@ function createTransitionManager() {
         if (typeof getUserConfirmation === 'function') {
           getUserConfirmation(result, callback);
         } else {
-           true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(false, 'A history needs a getUserConfirmation function in order to use a prompt message') : 0;
+           true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(false, 'A history needs a getUserConfirmation function in order to use a prompt message') : 0;
           callback(true);
         }
       } else {
@@ -3534,7 +4455,7 @@ function createBrowserHistory(props) {
     props = {};
   }
 
-  !canUseDOM ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_4__.default)(false, 'Browser history needs a DOM') : 0 : void 0;
+  !canUseDOM ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_4__["default"])(false, 'Browser history needs a DOM') : 0 : void 0;
   var globalHistory = window.history;
   var canUseHistory = supportsHistory();
   var needsHashChangeListener = !supportsPopStateOnHashChange();
@@ -3557,7 +4478,7 @@ function createBrowserHistory(props) {
         search = _window$location.search,
         hash = _window$location.hash;
     var path = pathname + search + hash;
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(!basename || hasBasename(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(!basename || hasBasename(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".') : 0;
     if (basename) path = stripBasename(path, basename);
     return createLocation(path, state, key);
   }
@@ -3569,7 +4490,7 @@ function createBrowserHistory(props) {
   var transitionManager = createTransitionManager();
 
   function setState(nextState) {
-    (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)(history, nextState);
+    (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])(history, nextState);
 
     history.length = globalHistory.length;
     transitionManager.notifyListeners(history.location, history.action);
@@ -3631,7 +4552,7 @@ function createBrowserHistory(props) {
   }
 
   function push(path, state) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(!(typeof path === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(!(typeof path === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored') : 0;
     var action = 'PUSH';
     var location = createLocation(path, state, createKey(), history.location);
     transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
@@ -3659,14 +4580,14 @@ function createBrowserHistory(props) {
           });
         }
       } else {
-         true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history') : 0;
+         true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history') : 0;
         window.location.href = href;
       }
     });
   }
 
   function replace(path, state) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(!(typeof path === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(!(typeof path === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored') : 0;
     var action = 'REPLACE';
     var location = createLocation(path, state, createKey(), history.location);
     transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
@@ -3692,7 +4613,7 @@ function createBrowserHistory(props) {
           });
         }
       } else {
-         true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history') : 0;
+         true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history') : 0;
         window.location.replace(href);
       }
     });
@@ -3819,7 +4740,7 @@ function createHashHistory(props) {
     props = {};
   }
 
-  !canUseDOM ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_4__.default)(false, 'Hash history needs a DOM') : 0 : void 0;
+  !canUseDOM ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_4__["default"])(false, 'Hash history needs a DOM') : 0 : void 0;
   var globalHistory = window.history;
   var canGoWithoutReload = supportsGoWithoutReloadUsingHash();
   var _props = props,
@@ -3834,7 +4755,7 @@ function createHashHistory(props) {
 
   function getDOMLocation() {
     var path = decodePath(getHashPath());
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(!basename || hasBasename(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(!basename || hasBasename(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".') : 0;
     if (basename) path = stripBasename(path, basename);
     return createLocation(path);
   }
@@ -3842,7 +4763,7 @@ function createHashHistory(props) {
   var transitionManager = createTransitionManager();
 
   function setState(nextState) {
-    (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)(history, nextState);
+    (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])(history, nextState);
 
     history.length = globalHistory.length;
     transitionManager.notifyListeners(history.location, history.action);
@@ -3929,7 +4850,7 @@ function createHashHistory(props) {
   }
 
   function push(path, state) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(state === undefined, 'Hash history cannot push state; it is ignored') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(state === undefined, 'Hash history cannot push state; it is ignored') : 0;
     var action = 'PUSH';
     var location = createLocation(path, undefined, undefined, history.location);
     transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
@@ -3953,14 +4874,14 @@ function createHashHistory(props) {
           location: location
         });
       } else {
-         true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(false, 'Hash history cannot PUSH the same path; a new entry will not be added to the history stack') : 0;
+         true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(false, 'Hash history cannot PUSH the same path; a new entry will not be added to the history stack') : 0;
         setState();
       }
     });
   }
 
   function replace(path, state) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(state === undefined, 'Hash history cannot replace state; it is ignored') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(state === undefined, 'Hash history cannot replace state; it is ignored') : 0;
     var action = 'REPLACE';
     var location = createLocation(path, undefined, undefined, history.location);
     transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
@@ -3987,7 +4908,7 @@ function createHashHistory(props) {
   }
 
   function go(n) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(canGoWithoutReload, 'Hash history go(n) causes a full page reload in this browser') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(canGoWithoutReload, 'Hash history go(n) causes a full page reload in this browser') : 0;
     globalHistory.go(n);
   }
 
@@ -4084,7 +5005,7 @@ function createMemoryHistory(props) {
   var transitionManager = createTransitionManager();
 
   function setState(nextState) {
-    (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)(history, nextState);
+    (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])(history, nextState);
 
     history.length = history.entries.length;
     transitionManager.notifyListeners(history.location, history.action);
@@ -4102,7 +5023,7 @@ function createMemoryHistory(props) {
   var createHref = createPath;
 
   function push(path, state) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(!(typeof path === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(!(typeof path === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored') : 0;
     var action = 'PUSH';
     var location = createLocation(path, state, createKey(), history.location);
     transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
@@ -4127,7 +5048,7 @@ function createMemoryHistory(props) {
   }
 
   function replace(path, state) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)(!(typeof path === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])(!(typeof path === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored') : 0;
     var action = 'REPLACE';
     var location = createLocation(path, state, createKey(), history.location);
     transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
@@ -4392,7 +5313,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
   var contextProp = '__create-react-context-' + getUniqueId() + '__';
 
   var Provider = /*#__PURE__*/function (_Component) {
-    (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(Provider, _Component);
+    (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(Provider, _Component);
 
     function Provider() {
       var _this;
@@ -4422,7 +5343,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
           changedBits = typeof calculateChangedBits === 'function' ? calculateChangedBits(oldValue, newValue) : MAX_SIGNED_31_BIT_INT;
 
           if (true) {
-            (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__.default)((changedBits & MAX_SIGNED_31_BIT_INT) === changedBits, 'calculateChangedBits: Expected the return value to be a ' + '31-bit integer. Instead received: ' + changedBits);
+            (0,tiny_warning__WEBPACK_IMPORTED_MODULE_3__["default"])((changedBits & MAX_SIGNED_31_BIT_INT) === changedBits, 'calculateChangedBits: Expected the return value to be a ' + '31-bit integer. Instead received: ' + changedBits);
           }
 
           changedBits |= 0;
@@ -4444,7 +5365,7 @@ function createReactContext(defaultValue, calculateChangedBits) {
   Provider.childContextTypes = (_Provider$childContex = {}, _Provider$childContex[contextProp] = (prop_types__WEBPACK_IMPORTED_MODULE_2___default().object.isRequired), _Provider$childContex);
 
   var Consumer = /*#__PURE__*/function (_Component2) {
-    (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(Consumer, _Component2);
+    (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(Consumer, _Component2);
 
     function Consumer() {
       var _this2;
@@ -30709,7 +31630,7 @@ function Provider(_ref) {
       context = _ref.context,
       children = _ref.children;
   var contextValue = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    var subscription = new _utils_Subscription__WEBPACK_IMPORTED_MODULE_3__.default(store);
+    var subscription = new _utils_Subscription__WEBPACK_IMPORTED_MODULE_3__["default"](store);
     subscription.onStateChange = subscription.notifyNestedSubs;
     return {
       store: store,
@@ -30939,7 +31860,7 @@ _ref) {
       forwardRef = _ref2$forwardRef === void 0 ? false : _ref2$forwardRef,
       _ref2$context = _ref2.context,
       context = _ref2$context === void 0 ? _Context__WEBPACK_IMPORTED_MODULE_7__.ReactReduxContext : _ref2$context,
-      connectOptions = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(_ref2, ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"]);
+      connectOptions = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref2, ["getDisplayName", "methodName", "renderCountProp", "shouldHandleStateChanges", "storeKey", "withRef", "forwardRef", "context"]);
 
   if (true) {
     if (renderCountProp !== undefined) {
@@ -30966,7 +31887,7 @@ _ref) {
     var wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
     var displayName = getDisplayName(wrappedComponentName);
 
-    var selectorFactoryOptions = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, connectOptions, {
+    var selectorFactoryOptions = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, connectOptions, {
       getDisplayName: getDisplayName,
       methodName: methodName,
       renderCountProp: renderCountProp,
@@ -30996,7 +31917,7 @@ _ref) {
         // and values needed to control behavior (forwarded refs, alternate context instances).
         // To maintain the wrapperProps object reference, memoize this destructuring.
         var reactReduxForwardedRef = props.reactReduxForwardedRef,
-            wrapperProps = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(props, ["reactReduxForwardedRef"]);
+            wrapperProps = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["reactReduxForwardedRef"]);
 
         return [props.context, reactReduxForwardedRef, wrapperProps];
       }, [props]),
@@ -31033,7 +31954,7 @@ _ref) {
         if (!shouldHandleStateChanges) return NO_SUBSCRIPTION_ARRAY; // This Subscription's source should match where store came from: props vs. context. A component
         // connected to the store via props shouldn't use subscription from context, or vice versa.
 
-        var subscription = new _utils_Subscription__WEBPACK_IMPORTED_MODULE_5__.default(store, didStoreComeFromProps ? null : contextValue.subscription); // `notifyNestedSubs` is duplicated to handle the case where the component is unmounted in
+        var subscription = new _utils_Subscription__WEBPACK_IMPORTED_MODULE_5__["default"](store, didStoreComeFromProps ? null : contextValue.subscription); // `notifyNestedSubs` is duplicated to handle the case where the component is unmounted in
         // the middle of the notification loop, where `subscription` will then be null. This can
         // probably be avoided if Subscription's listeners logic is changed to not call listeners
         // that have been unsubscribed in the  middle of the notification loop.
@@ -31056,7 +31977,7 @@ _ref) {
         // connected descendants won't update until after this component is done
 
 
-        return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, contextValue, {
+        return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, contextValue, {
           subscription: subscription
         });
       }, [didStoreComeFromProps, contextValue, subscription]); // We need to force this wrapper component to re-render whenever a Redux store update
@@ -31103,7 +32024,7 @@ _ref) {
       // We memoize the elements for the rendered child component as an optimization.
 
       var renderedWrappedComponent = (0,react__WEBPACK_IMPORTED_MODULE_3__.useMemo)(function () {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(WrappedComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, actualChildProps, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(WrappedComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, actualChildProps, {
           ref: reactReduxForwardedRef
         }));
       }, [reactReduxForwardedRef, WrappedComponent, actualChildProps]); // If React sees the exact same element reference as last time, it bails out of re-rendering
@@ -31131,7 +32052,7 @@ _ref) {
 
     if (forwardRef) {
       var forwarded = react__WEBPACK_IMPORTED_MODULE_3__.forwardRef(function forwardConnectRef(props, ref) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Connect, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, props, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Connect, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
           reactReduxForwardedRef: ref
         }));
       });
@@ -31211,15 +32132,15 @@ function strictEqual(a, b) {
 function createConnect(_temp) {
   var _ref = _temp === void 0 ? {} : _temp,
       _ref$connectHOC = _ref.connectHOC,
-      connectHOC = _ref$connectHOC === void 0 ? _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_2__.default : _ref$connectHOC,
+      connectHOC = _ref$connectHOC === void 0 ? _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_2__["default"] : _ref$connectHOC,
       _ref$mapStateToPropsF = _ref.mapStateToPropsFactories,
-      mapStateToPropsFactories = _ref$mapStateToPropsF === void 0 ? _mapStateToProps__WEBPACK_IMPORTED_MODULE_5__.default : _ref$mapStateToPropsF,
+      mapStateToPropsFactories = _ref$mapStateToPropsF === void 0 ? _mapStateToProps__WEBPACK_IMPORTED_MODULE_5__["default"] : _ref$mapStateToPropsF,
       _ref$mapDispatchToPro = _ref.mapDispatchToPropsFactories,
-      mapDispatchToPropsFactories = _ref$mapDispatchToPro === void 0 ? _mapDispatchToProps__WEBPACK_IMPORTED_MODULE_4__.default : _ref$mapDispatchToPro,
+      mapDispatchToPropsFactories = _ref$mapDispatchToPro === void 0 ? _mapDispatchToProps__WEBPACK_IMPORTED_MODULE_4__["default"] : _ref$mapDispatchToPro,
       _ref$mergePropsFactor = _ref.mergePropsFactories,
-      mergePropsFactories = _ref$mergePropsFactor === void 0 ? _mergeProps__WEBPACK_IMPORTED_MODULE_6__.default : _ref$mergePropsFactor,
+      mergePropsFactories = _ref$mergePropsFactor === void 0 ? _mergeProps__WEBPACK_IMPORTED_MODULE_6__["default"] : _ref$mergePropsFactor,
       _ref$selectorFactory = _ref.selectorFactory,
-      selectorFactory = _ref$selectorFactory === void 0 ? _selectorFactory__WEBPACK_IMPORTED_MODULE_7__.default : _ref$selectorFactory;
+      selectorFactory = _ref$selectorFactory === void 0 ? _selectorFactory__WEBPACK_IMPORTED_MODULE_7__["default"] : _ref$selectorFactory;
 
   return function connect(mapStateToProps, mapDispatchToProps, mergeProps, _ref2) {
     if (_ref2 === void 0) {
@@ -31232,17 +32153,17 @@ function createConnect(_temp) {
         _ref3$areStatesEqual = _ref3.areStatesEqual,
         areStatesEqual = _ref3$areStatesEqual === void 0 ? strictEqual : _ref3$areStatesEqual,
         _ref3$areOwnPropsEqua = _ref3.areOwnPropsEqual,
-        areOwnPropsEqual = _ref3$areOwnPropsEqua === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__.default : _ref3$areOwnPropsEqua,
+        areOwnPropsEqual = _ref3$areOwnPropsEqua === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__["default"] : _ref3$areOwnPropsEqua,
         _ref3$areStatePropsEq = _ref3.areStatePropsEqual,
-        areStatePropsEqual = _ref3$areStatePropsEq === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__.default : _ref3$areStatePropsEq,
+        areStatePropsEqual = _ref3$areStatePropsEq === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__["default"] : _ref3$areStatePropsEq,
         _ref3$areMergedPropsE = _ref3.areMergedPropsEqual,
-        areMergedPropsEqual = _ref3$areMergedPropsE === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__.default : _ref3$areMergedPropsE,
-        extraOptions = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(_ref3, ["pure", "areStatesEqual", "areOwnPropsEqual", "areStatePropsEqual", "areMergedPropsEqual"]);
+        areMergedPropsEqual = _ref3$areMergedPropsE === void 0 ? _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_3__["default"] : _ref3$areMergedPropsE,
+        extraOptions = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref3, ["pure", "areStatesEqual", "areOwnPropsEqual", "areStatePropsEqual", "areMergedPropsEqual"]);
 
     var initMapStateToProps = match(mapStateToProps, mapStateToPropsFactories, 'mapStateToProps');
     var initMapDispatchToProps = match(mapDispatchToProps, mapDispatchToPropsFactories, 'mapDispatchToProps');
     var initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps');
-    return connectHOC(selectorFactory, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({
+    return connectHOC(selectorFactory, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
       // used in error messages
       methodName: 'connect',
       // used to compute Connect's displayName from the wrapped component's displayName.
@@ -31297,7 +32218,7 @@ function whenMapDispatchToPropsIsMissing(mapDispatchToProps) {
 }
 function whenMapDispatchToPropsIsObject(mapDispatchToProps) {
   return mapDispatchToProps && typeof mapDispatchToProps === 'object' ? (0,_wrapMapToProps__WEBPACK_IMPORTED_MODULE_1__.wrapMapToPropsConstant)(function (dispatch) {
-    return (0,_utils_bindActionCreators__WEBPACK_IMPORTED_MODULE_0__.default)(mapDispatchToProps, dispatch);
+    return (0,_utils_bindActionCreators__WEBPACK_IMPORTED_MODULE_0__["default"])(mapDispatchToProps, dispatch);
   }) : undefined;
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ([whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject]);
@@ -31351,7 +32272,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function defaultMergeProps(stateProps, dispatchProps, ownProps) {
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, ownProps, stateProps, dispatchProps);
+  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, ownProps, stateProps, dispatchProps);
 }
 function wrapMergePropsFunc(mergeProps) {
   return function initMergePropsProxy(dispatch, _ref) {
@@ -31368,7 +32289,7 @@ function wrapMergePropsFunc(mergeProps) {
       } else {
         hasRunOnce = true;
         mergedProps = nextMergedProps;
-        if (true) (0,_utils_verifyPlainObject__WEBPACK_IMPORTED_MODULE_1__.default)(mergedProps, displayName, 'mergeProps');
+        if (true) (0,_utils_verifyPlainObject__WEBPACK_IMPORTED_MODULE_1__["default"])(mergedProps, displayName, 'mergeProps');
       }
 
       return mergedProps;
@@ -31476,14 +32397,14 @@ function finalPropsSelectorFactory(dispatch, _ref2) {
   var initMapStateToProps = _ref2.initMapStateToProps,
       initMapDispatchToProps = _ref2.initMapDispatchToProps,
       initMergeProps = _ref2.initMergeProps,
-      options = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__.default)(_ref2, ["initMapStateToProps", "initMapDispatchToProps", "initMergeProps"]);
+      options = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(_ref2, ["initMapStateToProps", "initMapDispatchToProps", "initMergeProps"]);
 
   var mapStateToProps = initMapStateToProps(dispatch, options);
   var mapDispatchToProps = initMapDispatchToProps(dispatch, options);
   var mergeProps = initMergeProps(dispatch, options);
 
   if (true) {
-    (0,_verifySubselectors__WEBPACK_IMPORTED_MODULE_1__.default)(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName);
+    (0,_verifySubselectors__WEBPACK_IMPORTED_MODULE_1__["default"])(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName);
   }
 
   var selectorFactory = options.pure ? pureFinalPropsSelectorFactory : impureFinalPropsSelectorFactory;
@@ -31511,7 +32432,7 @@ function verify(selector, methodName, displayName) {
     throw new Error("Unexpected value for " + methodName + " in " + displayName + ".");
   } else if (methodName === 'mapStateToProps' || methodName === 'mapDispatchToProps') {
     if (!Object.prototype.hasOwnProperty.call(selector, 'dependsOnOwnProps')) {
-      (0,_utils_warning__WEBPACK_IMPORTED_MODULE_0__.default)("The selector for " + methodName + " of " + displayName + " did not specify a value for dependsOnOwnProps.");
+      (0,_utils_warning__WEBPACK_IMPORTED_MODULE_0__["default"])("The selector for " + methodName + " of " + displayName + " did not specify a value for dependsOnOwnProps.");
     }
   }
 }
@@ -31595,7 +32516,7 @@ function wrapMapToPropsFunc(mapToProps, methodName) {
         props = proxy(stateOrDispatch, ownProps);
       }
 
-      if (true) (0,_utils_verifyPlainObject__WEBPACK_IMPORTED_MODULE_0__.default)(props, displayName, methodName);
+      if (true) (0,_utils_verifyPlainObject__WEBPACK_IMPORTED_MODULE_0__["default"])(props, displayName, methodName);
       return props;
     };
 
@@ -31743,7 +32664,7 @@ function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contex
       forceRender = _useReducer[1];
 
   var subscription = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    return new _utils_Subscription__WEBPACK_IMPORTED_MODULE_2__.default(store, contextSub);
+    return new _utils_Subscription__WEBPACK_IMPORTED_MODULE_2__["default"](store, contextSub);
   }, [store, contextSub]);
   var latestSubscriptionCallbackError = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   var latestSelector = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
@@ -31952,10 +32873,10 @@ var useStore = /*#__PURE__*/createStoreHook();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Provider": () => (/* reexport safe */ _components_Provider__WEBPACK_IMPORTED_MODULE_0__.default),
-/* harmony export */   "connectAdvanced": () => (/* reexport safe */ _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_1__.default),
+/* harmony export */   "Provider": () => (/* reexport safe */ _components_Provider__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   "connectAdvanced": () => (/* reexport safe */ _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "ReactReduxContext": () => (/* reexport safe */ _components_Context__WEBPACK_IMPORTED_MODULE_2__.ReactReduxContext),
-/* harmony export */   "connect": () => (/* reexport safe */ _connect_connect__WEBPACK_IMPORTED_MODULE_3__.default),
+/* harmony export */   "connect": () => (/* reexport safe */ _connect_connect__WEBPACK_IMPORTED_MODULE_3__["default"]),
 /* harmony export */   "batch": () => (/* reexport safe */ _utils_reactBatchedUpdates__WEBPACK_IMPORTED_MODULE_8__.unstable_batchedUpdates),
 /* harmony export */   "useDispatch": () => (/* reexport safe */ _hooks_useDispatch__WEBPACK_IMPORTED_MODULE_4__.useDispatch),
 /* harmony export */   "createDispatchHook": () => (/* reexport safe */ _hooks_useDispatch__WEBPACK_IMPORTED_MODULE_4__.createDispatchHook),
@@ -31963,7 +32884,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "createSelectorHook": () => (/* reexport safe */ _hooks_useSelector__WEBPACK_IMPORTED_MODULE_5__.createSelectorHook),
 /* harmony export */   "useStore": () => (/* reexport safe */ _hooks_useStore__WEBPACK_IMPORTED_MODULE_6__.useStore),
 /* harmony export */   "createStoreHook": () => (/* reexport safe */ _hooks_useStore__WEBPACK_IMPORTED_MODULE_6__.createStoreHook),
-/* harmony export */   "shallowEqual": () => (/* reexport safe */ _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_9__.default)
+/* harmony export */   "shallowEqual": () => (/* reexport safe */ _utils_shallowEqual__WEBPACK_IMPORTED_MODULE_9__["default"])
 /* harmony export */ });
 /* harmony import */ var _components_Provider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Provider */ "./node_modules/react-redux/es/components/Provider.js");
 /* harmony import */ var _components_connectAdvanced__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/connectAdvanced */ "./node_modules/react-redux/es/components/connectAdvanced.js");
@@ -32318,8 +33239,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function verifyPlainObject(value, displayName, methodName) {
-  if (!(0,_isPlainObject__WEBPACK_IMPORTED_MODULE_0__.default)(value)) {
-    (0,_warning__WEBPACK_IMPORTED_MODULE_1__.default)(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
+  if (!(0,_isPlainObject__WEBPACK_IMPORTED_MODULE_0__["default"])(value)) {
+    (0,_warning__WEBPACK_IMPORTED_MODULE_1__["default"])(methodName + "() in " + displayName + " must return a plain object. Instead received " + value + ".");
   }
 }
 
@@ -32419,7 +33340,7 @@ __webpack_require__.r(__webpack_exports__);
 var BrowserRouter =
 /*#__PURE__*/
 function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(BrowserRouter, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(BrowserRouter, _React$Component);
 
   function BrowserRouter() {
     var _this;
@@ -32455,7 +33376,7 @@ if (true) {
   };
 
   BrowserRouter.prototype.componentDidMount = function () {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_7__.default)(!this.props.history, "<BrowserRouter> ignores the history prop. To use a custom history, " + "use `import { Router }` instead of `import { BrowserRouter as Router }`.") : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_7__["default"])(!this.props.history, "<BrowserRouter> ignores the history prop. To use a custom history, " + "use `import { Router }` instead of `import { BrowserRouter as Router }`.") : 0;
   };
 }
 
@@ -32466,7 +33387,7 @@ if (true) {
 var HashRouter =
 /*#__PURE__*/
 function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__.default)(HashRouter, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(HashRouter, _React$Component);
 
   function HashRouter() {
     var _this;
@@ -32501,7 +33422,7 @@ if (true) {
   };
 
   HashRouter.prototype.componentDidMount = function () {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_7__.default)(!this.props.history, "<HashRouter> ignores the history prop. To use a custom history, " + "use `import { Router }` instead of `import { HashRouter as Router }`.") : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_7__["default"])(!this.props.history, "<HashRouter> ignores the history prop. To use a custom history, " + "use `import { Router }` instead of `import { HashRouter as Router }`.") : 0;
   };
 }
 
@@ -32530,11 +33451,11 @@ var LinkAnchor = forwardRef(function (_ref, forwardedRef) {
   var innerRef = _ref.innerRef,
       navigate = _ref.navigate,
       _onClick = _ref.onClick,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__.default)(_ref, ["innerRef", "navigate", "onClick"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__["default"])(_ref, ["innerRef", "navigate", "onClick"]);
 
   var target = rest.target;
 
-  var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, rest, {
+  var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, rest, {
     onClick: function onClick(event) {
       try {
         if (_onClick) _onClick(event);
@@ -32580,15 +33501,15 @@ var Link = forwardRef(function (_ref2, forwardedRef) {
       replace = _ref2.replace,
       to = _ref2.to,
       innerRef = _ref2.innerRef,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__.default)(_ref2, ["component", "replace", "to", "innerRef"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__["default"])(_ref2, ["component", "replace", "to", "innerRef"]);
 
   return react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router__WEBPACK_IMPORTED_MODULE_0__.__RouterContext.Consumer, null, function (context) {
-    !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_8__.default)(false, "You should not use <Link> outside a <Router>") : 0 : void 0;
+    !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_8__["default"])(false, "You should not use <Link> outside a <Router>") : 0 : void 0;
     var history = context.history;
     var location = normalizeToLocation(resolveToLocation(to, context.location), context.location);
     var href = location ? history.createHref(location) : "";
 
-    var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, rest, {
+    var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, rest, {
       href: href,
       navigate: function navigate() {
         var location = resolveToLocation(to, context.location);
@@ -32662,10 +33583,10 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
       styleProp = _ref.style,
       to = _ref.to,
       innerRef = _ref.innerRef,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__.default)(_ref, ["aria-current", "activeClassName", "activeStyle", "className", "exact", "isActive", "location", "sensitive", "strict", "style", "to", "innerRef"]);
+      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_5__["default"])(_ref, ["aria-current", "activeClassName", "activeStyle", "className", "exact", "isActive", "location", "sensitive", "strict", "style", "to", "innerRef"]);
 
   return react__WEBPACK_IMPORTED_MODULE_2__.createElement(react_router__WEBPACK_IMPORTED_MODULE_0__.__RouterContext.Consumer, null, function (context) {
-    !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_8__.default)(false, "You should not use <NavLink> outside a <Router>") : 0 : void 0;
+    !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_8__["default"])(false, "You should not use <NavLink> outside a <Router>") : 0 : void 0;
     var currentLocation = locationProp || context.location;
     var toLocation = normalizeToLocation(resolveToLocation(to, currentLocation), currentLocation);
     var path = toLocation.pathname; // Regex taken from: https://github.com/pillarjs/path-to-regexp/blob/master/index.js#L202
@@ -32679,9 +33600,9 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
     }) : null;
     var isActive = !!(isActiveProp ? isActiveProp(match, currentLocation) : match);
     var className = isActive ? joinClassnames(classNameProp, activeClassName) : classNameProp;
-    var style = isActive ? (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, styleProp, {}, activeStyle) : styleProp;
+    var style = isActive ? (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, styleProp, {}, activeStyle) : styleProp;
 
-    var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({
+    var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({
       "aria-current": isActive && ariaCurrent || null,
       className: className,
       style: style,
@@ -32702,7 +33623,7 @@ var NavLink = forwardRef$1(function (_ref, forwardedRef) {
 if (true) {
   NavLink.displayName = "NavLink";
   var ariaCurrentType = prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(["page", "step", "location", "date", "time", "true"]);
-  NavLink.propTypes = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, Link.propTypes, {
+  NavLink.propTypes = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Link.propTypes, {
     "aria-current": ariaCurrentType,
     activeClassName: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
     activeStyle: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
@@ -32779,7 +33700,7 @@ __webpack_require__.r(__webpack_exports__);
 // TODO: Replace with React.createContext once we can assume React 16+
 
 var createNamedContext = function createNamedContext(name) {
-  var context = (0,mini_create_react_context__WEBPACK_IMPORTED_MODULE_3__.default)();
+  var context = (0,mini_create_react_context__WEBPACK_IMPORTED_MODULE_3__["default"])();
   context.displayName = name;
   return context;
 };
@@ -32791,7 +33712,7 @@ createNamedContext("Router-History");
 // TODO: Replace with React.createContext once we can assume React 16+
 
 var createNamedContext$1 = function createNamedContext(name) {
-  var context = (0,mini_create_react_context__WEBPACK_IMPORTED_MODULE_3__.default)();
+  var context = (0,mini_create_react_context__WEBPACK_IMPORTED_MODULE_3__["default"])();
   context.displayName = name;
   return context;
 };
@@ -32807,7 +33728,7 @@ createNamedContext$1("Router");
 var Router =
 /*#__PURE__*/
 function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__.default)(Router, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(Router, _React$Component);
 
   Router.computeRootMatch = function computeRootMatch(pathname) {
     return {
@@ -32889,7 +33810,7 @@ if (true) {
   };
 
   Router.prototype.componentDidUpdate = function (prevProps) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(prevProps.history === this.props.history, "You cannot change <Router history>") : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(prevProps.history === this.props.history, "You cannot change <Router history>") : 0;
   };
 }
 
@@ -32900,7 +33821,7 @@ if (true) {
 var MemoryRouter =
 /*#__PURE__*/
 function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__.default)(MemoryRouter, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(MemoryRouter, _React$Component);
 
   function MemoryRouter() {
     var _this;
@@ -32936,14 +33857,14 @@ if (true) {
   };
 
   MemoryRouter.prototype.componentDidMount = function () {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!this.props.history, "<MemoryRouter> ignores the history prop. To use a custom history, " + "use `import { Router }` instead of `import { MemoryRouter as Router }`.") : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!this.props.history, "<MemoryRouter> ignores the history prop. To use a custom history, " + "use `import { Router }` instead of `import { MemoryRouter as Router }`.") : 0;
   };
 }
 
 var Lifecycle =
 /*#__PURE__*/
 function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__.default)(Lifecycle, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(Lifecycle, _React$Component);
 
   function Lifecycle() {
     return _React$Component.apply(this, arguments) || this;
@@ -32979,7 +33900,7 @@ function Prompt(_ref) {
       _ref$when = _ref.when,
       when = _ref$when === void 0 ? true : _ref$when;
   return react__WEBPACK_IMPORTED_MODULE_1__.createElement(context.Consumer, null, function (context) {
-    !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You should not use <Prompt> outside a <Router>") : 0 : void 0;
+    !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You should not use <Prompt> outside a <Router>") : 0 : void 0;
     if (!when || context.staticContext) return null;
     var method = context.history.block;
     return react__WEBPACK_IMPORTED_MODULE_1__.createElement(Lifecycle, {
@@ -33052,11 +33973,11 @@ function Redirect(_ref) {
       _ref$push = _ref.push,
       push = _ref$push === void 0 ? false : _ref$push;
   return react__WEBPACK_IMPORTED_MODULE_1__.createElement(context.Consumer, null, function (context) {
-    !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You should not use <Redirect> outside a <Router>") : 0 : void 0;
+    !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You should not use <Redirect> outside a <Router>") : 0 : void 0;
     var history = context.history,
         staticContext = context.staticContext;
     var method = push ? history.push : history.replace;
-    var location = (0,history__WEBPACK_IMPORTED_MODULE_10__.createLocation)(computedMatch ? typeof to === "string" ? generatePath(to, computedMatch.params) : (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, to, {
+    var location = (0,history__WEBPACK_IMPORTED_MODULE_10__.createLocation)(computedMatch ? typeof to === "string" ? generatePath(to, computedMatch.params) : (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, to, {
       pathname: generatePath(to.pathname, computedMatch.params)
     }) : to); // When rendering in a static context,
     // set the new location immediately.
@@ -33073,7 +33994,7 @@ function Redirect(_ref) {
       onUpdate: function onUpdate(self, prevProps) {
         var prevLocation = (0,history__WEBPACK_IMPORTED_MODULE_10__.createLocation)(prevProps.to);
 
-        if (!(0,history__WEBPACK_IMPORTED_MODULE_10__.locationsAreEqual)(prevLocation, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, location, {
+        if (!(0,history__WEBPACK_IMPORTED_MODULE_10__.locationsAreEqual)(prevLocation, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, location, {
           key: prevLocation.key
         }))) {
           method(location);
@@ -33178,7 +34099,7 @@ function isEmptyChildren(children) {
 
 function evalChildrenDev(children, props, path) {
   var value = children(props);
-   true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(value !== undefined, "You returned `undefined` from the `children` function of " + ("<Route" + (path ? " path=\"" + path + "\"" : "") + ">, but you ") + "should have returned a React element or `null`") : 0;
+   true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(value !== undefined, "You returned `undefined` from the `children` function of " + ("<Route" + (path ? " path=\"" + path + "\"" : "") + ">, but you ") + "should have returned a React element or `null`") : 0;
   return value || null;
 }
 /**
@@ -33189,7 +34110,7 @@ function evalChildrenDev(children, props, path) {
 var Route =
 /*#__PURE__*/
 function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__.default)(Route, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(Route, _React$Component);
 
   function Route() {
     return _React$Component.apply(this, arguments) || this;
@@ -33201,12 +34122,12 @@ function (_React$Component) {
     var _this = this;
 
     return react__WEBPACK_IMPORTED_MODULE_1__.createElement(context.Consumer, null, function (context$1) {
-      !context$1 ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You should not use <Route> outside a <Router>") : 0 : void 0;
+      !context$1 ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You should not use <Route> outside a <Router>") : 0 : void 0;
       var location = _this.props.location || context$1.location;
       var match = _this.props.computedMatch ? _this.props.computedMatch // <Switch> already computed the match for us
       : _this.props.path ? matchPath(location.pathname, _this.props) : context$1.match;
 
-      var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, context$1, {
+      var props = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, context$1, {
         location: location,
         match: match
       });
@@ -33247,14 +34168,14 @@ if (true) {
   };
 
   Route.prototype.componentDidMount = function () {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!(this.props.children && !isEmptyChildren(this.props.children) && this.props.component), "You should not use <Route component> and <Route children> in the same route; <Route component> will be ignored") : 0;
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!(this.props.children && !isEmptyChildren(this.props.children) && this.props.render), "You should not use <Route render> and <Route children> in the same route; <Route render> will be ignored") : 0;
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!(this.props.component && this.props.render), "You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored") : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!(this.props.children && !isEmptyChildren(this.props.children) && this.props.component), "You should not use <Route component> and <Route children> in the same route; <Route component> will be ignored") : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!(this.props.children && !isEmptyChildren(this.props.children) && this.props.render), "You should not use <Route render> and <Route children> in the same route; <Route render> will be ignored") : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!(this.props.component && this.props.render), "You should not use <Route component> and <Route render> in the same route; <Route render> will be ignored") : 0;
   };
 
   Route.prototype.componentDidUpdate = function (prevProps) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!(this.props.location && !prevProps.location), '<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.') : 0;
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!(!this.props.location && prevProps.location), '<Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!(this.props.location && !prevProps.location), '<Route> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!(!this.props.location && prevProps.location), '<Route> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.') : 0;
   };
 }
 
@@ -33264,7 +34185,7 @@ function addLeadingSlash(path) {
 
 function addBasename(basename, location) {
   if (!basename) return location;
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, location, {
+  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, location, {
     pathname: addLeadingSlash(basename) + location.pathname
   });
 }
@@ -33273,7 +34194,7 @@ function stripBasename(basename, location) {
   if (!basename) return location;
   var base = addLeadingSlash(basename);
   if (location.pathname.indexOf(base) !== 0) return location;
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, location, {
+  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, location, {
     pathname: location.pathname.substr(base.length)
   });
 }
@@ -33284,7 +34205,7 @@ function createURL(location) {
 
 function staticHandler(methodName) {
   return function () {
-      true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You cannot %s with <StaticRouter>", methodName) : 0 ;
+      true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You cannot %s with <StaticRouter>", methodName) : 0 ;
   };
 }
 
@@ -33300,7 +34221,7 @@ function noop() {}
 var StaticRouter =
 /*#__PURE__*/
 function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__.default)(StaticRouter, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(StaticRouter, _React$Component);
 
   function StaticRouter() {
     var _this;
@@ -33351,7 +34272,7 @@ function (_React$Component) {
         context = _this$props2$context === void 0 ? {} : _this$props2$context,
         _this$props2$location = _this$props2.location,
         location = _this$props2$location === void 0 ? "/" : _this$props2$location,
-        rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_7__.default)(_this$props2, ["basename", "context", "location"]);
+        rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_7__["default"])(_this$props2, ["basename", "context", "location"]);
 
     var history = {
       createHref: function createHref(path) {
@@ -33367,7 +34288,7 @@ function (_React$Component) {
       listen: this.handleListen,
       block: this.handleBlock
     };
-    return react__WEBPACK_IMPORTED_MODULE_1__.createElement(Router, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, rest, {
+    return react__WEBPACK_IMPORTED_MODULE_1__.createElement(Router, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, rest, {
       history: history,
       staticContext: context
     }));
@@ -33384,7 +34305,7 @@ if (true) {
   };
 
   StaticRouter.prototype.componentDidMount = function () {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!this.props.history, "<StaticRouter> ignores the history prop. To use a custom history, " + "use `import { Router }` instead of `import { StaticRouter as Router }`.") : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!this.props.history, "<StaticRouter> ignores the history prop. To use a custom history, " + "use `import { Router }` instead of `import { StaticRouter as Router }`.") : 0;
   };
 }
 
@@ -33395,7 +34316,7 @@ if (true) {
 var Switch =
 /*#__PURE__*/
 function (_React$Component) {
-  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__.default)(Switch, _React$Component);
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(Switch, _React$Component);
 
   function Switch() {
     return _React$Component.apply(this, arguments) || this;
@@ -33407,7 +34328,7 @@ function (_React$Component) {
     var _this = this;
 
     return react__WEBPACK_IMPORTED_MODULE_1__.createElement(context.Consumer, null, function (context) {
-      !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You should not use <Switch> outside a <Router>") : 0 : void 0;
+      !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You should not use <Switch> outside a <Router>") : 0 : void 0;
       var location = _this.props.location || context.location;
       var element, match; // We use React.Children.forEach instead of React.Children.toArray().find()
       // here because toArray adds keys to all child elements and we do not want
@@ -33418,7 +34339,7 @@ function (_React$Component) {
         if (match == null && react__WEBPACK_IMPORTED_MODULE_1__.isValidElement(child)) {
           element = child;
           var path = child.props.path || child.props.from;
-          match = path ? matchPath(location.pathname, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, child.props, {
+          match = path ? matchPath(location.pathname, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, child.props, {
             path: path
           })) : context.match;
         }
@@ -33440,8 +34361,8 @@ if (true) {
   };
 
   Switch.prototype.componentDidUpdate = function (prevProps) {
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!(this.props.location && !prevProps.location), '<Switch> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.') : 0;
-     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__.default)(!(!this.props.location && prevProps.location), '<Switch> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!(this.props.location && !prevProps.location), '<Switch> elements should not change from uncontrolled to controlled (or vice versa). You initially used no "location" prop and then provided one on a subsequent render.') : 0;
+     true ? (0,tiny_warning__WEBPACK_IMPORTED_MODULE_9__["default"])(!(!this.props.location && prevProps.location), '<Switch> elements should not change from controlled to uncontrolled (or vice versa). You provided a "location" prop initially but omitted it on a subsequent render.') : 0;
   };
 }
 
@@ -33454,11 +34375,11 @@ function withRouter(Component) {
 
   var C = function C(props) {
     var wrappedComponentRef = props.wrappedComponentRef,
-        remainingProps = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_7__.default)(props, ["wrappedComponentRef"]);
+        remainingProps = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_7__["default"])(props, ["wrappedComponentRef"]);
 
     return react__WEBPACK_IMPORTED_MODULE_1__.createElement(context.Consumer, null, function (context) {
-      !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You should not use <" + displayName + " /> outside a <Router>") : 0 : void 0;
-      return react__WEBPACK_IMPORTED_MODULE_1__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__.default)({}, remainingProps, context, {
+      !context ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You should not use <" + displayName + " /> outside a <Router>") : 0 : void 0;
+      return react__WEBPACK_IMPORTED_MODULE_1__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_4__["default"])({}, remainingProps, context, {
         ref: wrappedComponentRef
       }));
     });
@@ -33479,21 +34400,21 @@ function withRouter(Component) {
 var useContext = react__WEBPACK_IMPORTED_MODULE_1__.useContext;
 function useHistory() {
   if (true) {
-    !(typeof useContext === "function") ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You must use React >= 16.8 in order to use useHistory()") : 0 : void 0;
+    !(typeof useContext === "function") ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You must use React >= 16.8 in order to use useHistory()") : 0 : void 0;
   }
 
   return useContext(historyContext);
 }
 function useLocation() {
   if (true) {
-    !(typeof useContext === "function") ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You must use React >= 16.8 in order to use useLocation()") : 0 : void 0;
+    !(typeof useContext === "function") ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You must use React >= 16.8 in order to use useLocation()") : 0 : void 0;
   }
 
   return useContext(context).location;
 }
 function useParams() {
   if (true) {
-    !(typeof useContext === "function") ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You must use React >= 16.8 in order to use useParams()") : 0 : void 0;
+    !(typeof useContext === "function") ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You must use React >= 16.8 in order to use useParams()") : 0 : void 0;
   }
 
   var match = useContext(context).match;
@@ -33501,7 +34422,7 @@ function useParams() {
 }
 function useRouteMatch(path) {
   if (true) {
-    !(typeof useContext === "function") ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__.default)(false, "You must use React >= 16.8 in order to use useRouteMatch()") : 0 : void 0;
+    !(typeof useContext === "function") ?  true ? (0,tiny_invariant__WEBPACK_IMPORTED_MODULE_11__["default"])(false, "You must use React >= 16.8 in order to use useRouteMatch()") : 0 : void 0;
   }
 
   var location = useLocation();
@@ -35934,7 +36855,7 @@ if (false) {} else {
 "use strict";
 
 
-var compose = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js").compose;
+var compose = (__webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js").compose);
 
 exports.__esModule = true;
 exports.composeWithDevTools =
@@ -36685,7 +37606,7 @@ function applyMiddleware() {
         return middleware(middlewareAPI);
       });
       _dispatch = compose.apply(void 0, chain)(store.dispatch);
-      return (0,_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__.default)((0,_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__.default)({}, store), {}, {
+      return (0,_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])((0,_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, store), {}, {
         dispatch: _dispatch
       });
     };
@@ -38171,6 +39092,190 @@ function valueEqual(a, b) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (valueEqual);
 
 
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _defineProperty)
+/* harmony export */ });
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _extends)
+/* harmony export */ });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _inheritsLoose)
+/* harmony export */ });
+/* harmony import */ var _setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./setPrototypeOf.js */ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js");
+
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__["default"])(subClass, superClass);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/objectSpread2.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _objectSpread2)
+/* harmony export */ });
+/* harmony import */ var _defineProperty_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./defineProperty.js */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+    }
+
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        (0,_defineProperty_js__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _objectWithoutPropertiesLoose)
+/* harmony export */ });
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _setPrototypeOf)
+/* harmony export */ });
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
 /***/ })
 
 /******/ 	});
@@ -38276,10 +39381,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
-  store: _store__WEBPACK_IMPORTED_MODULE_4__.default
+  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Router, {
-  history: _history__WEBPACK_IMPORTED_MODULE_3__.default
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_App__WEBPACK_IMPORTED_MODULE_5__.default, null))), document.getElementById("app"));
+  history: _history__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_App__WEBPACK_IMPORTED_MODULE_5__["default"], null))), document.getElementById("app"));
 })();
 
 /******/ })()

@@ -1,5 +1,5 @@
 body {
-    background-color: darkblue;
+    background-color: rgb(49, 49, 49)
 }
 
 nav a {
@@ -10,9 +10,35 @@ nav a {
 
 h2 {
     color:#FFFCE4;
-    text-align: center;
+
+}
+
+h3 {
+    color:#FFFCE4;
+
 }
 
 h4 {
+    font-size: 21px;
     color:#FFFCE4;
+    text-decoration: underline;
+
+
+}
+
+p {
+    color:#FFFCE4;
+}
+
+option {
+    color:#FFFCE4;
+}
+
+#description {
+    color:#FFFCE4;
+}
+
+#songsList {
+    margin-top: 30px;
+
 }
