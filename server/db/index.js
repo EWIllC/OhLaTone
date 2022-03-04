@@ -2,8 +2,9 @@ const db = require("./db");
 const Songs = require("./models/songs")
 
 module.exports = {
-    db, 
+    db,
     models: {
         Songs
     },
+
 };
