@@ -13,6 +13,14 @@ if(process.env.LOGGING === 'true'){
 
 //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
 if(process.env.DATABASE_URL){
+  sequelize = new Sequelize(process.env.DATABASE_URL,
+    {
+      dialect: "postgres",
+      protocol: "postgres",
+      port: 5432,
+      host: "<heroku host>",
+      logging: true //false
+   });
   config.dialectOptions = {
     ssl: {
       rejectUnauthorized: false
@@ -20,11 +28,6 @@ if(process.env.DATABASE_URL){
   };
 }
 
-const db = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  protocol: 'postgres',
-  dialectOptions: {
-      ssl: true
-  }
-});
+const db = new Sequelize(
+  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`, config)
 module.exports = db
